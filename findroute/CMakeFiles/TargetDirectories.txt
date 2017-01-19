@@ -1,0 +1,3 @@
+/media/zhoufeitong/工程/findroute/CMakeFiles/edit_cache.dir
+/media/zhoufeitong/工程/findroute/CMakeFiles/rebuild_cache.dir
+/media/zhoufeitong/工程/findroute/CMakeFiles/path.dir
