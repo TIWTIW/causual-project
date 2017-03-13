@@ -1,6 +1,0 @@
-# depslib dependency file v1.0
-1487475383 source:f:\data  structure ex\ex1.1\main.cpp
-	<iostream>
-	<vector>
-	<algorithm>
-
