@@ -11,7 +11,8 @@
 #include <memory>
 #include <string>
 #include <stdexcept>
-#include "StrBlobPtr.h"
+
+using namespace std;
 
 class StrBlobPtr;
 class StrBlob
@@ -27,12 +28,60 @@ public:
     void pop_back();
     std::string &front();
     std::string &back();
-    StrBlobPtr begin() { return StrBlobPtr( *this ); }
-    StrBlobPtr end() { return StrBlobPtr( *this, data->size() ); }
+    StrBlobPtr begin();// { return StrBlobPtr( *this ); }
+    StrBlobPtr end() ;//{ return StrBlobPtr( *this, data->size() ); }
 private:
     std::shared_ptr<std::vector<std::string>> data;
     void check( size_type i, const std::string &msg ) const;
 };
+
+class StrBlobPtr
+{
+public:
+    StrBlobPtr() : curr( 0 ) {  }
+    StrBlobPtr( StrBlob& a, size_t sz = 0 ) :
+                wptr( a.data ), curr( sz ) {  }
+    string& deref() const;
+    StrBlobPtr& incr();
+private:
+    shared_ptr<vector<string>> check( size_t i, const string& msg) const;
+    weak_ptr<vector<string>> wptr;
+    size_t curr;
+};
+
+shared_ptr<vector<string>> StrBlobPtr::check( size_t i, const string& msg ) const
+{
+    auto ret = wptr.lock();
+    if( !ret )
+        throw runtime_error( "unbound StrBlobPtr" );
+    if( i >= ret->size() )
+        throw out_of_range( msg );
+    return ret;
+}
+
+string& StrBlobPtr::deref() const
+{
+    auto p = check( curr, "dereference past end" );
+    return (*p)[curr];
+}
+
+StrBlobPtr& StrBlobPtr::incr()
+{
+    check( curr, "increment past end of StrBlobPtr" );
+    ++curr;
+    return *this;
+}
+
+StrBlobPtr StrBlob::begin()
+{
+    return StrBlobPtr( *this );
+}
+
+StrBlobPtr StrBlob::end()
+{
+    auto ret = StrBlobPtr( *this, data->size() );
+    return ret;
+}
 
 void StrBlob::check( size_type i, const std::string &msg ) const
 {
