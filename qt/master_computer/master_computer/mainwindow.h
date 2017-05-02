@@ -4,6 +4,12 @@
 #include <QMainWindow>
 #include <QtNetwork/QTcpSocket>
 #include <QAbstractSocket>
+#include <QLabel>
+#include <QPixmap>
+#include <QTimer>
+#include <QBuffer>
+#include <QImageReader>
+#include <QVBoxLayout>
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +46,10 @@ private slots:
     void on_pushButton_4_clicked();
     void on_pushButton_5_clicked();
     void on_pushButton_6_clicked();
+
+/********Map show*********************/
+private:
+    void showMap();
 };
 
 #endif // MAINWINDOW_H

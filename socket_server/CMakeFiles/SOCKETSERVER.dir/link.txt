@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/SOCKETSERVER.dir/keyboard.cpp.o CMakeFiles/SOCKETSERVER.dir/main.cpp.o CMakeFiles/SOCKETSERVER.dir/socketServer.cpp.o  -o SOCKETSERVER -rdynamic -lpthread 

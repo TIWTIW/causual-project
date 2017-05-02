@@ -24,6 +24,27 @@ void MainWindow::on_pushButton_clicked()
     ui->pushButton->setEnabled(false);
 }
 
+//send map
+/*void MainWindow::on_pushButton_3_clicked()
+{
+    QPixmap pix(tr("map.jpg"));
+    QBuffer buffer;
+    buffer.open(QIODevice::ReadWrite);
+    pix.save(&buffer,"jpg");
+    quint32 pix_len = (quint32)buffer.data().size();
+    //qDebug("image size:%d",pix_len);
+
+     char buf[10];
+     //memcpy(buf,&pix_len,4);
+     QByteArray dataArray(buf,pix_len);
+
+     dataArray.append(buffer.data());
+
+     //qDebug()<<"connect success";
+     quint32 write_len = tcpServer->write(dataArray);
+     //qDebug("write len:%d",write_len);
+}*/
+
 //监听
 void MainWindow::updateServer(QString message, int length)
 {

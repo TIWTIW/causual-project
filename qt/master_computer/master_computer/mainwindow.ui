@@ -237,16 +237,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>30</y>
-      <width>391</width>
-      <height>381</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="Line" name="line_4">
     <property name="geometry">
      <rect>
@@ -268,6 +258,19 @@
       <width>211</width>
       <height>191</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>30</y>
+      <width>391</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_7">
