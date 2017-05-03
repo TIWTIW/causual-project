@@ -101,8 +101,6 @@ void MainWindow::dataReceived()
         qDebug() << "bytesavail" << tcpSocket->bytesAvailable();
         if( dataSize == 0 )
         {
-            //QDataStream stream( tcpSocket );
-            //stream.setVersion( QDataStream::Qt_4_0 );
 
            // if( tcpSocket->bytesAvailable() < sizeof(quint32) )
               //return;
@@ -119,19 +117,10 @@ void MainWindow::dataReceived()
         }
         qint64 size = tcpSocket->bytesAvailable();
         qDebug() << "size" << size;
-        //qDebug() << "len_now:" << len_now;
-        //len_now += (long)tcpSocket->bytesAvailable();
-       // qDebug() << "len_now:" << len_now;
-        //array.append((QByteArray)tcpSocket->readAll());
-
-        //qDebug() << "len_now:" << len_now;
 
         if( dataSize <= tcpSocket->bytesAvailable() )
         {
             qDebug()<<"ok,all bytes recvd"<<endl;
-
-            //dataSize = 0;
-            //len_now = 0;
 
             QString message( "N" );
             tcpSocket->write( message.toLatin1(), message.length() );
@@ -140,7 +129,6 @@ void MainWindow::dataReceived()
         else
             return ;
     }
-    //tcpSocket->disconnectFromHost();
 
         QByteArray array;
         array.append( (QByteArray)tcpSocket->read( dataSize ) );

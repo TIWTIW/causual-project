@@ -138,7 +138,7 @@ public:
         textBrowser->setGeometry(QRect(10, 360, 211, 191));
         label_3 = new QLabel(centralWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(610, 30, 391, 401));
+        label_3->setGeometry(QRect(610, 10, 391, 421));
         pushButton_7 = new QPushButton(centralWidget);
         pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
         pushButton_7->setGeometry(QRect(60, 570, 89, 25));

@@ -42,7 +42,7 @@ void socketServer::waiting()
      //           continue;
             }
         }
-
+        readThread();
         writeMsg();
        // readMsg();
      //  close( connfd );
@@ -50,7 +50,20 @@ void socketServer::waiting()
     }
 }
 
-void socketServer::readMsg()
+void socketServer::readThread()
+{
+    pthread_t thread;
+    int rc;
+    rc = pthread_create( &thread, NULL, (void *)readMsg, NULL );
+    if( rc )
+    {
+        printf( "error create thread" );
+        exit( -1 );
+    }
+    return ;
+}
+
+void socketServer::readMsg(void *)
 {
     int n;
     n = recv( connfd, recBuf, MAXLINE, 0 );
@@ -71,13 +84,19 @@ void socketServer::writeMsg()
     int len = 0;
     FILE *fd = fopen( "map.jpg", "rb" );
 
+    if ( fd == NULL )
+    {
+        printf( "file open error!\n" );
+        exit( 1 );
+    }
+
     struct stat buf;
 
     if(stat("map.jpg", &buf)<0)
     {
         return ;
     }
-    printf( "%lu\n", (unsigned long)buf.st_size ); 
+    printf( "%lu\n", (unsigned long)buf.st_size );           //获取图片大小 
 
     long file_size = buf.st_size;
     char transfer_size[10];
@@ -98,35 +117,27 @@ void socketServer::writeMsg()
         transfer_size[i - x - 1] = temp;
     }
 
-    printf( "b=%s\n", transfer_size );
+    printf( "b=%s\n", transfer_size );        
+
+    int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );   //传送数据大小
+    if( a  < 0 )
+        printf( "send msg error: %s(errno: %d)\n", strerror(errno), errno );  
 
 
-    if ( fd == NULL )
+    readMsg();   
+
+    while( 1 )
     {
-        printf( "file open error!\n" );
-        exit( 1 );
-    }
-
-
-   int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );
-   if( a  < 0 )
-       printf( "send msg error: %s(errno: %d)\n", strerror(errno), errno );  
-
-
-   readMsg();
-
-   while( 1 )
-   {
-       if( recBuf[0] == 'O' )
+        if( recBuf[0] == 'O' )   //等待服务器传回消息
            break;
-   }
+    }
    
     char sendBuf[MAXLINE];
     while(!feof(fd))
     {
         len = fread( sendBuf, 1, MAXLINE, fd );
 
-        if( len < 0 )
+        if( len <= 0 )
             break;
         else if( ( send( connfd, sendBuf, sizeof( sendBuf ) , 0 ) ) < 0)  
         {  
@@ -138,7 +149,7 @@ void socketServer::writeMsg()
     }
 
     readMsg();
-    while( recBuf[0] != 'N' )
+    while( recBuf[0] != 'N' )     //等待服务器传回下一次传送消息
         ;
     fclose( fd );
 }
