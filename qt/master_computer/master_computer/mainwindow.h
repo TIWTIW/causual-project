@@ -28,6 +28,10 @@ private:
 
     QTcpSocket *tcpSocket;
 
+    QTimer *timer;
+
+    char frame[6];
+
 /*****************Communication*********/
 private slots:
     void on_pushButton_clicked();
@@ -39,6 +43,7 @@ private slots:
     void hostFounded();
     void written( qint64 );
     void errorOccur(QAbstractSocket::SocketError e);
+    void sendMsg();
 
 /*******Control************************/
 private slots:

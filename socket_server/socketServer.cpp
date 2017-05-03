@@ -42,7 +42,7 @@ void socketServer::waiting()
      //           continue;
             }
         }
-
+        readThread();
         writeMsg();
        // readMsg();
      //  close( connfd );
@@ -50,20 +50,56 @@ void socketServer::waiting()
     }
 }
 
-void socketServer::readMsg()
+void socketServer::readThread()
 {
+    pthread_t thread;
+    int rc;
+    rc = pthread_create( &thread, NULL, readMsg, this );
+    if( rc )
+    {
+        printf( "error create thread" );
+        exit( -1 );
+    }
+    return ;
+}
+
+void* socketServer::readMsg( void *arg )
+{
+    socketServer *s = (socketServer *) arg;
     int n;
-    n = recv( connfd, recBuf, MAXLINE, 0 );
-    if( n == 0 )
+    while( 1 )
+    {
+        n = recv( s->connfd, s->recBuf, MAXLINE, 0 );
+    /*if( n == 0 )
     {
         printf( "disconected!\n" );
-        close( connfd );
-        connfd = 0;
-        return ;
-    }
+        close( s->connfd );
+        s->connfd = 0;
+    }*/
 
-    recBuf[n] = '\0';
-    printf( "recv msg from client: %s\n", recBuf );
+        s->recBuf[n] = '\0';
+
+    //    printf( "%s\n", s->recBuf );
+        for( int i = 0; i < n; ++i )
+        {
+        //if( s->recBuf[i] == ' ' )
+           // printf( "recv msg from client: %s\n", s->recBuf );
+            if( s->recBuf[i] == 'h' )
+            {
+                s->flag_head = 1;
+                printf( "head\n" );
+            }
+            else if( s->recBuf[i] == 'n')
+            { 
+                s->flag_next = 1;
+                printf( "next\n" );
+            }
+        }
+
+        if( s->recBuf[0] == 'f' )
+            printf( "f\n" );
+
+    }
 }
 
 void socketServer::writeMsg()
@@ -71,13 +107,21 @@ void socketServer::writeMsg()
     int len = 0;
     FILE *fd = fopen( "map.jpg", "rb" );
 
+    //pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+
+    if( fd == NULL )
+    {
+        printf( "file open error!\n" );
+        exit( 1 );
+    }
+
     struct stat buf;
 
-    if(stat("map.jpg", &buf)<0)
+    if( stat( "map.jpg", &buf ) < 0 )
     {
         return ;
     }
-    printf( "%lu\n", (unsigned long)buf.st_size ); 
+    printf( "%lu\n", (unsigned long)buf.st_size );           //获取图片大小 
 
     long file_size = buf.st_size;
     char transfer_size[10];
@@ -98,35 +142,28 @@ void socketServer::writeMsg()
         transfer_size[i - x - 1] = temp;
     }
 
-    printf( "b=%s\n", transfer_size );
+    printf( "b=%s\n", transfer_size );        
+
+    int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );   //传送数据大小
+    if( a  < 0 )
+        printf( "send msg error: %s(errno: %d)\n", strerror(errno), errno );  
 
 
-    if ( fd == NULL )
+
+    while( 1 )
     {
-        printf( "file open error!\n" );
-        exit( 1 );
+        if( flag_head == 1 )   //等待服务器传回消息
+           break;
     }
 
-
-   int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );
-   if( a  < 0 )
-       printf( "send msg error: %s(errno: %d)\n", strerror(errno), errno );  
-
-
-   readMsg();
-
-   while( 1 )
-   {
-       if( recBuf[0] == 'O' )
-           break;
-   }
+    flag_head = 0;
    
     char sendBuf[MAXLINE];
     while(!feof(fd))
     {
         len = fread( sendBuf, 1, MAXLINE, fd );
 
-        if( len < 0 )
+        if( len <= 0 )
             break;
         else if( ( send( connfd, sendBuf, sizeof( sendBuf ) , 0 ) ) < 0)  
         {  
@@ -137,9 +174,14 @@ void socketServer::writeMsg()
             printf( "write success!\n");
     }
 
-    readMsg();
-    while( recBuf[0] != 'N' )
-        ;
+    while( 1 )
+    {
+       if( flag_next == 1 )
+            break;
+    }
+
+    flag_next = 0;
+
     fclose( fd );
 }
 

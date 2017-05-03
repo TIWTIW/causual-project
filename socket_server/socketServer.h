@@ -34,6 +34,9 @@ private:
 
 private:
     void writeMsg();
-    void readMsg();        
+    static void* readMsg( void * );        
+    void readThread();
+    int flag_head = 0;
+    int flag_next = 0;
 };
 #endif

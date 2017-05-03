@@ -203,6 +203,7 @@ DIST          = /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/spec_pre.p
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/qt_config.prf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/spec_post.prf \
+		../master_computer/.qmake.stash \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/toolchain.prf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -385,6 +386,7 @@ Makefile: ../master_computer/master_computer.pro /home/zhoufeitong/Qt5.8.0/5.8/g
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/qt_config.prf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/toolchain.prf \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -560,6 +562,7 @@ Makefile: ../master_computer/master_computer.pro /home/zhoufeitong/Qt5.8.0/5.8/g
 /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/qt_config.prf:
 /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/linux-g++/qmake.conf:
 /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/exclusive_builds.prf:
 /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/toolchain.prf:
 /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/mkspecs/features/default_pre.prf:
@@ -746,6 +749,30 @@ moc_mainwindow.cpp: /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMain
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/QAbstractSocket \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLabel \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QPixmap \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QTimer \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qtimer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QBuffer \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbuffer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QImageReader \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qimagereader.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qeventloop.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qimageiohandler.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qplugin.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qpointer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonobject.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonvalue.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayout.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
 		../master_computer/mainwindow.h \
 		moc_predefs.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/bin/moc
@@ -881,10 +908,32 @@ main.o: ../master_computer/main.cpp ../master_computer/mainwindow.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/QAbstractSocket \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QApplication \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qapplication.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLabel \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QPixmap \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QTimer \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qtimer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QBuffer \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbuffer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QImageReader \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qimagereader.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qcoreapplication.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qeventloop.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qimageiohandler.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qplugin.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qpointer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonobject.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonvalue.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayout.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QApplication \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qapplication.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qguiapplication.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qinputmethod.h
@@ -1001,7 +1050,80 @@ mainwindow.o: ../master_computer/mainwindow.cpp ../master_computer/mainwindow.h 
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtNetwork/QAbstractSocket \
-		ui_mainwindow.h
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLabel \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QPixmap \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QTimer \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qtimer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QBuffer \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbuffer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QImageReader \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qimagereader.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qeventloop.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qimageiohandler.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qplugin.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qpointer.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonobject.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonvalue.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayout.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
+		ui_mainwindow.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QVariant \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QAction \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qaction.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QApplication \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qapplication.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qguiapplication.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qinputmethod.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QFrame \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QHeaderView \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qvalidator.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qregularexpression.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qslider.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyle.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLineEdit \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlineedit.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextcursor.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextformat.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qpen.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMenuBar \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenu.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QPushButton \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QStatusBar \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QTextBrowser \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtextbrowser.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtextedit.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextdocument.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QToolBar \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtoolbar.h \
+		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../master_computer/mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

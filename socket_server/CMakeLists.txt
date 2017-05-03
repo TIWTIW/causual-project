@@ -12,6 +12,7 @@ SET(CMAKE_BUILE_TYPE DEBUG)
 SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -lpthread -Wall -g -ggdb -std=c++11")
 
 add_compile_options(-g)
+add_compile_options(-std=c++11)
 
 ADD_EXECUTABLE(SOCKETSERVER ${APP_SRC})
 
