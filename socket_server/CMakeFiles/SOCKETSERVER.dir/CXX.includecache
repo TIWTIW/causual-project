@@ -55,4 +55,12 @@ pthread.h
 -
 sys/stat.h
 -
+sys/ioctl.h
+-
+fcntl.h
+-
+sys/select.h
+-
+sys/time.h
+-
 

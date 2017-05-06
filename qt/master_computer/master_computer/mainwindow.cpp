@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     for( int i = 0; i < 6; ++i )
         frame[i] = ' ';
 
-    showMap();
 }
 
 
@@ -29,8 +28,6 @@ void MainWindow::on_pushButton_clicked()
 {
     QString ipAddress = ui->lineEdit->text();
     QString port = ui->lineEdit_2->text();
-
-    //sender.start( ipAddress, port );
 
     tcpSocket = new QTcpSocket( this );
 
@@ -84,15 +81,8 @@ void MainWindow::tcpConnected()
     ui->textBrowser->append( message );
     ui->pushButton->setEnabled( false );
     ui->pushButton_2->setEnabled( true );
+
     qDebug() << tcpSocket->socketDescriptor();
-
-    timer = new QTimer( this );
-
-    connect( timer, SIGNAL( timeout() ),
-             this, SLOT( sendMsg() ) );
-
-    timer->start( 1000 );
-
 }
 
 void MainWindow::tcpDisconnected()
@@ -101,139 +91,156 @@ void MainWindow::tcpDisconnected()
     ui->textBrowser->append( message );
     ui->pushButton_2->setEnabled( false );
     ui->pushButton->setEnabled( true );
+    tcpSocket->readAll();
 }
 
 void MainWindow::dataReceived()
 {
     static long dataSize = 0;
-    //static long len_now = 0;
+    static int restSize = 0;
+
+    quint8 flag_exit = 0;
+
     qDebug("receive");
+
     QByteArray array;
     QByteArray head;
+    QByteArray dataSizeArray;
+    QByteArray restSizeArray;
 
-    while( tcpSocket->bytesAvailable() > 0 )
+    //only when the more than 15 bytes received
+    while( tcpSocket->bytesAvailable() > 15 )
     {
-        //qDebug() << dataSize;
+        qDebug() << tcpSocket->bytesAvailable();
+
         if( dataSize == 0 )
         {
-            //QDataStream stream( tcpSocket );
-            //stream.setVersion( QDataStream::Qt_4_0 );
+            if( tcpSocket->read( head.data(), 1 ) == -1 )
+            {
+                qDebug() << "error read!";
+                return;
+            }
 
-           // if( tcpSocket->bytesAvailable() < sizeof(quint32) )
-              //return;
+            qDebug() << "headArray" << head;
 
-            tcpSocket->read( head.data(), tcpSocket->bytesAvailable() );
-            qDebug() << head.data();
-            QString size_str = head.data();
-            qDebug() << size_str;
-            dataSize = size_str.toLong();
+            //trans may be incorrect, there are more than 1 bytes??
+            QString head_msg = head.data();
+            qDebug() << head_msg;
+
+            if( head_msg[0] == 'H' )
+            {
+               if( tcpSocket->read( dataSizeArray.data(), 10 ) == -1 )
+                {
+                   qDebug() << "readd dataSizeArray error!" << dataSizeArray.data();
+                   return;
+               }
+
+                if( tcpSocket->read( restSizeArray.data(), 5 ) == -1 )
+                {
+                    qDebug() << "read restSizeArray error!" << restSizeArray.data();
+                    return;
+                }
+            }
+            else
+                return;
+
+            bool transfer_ok;
+
+            QString sizeMsg = dataSizeArray.data();
+            dataSize = sizeMsg.toLong( &transfer_ok, 10 );
             qDebug() << "dataSize:" << dataSize;
+            if( !transfer_ok )
+                return;
 
-           // QString message( "OK" );
-            //tcpSocket->write( message.toLatin1(), message.length() );
-            frame[4] = 'h';
+            QString sizeRest = restSizeArray.data();
+            restSize = sizeRest.toInt( &transfer_ok, 10 );
+            qDebug() << "restSize:" << restSize;
+             if( !transfer_ok )
+                return;
         }
+
         qint64 size = tcpSocket->bytesAvailable();
         qDebug() << "size" << size;
-        //qDebug() << "len_now:" << len_now;
-        //len_now += (long)tcpSocket->bytesAvailable();
-        //qDebug() << "len_now:" << len_now;
-        //array.append((QByteArray)tcpSocket->readAll());
-
-        //qDebug() << "len_now:" << len_now;
 
         if( dataSize <= tcpSocket->bytesAvailable() )
         {
-            qDebug()<<"ok,all bytes recvd"<<endl;
+            qDebug() << "ok,all bytes recvd" << endl;
 
-            //tcpSocket->read( array.data(), dataSize );
             array = tcpSocket->read( dataSize );
-
-            tcpSocket->readAll();
-
-            //dataSize = 0;
-            //len_now = 0;
-
-           // QString message( "N" );
-            //tcpSocket->write( message.toLatin1(), message.length() );
-            frame[5] = 'n';
+            if( array.isEmpty() )
+            {
+                qDebug() << "read empty!";
+                return;
+            }
+            tcpSocket->read( restSize );
+            flag_exit = 1;
         }
         else
             return ;
+
     }
-    //tcpSocket->disconnectFromHost();
-        //array.resize( ds );
-        QBuffer buffer( &array );
-        buffer.open( QIODevice::ReadOnly );
 
-        QImageReader reader( &buffer );
-        QImage image = reader.read();
+    if( !flag_exit )
+        return;
 
-        if( !image.isNull() )
-        {
-            ui->label_3->setPixmap( QPixmap::fromImage( image ) );
-            qDebug("write!");
-            dataSize=0;
-        }
-        else
-        {
-            qDebug() << reader.error();
-        }
+    QBuffer buffer( &array );
+    buffer.open( QIODevice::ReadOnly );
+
+    QImageReader reader( &buffer );
+    QImage image = reader.read();
+
+    qDebug() << image;
+
+    if( !image.isNull() )
+    {
+        ui->label_3->setPixmap( QPixmap::fromImage( image ) );
+        qDebug( "write!" );
+        dataSize=0;
+        restSize = 0;
+    }
+    else
+    {
+        qDebug() << reader.error();
+    }
 
 }
 
 void MainWindow::on_pushButton_7_clicked()
 {
     ui->textBrowser->clear();
+    ui->label_3->clear();
 }
 
 /**************Control***********************/
 void MainWindow::on_pushButton_3_clicked()
 {
-    /*QString message = "forward";
-    QByteArray message_latin = message.toLatin1();
-    char *message_char = message_latin.data();
-
-    //connect( tcpSocket, SIGNAL( bytesWritten(qint64) ), this, SLOT( written(qint64) ) );
-    tcpSocket->write( message_char, message.length() );*/
-
     frame[0] = 'f';
+    sendMsg();
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    /*QString message = "left";
-
-    connect( tcpSocket, SIGNAL( bytesWritten(qint64) ), this, SLOT( written(qint64) ) );
-    tcpSocket->write( message.toLatin1(), message.length() );*/
-
-    frame[1] = 'b';
+    frame[1] = 'l';
+    sendMsg();
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
-    /*QString message = "right";
-
-    connect( tcpSocket, SIGNAL( bytesWritten(qint64) ), this, SLOT( written(qint64) ) );
-    tcpSocket->write( message.toLatin1(), message.length() );*/
-
-    frame[2] = 'c';
+    frame[2] = 'r';
+    sendMsg();
 }
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    /*QString message = "back";
-
-    connect( tcpSocket, SIGNAL( bytesWritten(qint64) ), this, SLOT( written(qint64) ) );
-    tcpSocket->write( message.toLatin1(), message.length() );*/
-
-    frame[3] = 'r';
+    frame[3] = 'b';
+    sendMsg();
 }
 
 void MainWindow::written( qint64 )
 {
     qDebug( "success!" );
 
+    //let the frame be 0 after send success
     for( int i = 0; i < 6; ++i )
     {
         if( frame[i] != ' ' )
@@ -244,28 +251,11 @@ void MainWindow::written( qint64 )
     }
 }
 
-/********Map show***********************/
-void MainWindow::showMap()
-{
-    //QPixmap pm = new QPixmap;
-    //pm->load()
-}
-
 
 /********send to server**********/
 void MainWindow::sendMsg()
 {
-    //qDebug() << frame;
     tcpSocket->write( frame, sizeof( frame ) );
-
-    /*for( int i = 0; i < 6; ++i )
-    {
-        if( frame[i] != ' ' )
-        {
-            qDebug() << frame;
-            frame[i] = ' ';
-        }
-    }*/
 }
 
 

@@ -6,10 +6,8 @@
 #include <QAbstractSocket>
 #include <QLabel>
 #include <QPixmap>
-#include <QTimer>
 #include <QBuffer>
 #include <QImageReader>
-#include <QVBoxLayout>
 
 namespace Ui {
 class MainWindow;
@@ -39,7 +37,7 @@ private slots:
     void on_pushButton_7_clicked();
     void tcpConnected();
     void tcpDisconnected();
-    void dataReceived();
+    void dataReceived();  //show map
     void hostFounded();
     void written( qint64 );
     void errorOccur(QAbstractSocket::SocketError e);
@@ -52,9 +50,6 @@ private slots:
     void on_pushButton_5_clicked();
     void on_pushButton_6_clicked();
 
-/********Map show*********************/
-private:
-    void showMap();
 };
 
 #endif // MAINWINDOW_H
