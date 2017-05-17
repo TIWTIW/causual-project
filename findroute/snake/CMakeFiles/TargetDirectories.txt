@@ -1,3 +1,0 @@
-/media/zhoufeitong/工程/c++/causual/snake/CMakeFiles/rebuild_cache.dir
-/media/zhoufeitong/工程/c++/causual/snake/CMakeFiles/edit_cache.dir
-/media/zhoufeitong/工程/c++/causual/snake/CMakeFiles/snake.dir

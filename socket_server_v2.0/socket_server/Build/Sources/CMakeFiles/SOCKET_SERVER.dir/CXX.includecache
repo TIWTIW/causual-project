@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../Includes/function.h
+sys/socket.h
+-
+cerrno
+-
+pthread.h
+-
+sys/stat.h
+-
+sys/ioctl.h
+-
+sys/epoll.h
+-
+fcntl.h
+-
+iostream
+-
+string
+-
+netinet/in.h
+-
+unistd.h
+-
+
+/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Sources/function.cpp
+function.h
+/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Sources/function.h
+
+/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Sources/main.cpp
+function.h
+/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Sources/function.h
+
