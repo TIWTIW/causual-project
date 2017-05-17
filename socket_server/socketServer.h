@@ -1,6 +1,7 @@
 #ifndef _SOCKET_SEVER_H
 #define _SOCKET_SEVER_H
 
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,7 +21,7 @@
 #include <sys/select.h>
 #include <sys/time.h>
 
-#define MAXLINE 4096
+#define MAXLINE 8192
 
 class socketServer
 {
@@ -40,7 +41,7 @@ private:
     void writeMsg();
     static void* readMsg( void * );        
     void readThread();
-    void intToChar( int, char * );
+    void intToChar( long, char * );
     static void* keyExit( void * );
     void keyThread();
 };

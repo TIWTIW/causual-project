@@ -753,9 +753,6 @@ moc_mainwindow.cpp: /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMain
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QPixmap \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QTimer \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qtimer.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbasictimer.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QBuffer \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbuffer.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QImageReader \
@@ -768,11 +765,6 @@ moc_mainwindow.cpp: /home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMain
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonobject.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonvalue.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayout.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
 		../master_computer/mainwindow.h \
 		moc_predefs.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/bin/moc
@@ -912,9 +904,6 @@ main.o: ../master_computer/main.cpp ../master_computer/mainwindow.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QPixmap \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QTimer \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qtimer.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbasictimer.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QBuffer \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbuffer.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QImageReader \
@@ -927,11 +916,6 @@ main.o: ../master_computer/main.cpp ../master_computer/mainwindow.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonobject.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonvalue.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayout.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QApplication \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qapplication.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
@@ -1054,9 +1038,6 @@ mainwindow.o: ../master_computer/mainwindow.cpp ../master_computer/mainwindow.h 
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QPixmap \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QTimer \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qtimer.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbasictimer.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QBuffer \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qbuffer.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtGui/QImageReader \
@@ -1069,11 +1050,6 @@ mainwindow.o: ../master_computer/mainwindow.cpp ../master_computer/mainwindow.h 
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonobject.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qjsonvalue.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayout.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
 		ui_mainwindow.h \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtCore/QVariant \
 		/home/zhoufeitong/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QAction \

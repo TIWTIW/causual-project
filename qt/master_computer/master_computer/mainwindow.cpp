@@ -99,7 +99,7 @@ void MainWindow::dataReceived()
     static long dataSize = 0;
     static int restSize = 0;
 
-    quint8 flag_exit = 0;
+    //quint8 flag_exit = 0;
 
     qDebug("receive");
 
@@ -111,35 +111,47 @@ void MainWindow::dataReceived()
     //only when the more than 15 bytes received
     while( tcpSocket->bytesAvailable() > 15 )
     {
+        //qDebug() << "data is:" << tcpSocket->readAll();
+        //return;
         qDebug() << tcpSocket->bytesAvailable();
 
         if( dataSize == 0 )
         {
-            if( tcpSocket->read( head.data(), 1 ) == -1 )
+            head = tcpSocket->read( 1 );
+            if( head.isEmpty() )
             {
                 qDebug() << "error read!";
                 return;
             }
 
-            qDebug() << "headArray" << head;
+            //qDebug() << "headArray.data" << head.data();
 
             //trans may be incorrect, there are more than 1 bytes??
-            QString head_msg = head.data();
-            qDebug() << head_msg;
+            //QString head_msg = head.data();
+           // qDebug() << head_msg;
 
-            if( head_msg[0] == 'H' )
+            //char *head_msg_ch = head.data();
+            //qDebug() << head_msg_ch;
+            //QString x = 'H';
+
+            qDebug() << "head" << head;
+            if( head[0] == 'H' )
             {
-               if( tcpSocket->read( dataSizeArray.data(), 10 ) == -1 )
+               dataSizeArray = tcpSocket->read( 10 );
+               if( dataSizeArray.isEmpty() )
                 {
                    qDebug() << "readd dataSizeArray error!" << dataSizeArray.data();
                    return;
                }
+               qDebug() << "dataSizeArray" << dataSizeArray;
 
-                if( tcpSocket->read( restSizeArray.data(), 5 ) == -1 )
+                restSizeArray = tcpSocket->read( 5 );
+                if(  restSizeArray.isEmpty() )
                 {
                     qDebug() << "read restSizeArray error!" << restSizeArray.data();
                     return;
                 }
+                qDebug() << "restSize" << restSizeArray;
             }
             else
                 return;
@@ -162,26 +174,37 @@ void MainWindow::dataReceived()
         qint64 size = tcpSocket->bytesAvailable();
         qDebug() << "size" << size;
 
-        if( dataSize <= tcpSocket->bytesAvailable() )
+        if( (dataSize + restSize) <= size )
         {
             qDebug() << "ok,all bytes recvd" << endl;
 
             array = tcpSocket->read( dataSize );
+            //qDebug() << tcpSocket->read( restSize );
+            //qDebug() << "array" << array;
+            tcpSocket->read( restSize );
+
+            //return;
+
             if( array.isEmpty() )
             {
                 qDebug() << "read empty!";
                 return;
             }
-            tcpSocket->read( restSize );
-            flag_exit = 1;
+            dataSize=0;
+            restSize = 0;
+            //qDebug() << "next" << tcpSocket->readAll();
+            //flag_exit = 1;
+            break;
         }
         else
             return ;
 
     }
 
-    if( !flag_exit )
-        return;
+    //if( !flag_exit )
+        //return;
+
+    qDebug() << "exit!";
 
     QBuffer buffer( &array );
     buffer.open( QIODevice::ReadOnly );
@@ -195,8 +218,6 @@ void MainWindow::dataReceived()
     {
         ui->label_3->setPixmap( QPixmap::fromImage( image ) );
         qDebug( "write!" );
-        dataSize=0;
-        restSize = 0;
     }
     else
     {

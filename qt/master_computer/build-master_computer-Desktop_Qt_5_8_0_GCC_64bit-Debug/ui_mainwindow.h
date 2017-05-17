@@ -90,12 +90,12 @@ public:
         pushButton_6->setGeometry(QRect(370, 340, 89, 61));
         line = new QFrame(centralWidget);
         line->setObjectName(QStringLiteral("line"));
-        line->setGeometry(QRect(230, 0, 16, 701));
+        line->setGeometry(QRect(230, 0, 16, 711));
         line->setFrameShape(QFrame::VLine);
         line->setFrameShadow(QFrame::Sunken);
         line_3 = new QFrame(centralWidget);
         line_3->setObjectName(QStringLiteral("line_3"));
-        line_3->setGeometry(QRect(580, 0, 16, 691));
+        line_3->setGeometry(QRect(580, 0, 16, 711));
         line_3->setFrameShape(QFrame::VLine);
         line_3->setFrameShadow(QFrame::Sunken);
         line_4 = new QFrame(centralWidget);
@@ -108,7 +108,7 @@ public:
         textBrowser->setGeometry(QRect(10, 360, 211, 191));
         label_3 = new QLabel(centralWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(630, 40, 480, 640));
+        label_3->setGeometry(QRect(630, 19, 531, 661));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);

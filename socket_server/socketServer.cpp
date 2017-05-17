@@ -34,7 +34,7 @@ void socketServer::waiting()
     printf( "======waiting for client's request======\n" );
 
     //create key thread, while key 1 is pressed, the program exit
-    keyThread();
+   // keyThread();
 
     while( 1 )
     {
@@ -163,9 +163,16 @@ void* socketServer::readMsg( void *arg )
 }
 
 /**************transfer size which is int to char, eg. 123 -> "123"***********/
-void socketServer::intToChar( int size, char * trans )
+void socketServer::intToChar( long size, char * trans )
 {
+    if( size == 0 )
+    {
+        trans[0] = '0';
+        return ;
+    }
+
     int i = 0;
+
     while( size != 0 )
     {
         trans[i++] = size - size / 10 * 10 + 48;
@@ -187,17 +194,46 @@ void socketServer::intToChar( int size, char * trans )
 void socketServer::writeMsg()
 {
     int len = 0;
-    FILE *fd = fopen( "map.jpg", "rb" );
+
+    static long num = 132315;
+    
+    char file_name[43] = "./MapSnapShoots/ocpMap20120101_";
+
+    char num_ch[6];
+    intToChar( num , num_ch );
+
+    //file_name[30] = '_';
+    for( int i = 0; i < 6; ++i )
+    {
+        file_name[31 + i] = num_ch[i];
+    }
+
+    char back[5] = ".jpg";
+    for( int i = 0; i < 5; ++i )
+    {
+        file_name[37 + i] = back[i];
+    }
+
+    file_name[42] = '\0';
+
+    num++;
+
+    if( num == 132520 )
+        num = 132315;
+
+    printf( "%s\n", file_name );
+    FILE *fd = fopen( file_name, "rb" );
 
     if( fd == NULL )
     {
         printf( "file open error!\n" );
-        exit( 1 );
+        //exit( 1 );
+        return;
     }
 
     struct stat buf;
 
-    if( stat( "map.jpg", &buf ) < 0 )
+    if( stat( file_name, &buf ) < 0 )
     {
         return ;
     }
@@ -206,7 +242,7 @@ void socketServer::writeMsg()
     long file_size = buf.st_size;
     char transfer_size[10];
     char rest_size[5];
-    int rest = MAXLINE - file_size % MAXLINE;
+    int rest = MAXLINE >= file_size ? MAXLINE - file_size : MAXLINE - file_size % MAXLINE;
 
    // printf( "rest = %d\n", rest );
 
@@ -235,8 +271,12 @@ void socketServer::writeMsg()
     while( !feof(fd) )
     {
         len = fread( sendBuf, 1, MAXLINE, fd );
+        printf( "%d\n", len );
         if( len <= 0 )
+        {
+            printf( "send msg compete: %s(errno: %d)\n", strerror(errno), errno );  
             break;
+        }
         else if( ( send( connfd, sendBuf, sizeof( sendBuf ) , 0 ) ) < 0)  
         {  
             printf( "send msg error: %s(errno: %d)\n", strerror(errno), errno );  
@@ -250,7 +290,7 @@ void socketServer::writeMsg()
     fclose( fd );
 
     //wait for xms
-    usleep( 400000 );
+    usleep( 100000 );
 }
 
 
