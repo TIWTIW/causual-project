@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++0x   CMakeFiles/test_myfunctions.dir/Myfunctions_test.cpp.o CMakeFiles/test_myfunctions.dir/Myfunctions.cpp.o  -o test_myfunctions -rdynamic 

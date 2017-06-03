@@ -1,6 +1,7 @@
 #include "function.h"
 
 using namespace std;
+using namespace cv;
 
 /********readMsg****************************************
  * function:decode the message received, and when recv *
@@ -80,8 +81,22 @@ void intToChar( long size, char * trans )
 }
 
 
+/********writeMsg_Mat*************************************
+ * function:send the orignal data to connected socket
+ * parameters:1.Mat:orignal Mat data
+ *            2.connfd:the fd of connected socket
+ * return:1 means send error,0 means success, -1 means 
+ *        file operations failed
+ * author:zft                                          
+ * Time:2017.5.17                                      
+ * ****************************************************/
+int writeMsg_Mat( Mat image, int connfd )
+{
+    ;
+}
+
 /********writeMsg*************************************
- * function:send the message to connect socket
+ * function:send the message to connected socket
  * parameters:1.connfd:the fd of connected socket
  * return:1 means send error,0 means success, -1 means 
  *        file operations failed
@@ -273,20 +288,20 @@ static void* manageThread( void *arg )
         {
             if( events[n].events & EPOLLIN && events[n].data.fd == listenfd )
             {
-               connfd = accept( listenfd, (struct sockaddr *)NULL, NULL );
+                connfd = accept( listenfd, (struct sockaddr *)NULL, NULL );
                
-               if( fcntl( connfd, F_SETFL, fcntl( connfd, F_GETFL, 0) | O_NONBLOCK ) == -1 )
-               {
-                   cout << "set nonBlocking failed!" << endl;
-                   pthread_exit( NULL );
-               }
+                if( fcntl( connfd, F_SETFL, fcntl( connfd, F_GETFL, 0) | O_NONBLOCK ) == -1 )
+                {
+                    cout << "set nonBlocking failed!" << endl;
+                    pthread_exit( NULL );
+                } 
 
-               ev.events = EPOLLIN | EPOLLOUT;
-               ev.data.fd = connfd;
-               epoll_ctl( epollfd, EPOLL_CTL_ADD, connfd, &ev );
+                ev.events = EPOLLIN | EPOLLOUT;
+                ev.data.fd = connfd;
+                epoll_ctl( epollfd, EPOLL_CTL_ADD, connfd, &ev );
                 
                
-               cout << "accept success!" << connfd << endl;
+                cout << "accept success!" << connfd << endl;
             }
 
             if( events[n].events & EPOLLIN && events[n].data.fd != listenfd )

@@ -8,6 +8,8 @@
 #include <QPixmap>
 #include <QBuffer>
 #include <QImageReader>
+#include <QKeyEvent>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +32,8 @@ private:
 
     char frame[6];
 
+    bool connected = false;
+
 /*****************Communication*********/
 private slots:
     void on_pushButton_clicked();
@@ -50,6 +54,14 @@ private slots:
     void on_pushButton_5_clicked();
     void on_pushButton_6_clicked();
 
+/***********keyboard****************/
+protected:
+    void keyPressEvent(QKeyEvent *);
+
+
+/***********joke*****************/
+private slots:
+    void Login_open();
 };
 
 #endif // MAINWINDOW_H

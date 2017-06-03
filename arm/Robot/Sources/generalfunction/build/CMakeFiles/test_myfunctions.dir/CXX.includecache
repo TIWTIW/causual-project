@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/limin/WorkStations/Navigationlib/generalfunction/Myfunctions.cpp
+Myfunctions.h
+/home/limin/WorkStations/Navigationlib/generalfunction/Myfunctions.h
+
+/home/limin/WorkStations/Navigationlib/generalfunction/Myfunctions.h
+unistd.h
+-
+sys/stat.h
+-
+errno.h
+-
+string
+-
+cstdlib
+-
+cstring
+-
+dirent.h
+-
+
+/home/limin/WorkStations/Navigationlib/generalfunction/Myfunctions_test.cpp
+Myfunctions.h
+/home/limin/WorkStations/Navigationlib/generalfunction/Myfunctions.h
+iostream
+-
+
