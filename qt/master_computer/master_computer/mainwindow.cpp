@@ -12,8 +12,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit->setText( "127.0.0.1" );
     ui->lineEdit_2->setText( "8010" );
 
+    ui->lineEdit_3->setReadOnly( true );
+    ui->lineEdit_4->setReadOnly( true );
+    ui->lineEdit_5->setReadOnly( true );
+    ui->lineEdit_6->setReadOnly( true );
+    ui->lineEdit_7->setReadOnly( true );
+    ui->lineEdit_8->setReadOnly( true );
+    ui->lineEdit_9->setReadOnly( true );
+    ui->lineEdit_10->setReadOnly( true );
+    ui->lineEdit_11->setReadOnly( true );
+
     for( int i = 0; i < 6; ++i )
         frame[i] = ' ';
+
+    connect( ui->actionLogin_2, SIGNAL( triggered() ), this, SLOT( Login_open() ) );
 
 }
 
@@ -21,6 +33,11 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::Login_open()
+{
+    QMessageBox::information( this, tr( "Login" ), tr( "Too Young Too Simple!" ) );
 }
 
 /********************communication************************/
@@ -48,6 +65,7 @@ void MainWindow::on_pushButton_clicked()
 
     connect( tcpSocket, SIGNAL( bytesWritten(qint64) ),
              this, SLOT( written(qint64) ) );
+
 
     tcpSocket-> connectToHost(ipAddress, port.toInt());
 
@@ -82,6 +100,8 @@ void MainWindow::tcpConnected()
     ui->pushButton->setEnabled( false );
     ui->pushButton_2->setEnabled( true );
 
+    connected = true;
+
     qDebug() << tcpSocket->socketDescriptor();
 }
 
@@ -92,6 +112,8 @@ void MainWindow::tcpDisconnected()
     ui->pushButton_2->setEnabled( false );
     ui->pushButton->setEnabled( true );
     tcpSocket->readAll();
+
+    connected = false;
 }
 
 void MainWindow::dataReceived()
@@ -230,31 +252,64 @@ void MainWindow::on_pushButton_7_clicked()
 {
     ui->textBrowser->clear();
     ui->label_3->clear();
+    ui->textBrowser->clear();
 }
 
 /**************Control***********************/
 void MainWindow::on_pushButton_3_clicked()
 {
-    frame[0] = 'f';
-    sendMsg();
+    if( connected )
+    {
+        ui->textBrowser_2->append( "Go ahead!" );
+        frame[0] = 'f';
+        sendMsg();
+    }
+    else
+    {
+        QMessageBox::information( this, tr( "warning" ), tr( "You haven't connected to the server!" ) );
+    }
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    frame[1] = 'l';
-    sendMsg();
+    if( connected )
+    {
+        ui->textBrowser_2->append( "Turn left!" );
+        frame[1] = 'l';
+        sendMsg();
+    }
+    else
+    {
+        QMessageBox::information( this, tr( "warning" ), tr( "You haven't connected to the server!" ) );
+    }
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
-    frame[2] = 'r';
-    sendMsg();
+    if( connected )
+    {
+        ui->textBrowser_2->append( "Turn right!" );
+        frame[2] = 'r';
+        sendMsg();
+    }
+    else
+    {
+        QMessageBox::information( this, tr( "warning" ), tr( "You haven't connected to the server!" ) );
+    }
 }
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    frame[3] = 'b';
-    sendMsg();
+    if( connected )
+    {
+        ui->textBrowser_2->append( "Go back!" );
+        frame[3] = 'b';
+        sendMsg();
+    }
+    else
+    {
+        QMessageBox::information( this, tr( "warning" ), tr( "You haven't connected to the server!" ) );
+    }
 }
 
 void MainWindow::written( qint64 )
@@ -270,6 +325,32 @@ void MainWindow::written( qint64 )
             frame[i] = ' ';
         }
     }
+}
+
+/*********keyboard??*************/
+void MainWindow::keyPressEvent( QKeyEvent *event )
+{
+    if( event->key() == Qt::Key_W && connected )
+    {
+        frame[0] = 'f';
+        sendMsg();
+    }
+    else if( event->key() == Qt::Key_A && connected )
+    {
+        frame[1] = 'l';
+        sendMsg();
+    }
+    else if( event->key() == Qt::Key_D && connected )
+    {
+        frame[2] = 'r';
+        sendMsg();
+    }
+    else if( event->key() == Qt::Key_S && connected )
+    {
+        frame[3] = 'b';
+        sendMsg();
+    }
+
 }
 
 
