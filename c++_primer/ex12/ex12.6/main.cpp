@@ -26,7 +26,7 @@ void SaveVc( istream &is, shared_ptr<vector<int>> vc  )
 void printVc( shared_ptr<vector<int>> vc )
 {
     for( auto c : *vc )
-    cout << c << endl;
+        cout << c << endl;
 }
 
 int main( int argc, char *argv[] )
