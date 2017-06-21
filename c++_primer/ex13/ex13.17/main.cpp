@@ -15,11 +15,11 @@ class numbered
 {
 public:
     numbered() : mysn( ++i ) {}
-    numbered ( numbered & r_number ) { mysn = ++i; }
+    numbered ( numbered &r_number ) { mysn = ++i; }
     int mysn;
 };
 
-void f( const numbered & s )
+void f( const numbered &s )
 {
     cout << s.mysn << endl;
 }
