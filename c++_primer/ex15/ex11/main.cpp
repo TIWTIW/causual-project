@@ -15,10 +15,13 @@ double print_total( ostream & os, const Quote & item, size_t n )
 int main( int argc, char *argv[] )
 {
     Quote Q( "123", 15 );
-    Bulk_quote Bq( "234", 15, 10, 0.8 );
+    Bulk_quote Bq( "234", 15, 10, 0.2 );
 
-    print_total( cout, Q, 20 );
-    print_total( cout, Bq, 20 );
+    print_total( cout, Q, 10 );
+    print_total( cout, Bq, 10 );
+
+    Q.debug();
+    Bq.debug();
 
     return 0;
 }
