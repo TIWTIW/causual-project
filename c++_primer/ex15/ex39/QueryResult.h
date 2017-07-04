@@ -14,7 +14,7 @@ public:
     using line_no = std::vector<std::string>::size_type;
     QueryResult( std::string s,
                  std::shared_ptr<std::set<line_no>> p,
-                 std::shared_ptr<std::vector<std::string>> f) :
+                 std::shared_ptr<std::vector<std::string>> f ) :
         sought( s ), lines( p ), file( f) {  }
     std::set<line_no>::iterator begin() { return lines->begin(); }
     std::set<line_no>::iterator end()  { return lines->end(); }
