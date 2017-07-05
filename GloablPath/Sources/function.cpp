@@ -3,6 +3,7 @@
 using namespace std;
 using namespace cv;
 
+/******transfer CellVector to Map of Cell ***********/
 vector<vector<Cell>> CellVectorToMap( vector<Cell> &CellVector )
 {
     vector<vector<Cell>> result;
@@ -31,6 +32,7 @@ vector<vector<Cell>> CellVectorToMap( vector<Cell> &CellVector )
 }
 
 
+/******* --A* algorithm -- ****************/
 vector<Cell> A_Star_FindPath( vector<vector<Cell>> &CellMap, pair<int, int> Start, pair<int, int> End )
 {
    cout << "get in A_start!" << endl;
@@ -143,4 +145,151 @@ vector<Cell> A_Star_FindPath( vector<vector<Cell>> &CellMap, pair<int, int> Star
 
    return result;
 
+}
+
+/***** --RRT algorithm --*****************/
+void RRT_Find_Path( Mat &Image, Point Start, Point Goal )
+{
+    ETree Tree;
+    Tree.addNode( Start );
+
+    srand( unsigned( time(NULL) ) );
+
+    const int number_of_k = 4;
+    while( true )
+    {
+        for( int i = 0; i < number_of_k; ++i )
+        {
+            int x = abs( rand() % Map_Size );            
+            int y = abs( rand() % Map_Size );
+
+            Point currentPoint( x, y );
+
+            Point nearNode = Tree.findNearstNode( currentPoint );
+            
+            uchar *data = Image.ptr<uchar>( y );
+            
+            if( data[x] != 0 || data[x+1] != 0 || data[x+2] != 0 )
+            {
+                cout << "Current Point has obstacle!" << endl;
+                continue;
+            }
+
+
+            bool noObstacle = true;
+
+            int disX = x - nearNode.x, disY = y - nearNode.y;
+            
+            int times = 0;
+            if( disX > 0 && disY > 0 )
+            {
+                for( int i = x, j = y; i > nearNode.x; --i, j = j - max( ( disY / disX ), 1 ) )
+                {
+                    uchar *data = Image.ptr<uchar>(i);
+
+                    if( data[j] != 0 || data[j+1] != 0 || data[j+2] != 0 )
+                    {
+                       cout << data[i] << " " << data[i+1] << " " << data[i+2] << endl;
+                       cout << "line has obstacle! :"  << times << endl;
+                       times++;
+                       noObstacle = false;
+                       break;
+                        
+                    }
+                }
+            }
+            else if( disX > 0 && disY < 0 )
+            {
+
+                for( int i = x, j = y; i > nearNode.x; --i, j = j + max( disY / disX, 1 ) )
+                {
+                    uchar *data = Image.ptr<uchar>(i);
+
+                    if( data[j] != 0 || data[j+1] != 0 || data[j+2] != 0 )
+                    {
+                       cout << "line has obstacle!" << endl;
+                       noObstacle = false;
+                       break;
+                        
+                    }
+                }
+            }
+            else if( disX < 0 && disY > 0 )
+            {
+                for( int i = x, j = y; i < nearNode.x; ++i, j = j - max( disY / disX , 1) )
+                {
+                    uchar *data = Image.ptr<uchar>(j);
+
+                    if( data[i] != 0 || data[i+1] != 0 || data[i+2] != 0 )
+                    {
+                       cout << "line has obstacle!" << endl;
+                       noObstacle = false;
+                       break;
+                        
+                    }
+                }
+
+            }
+            else if( disX < 0 && disY < 0 )
+            {
+
+                for( int i = x, j = y; i < nearNode.x; ++i, j = j + max( disY / disX, 1 ) )
+                {
+                    uchar *data = Image.ptr<uchar>(j);
+
+                    if( data[i] != 0 || data[i+1] != 0 || data[i+2] != 0 )
+                    {
+                       cout << "line has obstacle!" << endl;
+                       noObstacle = false;
+                       break;
+                        
+                    }
+                }
+            }
+
+            if( !noObstacle )
+            {
+                continue;
+            }
+
+           // const int step = 5;
+
+            const int step_x = 2, step_y = step_x * max( 1,  disY / disX );
+
+            int newx, newy;
+            if( disX > 0 && disY > 0 )
+            {
+                newx = nearNode.x - step_x;
+                newy = nearNode.y - step_y;
+            }
+
+            if( disX > 0 && disY < 0 )
+            {
+                newx = nearNode.x - step_x;
+                newy = nearNode.y + step_y;
+            }
+
+            if( disX < 0 && disY > 0 )
+            {
+                newx = nearNode.x + step_x;
+                newy = nearNode.y - step_y;
+            }
+
+            if( disX < 0 && disY < 0 )
+            {
+                newx = nearNode.x + step_x;
+                newy = nearNode.y + step_y;
+            }
+
+            Point newPoint( newx, newy );
+
+            Tree.addNode( newPoint );
+            line( Image, nearNode, newPoint, Scalar( 255, 0, 0 ) );
+
+            cout << "add NewPoint!" << newPoint.x << " " << newPoint.y << endl;
+            if( newPoint.x == Goal.x && newPoint.y == Goal.y )
+                break;
+
+        }
+    }
 }

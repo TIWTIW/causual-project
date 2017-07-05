@@ -244,7 +244,8 @@ int logicalShift(int x, int n) {
  *   Rating: 3
  */
 int addOK(int x, int y) {
-  return 2;
+   
+ // return 2;
 }
 /* invert - Return x with the n bits that begin at position p inverted 
  *          (i.e., turn 0 into 1 and vice versa) and the rest left 
@@ -253,6 +254,7 @@ int addOK(int x, int y) {
  *   Example: invert(0x80000000, 0, 1) = 0x80000001,
  *            invert(0x0000008e, 3, 3) = 0x000000b6,
  *   Legal ops: ! ~ & ^ | + << >>
+ *
  *   Max ops: 20
  *   Rating: 3  
  */

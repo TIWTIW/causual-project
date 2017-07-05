@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/path.dir/main.cpp.o"
   "CMakeFiles/path.dir/Map.cpp.o"
   "CMakeFiles/path.dir/function.cpp.o"
+  "CMakeFiles/path.dir/ETree.cpp.o"
   "path.pdb"
   "path"
 )

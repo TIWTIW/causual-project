@@ -125,6 +125,33 @@ path/fast:
 	cd /media/zhoufeitong/工程/causual/GloablPath/Build && $(MAKE) -f Sources/CMakeFiles/path.dir/build.make Sources/CMakeFiles/path.dir/build
 .PHONY : path/fast
 
+ETree.o: ETree.cpp.o
+
+.PHONY : ETree.o
+
+# target to build an object file
+ETree.cpp.o:
+	cd /media/zhoufeitong/工程/causual/GloablPath/Build && $(MAKE) -f Sources/CMakeFiles/path.dir/build.make Sources/CMakeFiles/path.dir/ETree.cpp.o
+.PHONY : ETree.cpp.o
+
+ETree.i: ETree.cpp.i
+
+.PHONY : ETree.i
+
+# target to preprocess a source file
+ETree.cpp.i:
+	cd /media/zhoufeitong/工程/causual/GloablPath/Build && $(MAKE) -f Sources/CMakeFiles/path.dir/build.make Sources/CMakeFiles/path.dir/ETree.cpp.i
+.PHONY : ETree.cpp.i
+
+ETree.s: ETree.cpp.s
+
+.PHONY : ETree.s
+
+# target to generate assembly for a file
+ETree.cpp.s:
+	cd /media/zhoufeitong/工程/causual/GloablPath/Build && $(MAKE) -f Sources/CMakeFiles/path.dir/build.make Sources/CMakeFiles/path.dir/ETree.cpp.s
+.PHONY : ETree.cpp.s
+
 Map.o: Map.cpp.o
 
 .PHONY : Map.o
@@ -215,6 +242,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... path"
+	@echo "... ETree.o"
+	@echo "... ETree.i"
+	@echo "... ETree.s"
 	@echo "... Map.o"
 	@echo "... Map.i"
 	@echo "... Map.s"

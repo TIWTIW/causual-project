@@ -20,7 +20,7 @@ int main()
     vector<vector<Cell>> CellMap = CellVectorToMap( CellVector );
 
 
-    vector<Cell> Path = A_Star_FindPath( CellMap, pair<int, int>(10, 10), pair<int, int>(50, 53) );
+    //vector<Cell> Path = A_Star_FindPath( CellMap, pair<int, int>(10, 10), pair<int, int>(50, 53) );
 
     //cout << CellMap.size() << endl;
 
@@ -33,10 +33,19 @@ int main()
     Mat AfterCellImage = map.TransferCellToImage();
     Mat PathImage( AfterCellImage );
 
-    for( auto &c : Path )
+    /***** test for RRT******/
+    Mat orignalImage = map.getImage();
+
+    Point StartPoint( 20, 20 ), EndPoint( 300, 300 );
+
+    RRT_Find_Path( orignalImage, StartPoint, EndPoint );
+
+    /*****************/
+
+   // for( auto &c : Path )
     {
-        rectangle( PathImage, Point( c.getPosition().first - Cell_Size / 2, c.getPosition().second - Cell_Size / 2 ),
-                          Point( c.getPosition().first + Cell_Size / 2, c.getPosition().second + Cell_Size / 2 ),  Scalar( 255, 0, 0 ), -1 );
+     //   rectangle( PathImage, Point( c.getPosition().first - Cell_Size / 2, c.getPosition().second - Cell_Size / 2 ),
+      //                    Point( c.getPosition().first + Cell_Size / 2, c.getPosition().second + Cell_Size / 2 ),  Scalar( 255, 0, 0 ), -1 );
     }
 
     namedWindow( "MapImage", CV_WINDOW_AUTOSIZE );
@@ -45,8 +54,8 @@ int main()
     namedWindow( "CellImage", CV_WINDOW_AUTOSIZE );
     imshow( "CellImage", AfterCellImage );
 
-    namedWindow( "PathImage", CV_WINDOW_AUTOSIZE );
-    imshow( "PathImage", PathImage );
+    //namedWindow( "PathImage", CV_WINDOW_AUTOSIZE );
+    //imshow( "PathImage", PathImage );
 
     waitKey( 0 );
 }

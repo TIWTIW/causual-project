@@ -179,7 +179,7 @@ int P_COM_Node0( pid_t L1_pid )
         log.fs(ERROR) << "Failed to initialize the system, program will exit with code -1." << endl;
         //printf("Killing Process %d\n", L1_pid );
         //kill( L1_pid, SIGKILL );
-        return(-1);
+        return -1;
     }
 
     log.fs(INFO) << "Level-0 Init: System(STM 32) Initialized!" << endl;

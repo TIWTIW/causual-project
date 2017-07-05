@@ -10,6 +10,10 @@
 common.h
 ../Sources/../Includes/common.h
 
+../Sources/../Includes/ETree.h
+common.h
+../Sources/../Includes/common.h
+
 ../Sources/../Includes/Map.h
 Cell.h
 ../Sources/../Includes/Cell.h
@@ -35,6 +39,12 @@ queue
 -
 set
 -
+ETree.h
+../Sources/../Includes/ETree.h
+
+/media/zhoufeitong/工程/causual/GloablPath/Sources/ETree.cpp
+ETree.h
+/media/zhoufeitong/工程/causual/GloablPath/Sources/ETree.h
 
 /media/zhoufeitong/工程/causual/GloablPath/Sources/Map.cpp
 Map.h

@@ -199,7 +199,7 @@ int Level1_Lacation_Trajectory( void )
     }
     // Close the semaphore, please open it at the start of the take photo thread!
 
-    if ( L2_pid<0 )
+    if ( L2_pid < 0 )
     {
         perror("Error: Failed to Create Process L1");
         printf("Program Will exit with code -1\n");

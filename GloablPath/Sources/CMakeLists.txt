@@ -5,6 +5,7 @@ FIND_PACKAGE( OpenCV REQUIRED )
 SET( SRC_LIST main.cpp
               Map.cpp
               function.cpp
+              ETree.cpp
               )
 
 SET(CMAKE_C_COMPILER g++)

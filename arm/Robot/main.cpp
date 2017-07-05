@@ -8,7 +8,7 @@
 int main(int argc, char const *argv[])
 {
     pid_t L1_pid = fork();
-    if ( L1_pid<0 )
+    if ( L1_pid < 0 )
     {
         perror("Error: Failed to Create Process L1");
         printf("Program Will exit with code -1\n");

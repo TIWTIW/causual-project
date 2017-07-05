@@ -303,7 +303,7 @@ vector<pose_t> PathSegmentePose( vector<Point> globalPath, int map_grid_size)
 	}
 	return resPath;
 }
-vector<pose_t> PathSegmentePoseV2( vector<Point> globalPath, int map_grid_size)
+vector<pose_t> PathSegmentePoseV2( vector<Point> globalPath, int map_grid_size )
 {
 	vector<Point>::reverse_iterator iter = globalPath.rbegin();
 	cout << "PathSegmente: From " << *globalPath.rbegin() << "to" << *(globalPath.rend()-1) << endl;
