@@ -130,7 +130,7 @@ void test()
 /* $begin getbuf-c */
 unsigned long long getbuf()
 {
-  char buf[36];
+  char buf[36]
   volatile char* variable_length;
   int i;
   unsigned long long val = (unsigned long long)Gets(buf);
