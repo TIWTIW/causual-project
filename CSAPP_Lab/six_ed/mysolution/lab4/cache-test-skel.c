@@ -40,7 +40,18 @@ mystery3:
 int get_block_size(void) {
   /* YOUR CODE GOES HERE */
 
-  return -1;
+  int i = 0;
+  char a[1024];
+
+  access_cache( (unsigned long long)(&a[i]) );
+  ++i;
+  for( ; i < 1024; i = i + 1 )
+  {
+      if( !access_cache( (unsigned long long)(&a[i]) ) )
+          break;
+  }
+
+  return i;
 }
 
 /*
@@ -48,6 +59,7 @@ int get_block_size(void) {
 */
 int get_cache_size(int block_size) {
   /* YOUR CODE GOES HERE */
+  
   return -1;
 }
 
@@ -72,7 +84,7 @@ int main(void) {
 
   block_size=get_block_size();
   size=get_cache_size(block_size);
-  assoc=get_cache_assoc(size);
+ // assoc=get_cache_assoc(size);
 
   printf("Cache block size: %d bytes\n", block_size);
   printf("Cache size: %d bytes\n", size);
