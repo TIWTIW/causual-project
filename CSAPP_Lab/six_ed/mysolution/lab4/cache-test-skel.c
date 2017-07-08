@@ -5,21 +5,21 @@ Lab 4 - Mystery Caches
 
 Mystery Cache Geometries:
 mystery0:
-    block size =
-    cache size =
-    associativity =
+    block size = 64bytes
+    cache size = 262144bytes
+    associativity = 1
 mystery1:
-    block size =
-    cache size =
-    associativity =
+    block size = 8 bytes
+    cache size = 16384bytes
+    associativity = 4
 mystery2:
-    block size =
-    cache size =
-    associativity =
+    block size = 16bytes
+    cache size = 65536bytes
+    associativity = 16
 mystery3:
-    block size =
-    cache size =
-    associativity =
+    block size = 2bytes
+    cache size = 131072bytes
+    associativity = 2
 */
 
 #include <stdlib.h>
@@ -41,13 +41,12 @@ int get_block_size(void) {
   /* YOUR CODE GOES HERE */
 
   int i = 0;
-  char a[1024];
 
-  access_cache( (unsigned long long)(&a[i]) );
+  access_cache( (unsigned long long)( i ));
   ++i;
-  for( ; i < 1024; i = i + 1 )
+  for( ; ; i = i + 1 )
   {
-      if( !access_cache( (unsigned long long)(&a[i]) ) )
+      if( !access_cache( (unsigned long long)(i) ) )
           break;
   }
 
@@ -59,8 +58,25 @@ int get_block_size(void) {
 */
 int get_cache_size(int block_size) {
   /* YOUR CODE GOES HERE */
-  
-  return -1;
+ 
+  flush_cache();
+
+  const int bs = block_size;
+  int i = 0;
+  int result = 1;
+
+  while( 1 )
+  {
+      flush_cache();
+      for( i = 0; i < result; i = i + bs )
+          access_cache( (unsigned long long)( i ) );
+
+      if( !access_cache( (unsigned long long)( 0 ) ) )
+          break;
+      result = result << 1;
+  }
+
+  return result >> 1;
 }
 
 /*
@@ -68,6 +84,20 @@ int get_cache_size(int block_size) {
 */
 int get_cache_assoc(int cache_size) {
   /* YOUR CODE GOES HERE */
+  flush_cache();
+
+  int i = 0;
+  int j = 0;
+  int time = 0;
+  for( i = 0; ; i += cache_size )
+  {
+      access_cache( i );
+
+      for( j = 0; j < i; j += cache_size )
+        if( !access_cache( j ) )
+            return time;
+      time++;
+  }
   return -1;
 }
 
@@ -84,7 +114,7 @@ int main(void) {
 
   block_size=get_block_size();
   size=get_cache_size(block_size);
- // assoc=get_cache_assoc(size);
+  assoc=get_cache_assoc(size);
 
   printf("Cache block size: %d bytes\n", block_size);
   printf("Cache size: %d bytes\n", size);
