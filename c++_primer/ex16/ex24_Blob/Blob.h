@@ -12,8 +12,11 @@ template <typename T> class Blob
 public:
     typedef T value_type;
     typedef typename std::vector<T>::size_type size_type;
+    //construct
     Blob();
     Blob( std::initializer_list<T> il );
+    template <typename Iter> Blob( Iter begin, Iter end );
+
     size_type size() const { return data->size(); }
     bool empty() const { return data->empty(); }
 
@@ -33,6 +36,13 @@ private:
     std::shared_ptr<std::vector<T>> data;
     void check( size_type i, const std::string &msg ) const;
 };
+
+template <typename T>
+template <typename Iter>
+Blob<T>::Blob( Iter begin, Iter end ) : data( std::make_shared<std::vector<T>>(begin, end) )
+{
+
+}
 
 template <typename T>
 T &Blob<T>::back() const
