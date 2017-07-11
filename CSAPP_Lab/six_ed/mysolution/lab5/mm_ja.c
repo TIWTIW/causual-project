@@ -425,10 +425,10 @@ void mm_free (void *ptr) {
   
   followingBlock->sizeAndTags = followingBlock->sizeAndTags & ~TAG_PRECEDING_USED;
 
-  /*if(followingBlock->sizeAndTags & TAG_USED == 0)
+  if(followingBlock->sizeAndTags & TAG_USED == 0)
   {
       *(size_t *)UNSCALED_POINTER_ADD(followingBlock,SIZE(followingBlock->sizeAndTags) - WORD_SIZE) = followingBlock->sizeAndTags;
-  }*/
+  }
   insertFreeBlock( blockInfo );
 
   coalesceFreeBlock( blockInfo );

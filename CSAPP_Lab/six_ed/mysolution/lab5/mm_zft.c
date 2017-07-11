@@ -148,7 +148,7 @@ static void insertFreeBlock(BlockInfo* freeBlock) {
   if (oldHead != NULL) {
     oldHead->prev = freeBlock;
   }
-//  freeBlock->prev = NULL;
+  freeBlock->prev = NULL;
   FREE_LIST_HEAD = freeBlock;
 }      
 
@@ -254,7 +254,7 @@ static void requestMoreSpace(size_t reqSize) {
   /* initialize header, inherit TAG_PRECEDING_USED status from the
      previously useless last word however, reset the fake TAG_USED
      bit */
-  prevLastWordMask = newBlock->sizeAndTags & TAG_PRECEDING_USED;
+  prevLastWordMask = newBlock->sizeAndTags | TAG_PRECEDING_USED;
   newBlock->sizeAndTags = totalSize | prevLastWordMask;
   // Initialize boundary tag.
   ((BlockInfo*)UNSCALED_POINTER_ADD(newBlock, totalSize - WORD_SIZE))->sizeAndTags = 
@@ -328,9 +328,6 @@ void* mm_malloc (size_t size) {
   BlockInfo * ptrFreeBlock = NULL;
   size_t blockSize;
   size_t precedingBlockUseTag;
-  BlockInfo * ptrNextBlock = NULL;
-  size_t *ptrNextBlockFooter = NULL;
-  BlockInfo *restBlock = NULL;
   //size_t extendSize;
 
   // Zero-size requests get NULL.
@@ -355,55 +352,36 @@ void* mm_malloc (size_t size) {
   // code.  It is included as a suggestion of where to start.
   // You will want to replace this return statement...
   
-  ptrFreeBlock = searchFreeList( reqSize );
-  if( ptrFreeBlock == NULL )
-  {
+  while( ( ptrFreeBlock = (BlockInfo *)searchFreeList( reqSize ) ) == NULL ) 
       requestMoreSpace( reqSize );
-      ptrFreeBlock = searchFreeList( reqSize );
-  }
 
+  void *result = UNSCALED_POINTER_ADD( ptrFreeBlock, WORD_SIZE );
 
   blockSize = SIZE( ptrFreeBlock->sizeAndTags );
- // precedingBlockUseTag = (blockSize - reqSize) | TAG_PRECEDING_USED;
+  precedingBlockUseTag = (blockSize - reqSize) | TAG_PRECEDING_USED;
 
-  if(blockSize < reqSize + MIN_BLOCK_SIZE)
+  if( ( blockSize - reqSize ) >= MIN_BLOCK_SIZE )
   {
-    reqSize = blockSize;
-  }
+    BlockInfo *restBlock = (BlockInfo *)UNSCALED_POINTER_ADD( ptrFreeBlock, reqSize );
+    ptrFreeBlock->sizeAndTags = reqSize | TAG_USED | TAG_PRECEDING_USED;
 
-  precedingBlockUseTag = ptrFreeBlock->sizeAndTags & TAG_PRECEDING_USED;
-  ptrFreeBlock->sizeAndTags = reqSize | precedingBlockUseTag | TAG_USED;
-
-  restBlock = (BlockInfo *)UNSCALED_POINTER_ADD( ptrFreeBlock, reqSize );
-
-  if( reqSize != blockSize )
-  {
-    //ptrFreeBlock->sizeAndTags = reqSize | TAG_USED | TAG_PRECEDING_USED;
-
-    restBlock->sizeAndTags = (blockSize - reqSize) | TAG_PRECEDING_USED;
+    restBlock->sizeAndTags = precedingBlockUseTag;
     restBlock->next = NULL;
     restBlock->prev = NULL;
 
-    *((size_t*)UNSCALED_POINTER_ADD(ptrFreeBlock, blockSize - WORD_SIZE)) = restBlock->sizeAndTags;
-  //  ptrNextBlockFooter = (size_t *)UNSCALED_POINTER_ADD(ptrFreeBlock,blockSize - WORD_SIZE);
+    *((size_t*)UNSCALED_POINTER_ADD(ptrFreeBlock, blockSize - WORD_SIZE)) = precedingBlockUseTag;
 
-   // (*ptrNextBlockFooter) = restBlock->sizeAndTags;
-
+    removeFreeBlock( ptrFreeBlock );
     insertFreeBlock( restBlock );
   }
   else
   {
-    restBlock->sizeAndTags = restBlock->sizeAndTags | TAG_PRECEDING_USED;
-    *((size_t*)UNSCALED_POINTER_ADD(restBlock, SIZE( restBlock->sizeAndTags ) - WORD_SIZE)) = restBlock->sizeAndTags;
-    //ptrNextBlockFooter = (size_t *)UNSCALED_POINTER_ADD(restBlock, SIZE( restBlock->sizeAndTags ) - WORD_SIZE);
-
-    //(*ptrNextBlockFooter) = restBlock->sizeAndTags;
+    ptrFreeBlock->sizeAndTags = blockSize | TAG_USED | TAG_PRECEDING_USED;
+    removeFreeBlock( ptrFreeBlock );
   }
 
-    removeFreeBlock( ptrFreeBlock );
 
-  return UNSCALED_POINTER_ADD( ptrFreeBlock, WORD_SIZE );
-
+  return result;
 }
 
 /* Free the block referenced by ptr. */
@@ -419,20 +397,13 @@ void mm_free (void *ptr) {
   followingBlock = (BlockInfo *)UNSCALED_POINTER_ADD( blockInfo, payloadSize );
 
   blockInfo->sizeAndTags &= ~TAG_USED;
-  *((size_t*)UNSCALED_POINTER_ADD(blockInfo, payloadSize - WORD_SIZE)) = blockInfo->sizeAndTags;
+  *((size_t*)UNSCALED_POINTER_SUB(followingBlock, WORD_SIZE)) = blockInfo->sizeAndTags;
   blockInfo->prev = NULL;
   blockInfo->next = NULL;
-  
-  followingBlock->sizeAndTags = followingBlock->sizeAndTags & ~TAG_PRECEDING_USED;
 
-  /*if(followingBlock->sizeAndTags & TAG_USED == 0)
-  {
-      *(size_t *)UNSCALED_POINTER_ADD(followingBlock,SIZE(followingBlock->sizeAndTags) - WORD_SIZE) = followingBlock->sizeAndTags;
-  }*/
   insertFreeBlock( blockInfo );
 
   coalesceFreeBlock( blockInfo );
-
 }
 
 
