@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <stdexcept>
 
 template <typename Object>
 class Vector
@@ -65,9 +66,19 @@ public:
     }
 
     Object &operator[]( int index )
-    { return objects[index]; }
+    {
+        if( index > theSize )
+            throw std::runtime_error( "error:the index is over!" );
+
+        return objects[index]; 
+    }
+
     const Object &operator[]( int index ) const 
-    { return objects[index]; }
+    { 
+        if( index > theSize )
+            throw std::runtime_error( "error:the index is over!" );
+        return objects[index]; 
+    }
 
     bool empty() const
     { return size() == 0; }
@@ -109,6 +120,26 @@ public:
     { return &objects[theSize]; }
 
     static const int SPARE_CAPACITY = 16;
+
+    //my add
+    void insert( iterator it, const Object &x )
+    {
+        if( theSize == theCapacity )
+            reserve( 2 * theCapacity + 1 );
+        theSize++;
+        for( iterator ie = &objects[theSize]; ie != it; --ie )
+            *ie = *(ie - 1);
+        *it = x;
+    }
+
+    iterator erase( iterator it )
+    {
+        for( iterator itNow = it; itNow != &objects[theSize]; ++itNow )
+            *itNow = *(itNow + 1);
+        theSize--;
+
+        return it;
+    }
 private:
     int theSize;
     int theCapacity;

@@ -7,5 +7,9 @@ int main()
 
     V.push_back( 2 );
 
-    std::cout << V.back() << std::endl;
+    auto it = V.end();
+    V.insert( it, 4 );
+
+    V.erase( V.begin() );
+    std::cout << *V.begin() << std::endl;
 }

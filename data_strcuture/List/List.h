@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 
 template <typename Object>
 class List
@@ -198,6 +199,40 @@ public:
         return to;
     }
 
+
+    //my add ex15
+    void splice( iterator position, List<Object> &lst )
+    {
+        iterator it = begin();
+        Node *p = head->next;
+        while( it != position )
+        {
+            p = p->next;
+            ++it;
+        }
+        Node *p_p = p->prev;
+        Node *lst_head = (*lst.begin())->prev;
+        Node *lst_end = lst.end();
+
+        p_p->next = *lst.begin();
+        (--lst.end())->next = *position;
+        (*lst.begin())->prev = p_p;
+        (*position)->prev = --(lst.end());
+
+        lst_head->next = lst_end;
+        lst_end->prev = lst_head;
+
+    }
+
+    void print()
+    {
+        Node *p = head->next;
+        while( p != nullptr )
+        {
+            std::cout << p->data << " ";
+            std::cout << std::endl;
+        }
+    }
 private:
     int theSize;
     Node *head;

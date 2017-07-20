@@ -9,5 +9,7 @@ int main()
     l.push_back( 1 );
     l.push_front( 2 );
 
-    cout << *l.begin() << endl;
+    List<int> a;
+    a.splice( a.begin(), l );
+    a.print();
 }
