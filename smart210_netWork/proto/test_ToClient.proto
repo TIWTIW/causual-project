@@ -1,0 +1,29 @@
+package test;
+
+message ToClient
+{
+    //head of message
+    required uint32 head = 1;
+    
+    //frame type
+    enum Type
+    {
+        NoImage = 0;
+        HasImage = 1;
+    }
+
+    required Type DataType = 2;
+    //length of data
+    required uint32 DataLength = 3;
+
+    //sensor data
+    required uint32 Sen_data = 4;
+
+    //pose data
+    required float pose_x = 5;
+    required float pose_y = 6;
+    required float pose_theta = 7;
+
+    required uint32 tail = 8;
+
+}

@@ -1,0 +1,165 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_64daf/fast"
+/usr/bin/make -f CMakeFiles/cmTC_64daf.dir/build.make CMakeFiles/cmTC_64daf.dir/build
+make[1]: Entering directory '/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_64daf.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_64daf.dir/CheckSymbolExists.c.o   -c /media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_64daf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64daf.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_64daf.dir/CheckSymbolExists.c.o  -o cmTC_64daf -rdynamic 
+CMakeFiles/cmTC_64daf.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_64daf.dir/build.make:97: recipe for target 'cmTC_64daf' failed
+make[1]: *** [cmTC_64daf] Error 1
+make[1]: Leaving directory '/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_64daf/fast' failed
+make: *** [cmTC_64daf/fast] Error 2
+
+File /media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_af38c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_af38c.dir/build.make CMakeFiles/cmTC_af38c.dir/build
+make[1]: Entering directory '/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_af38c.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_af38c.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_af38c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_af38c.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_af38c.dir/CheckFunctionExists.c.o  -o cmTC_af38c -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_af38c.dir/build.make:97: recipe for target 'cmTC_af38c' failed
+make[1]: *** [cmTC_af38c] Error 1
+make[1]: Leaving directory '/media/zhoufeitong/工程/causual/socket_server_v2.0/socket_server/Build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_af38c/fast' failed
+make: *** [cmTC_af38c/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_50c34/fast"
+/usr/bin/make -f CMakeFiles/cmTC_50c34.dir/build.make CMakeFiles/cmTC_50c34.dir/build
+make[1]: Entering directory '/media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_50c34.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_50c34.dir/CheckSymbolExists.c.o   -c /media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_50c34
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50c34.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_50c34.dir/CheckSymbolExists.c.o  -o cmTC_50c34 -rdynamic 
+CMakeFiles/cmTC_50c34.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_50c34.dir/build.make:97: recipe for target 'cmTC_50c34' failed
+make[1]: *** [cmTC_50c34] Error 1
+make[1]: Leaving directory '/media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_50c34/fast' failed
+make: *** [cmTC_50c34/fast] Error 2
+
+File /media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_c9af7/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c9af7.dir/build.make CMakeFiles/cmTC_c9af7.dir/build
+make[1]: Entering directory '/media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c9af7.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_c9af7.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c9af7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c9af7.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_c9af7.dir/CheckFunctionExists.c.o  -o cmTC_c9af7 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c9af7.dir/build.make:97: recipe for target 'cmTC_c9af7' failed
+make[1]: *** [cmTC_c9af7] Error 1
+make[1]: Leaving directory '/media/zhoufeitong/工程/causual/socket_server_multiThread/socket_server/Build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_c9af7/fast' failed
+make: *** [cmTC_c9af7/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4e283/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4e283.dir/build.make CMakeFiles/cmTC_4e283.dir/build
+make[1]: Entering directory '/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4e283.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_4e283.dir/CheckSymbolExists.c.o   -c /media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_4e283
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4e283.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_4e283.dir/CheckSymbolExists.c.o  -o cmTC_4e283 -rdynamic 
+CMakeFiles/cmTC_4e283.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4e283.dir/build.make:97: recipe for target 'cmTC_4e283' failed
+make[1]: *** [cmTC_4e283] Error 1
+make[1]: Leaving directory '/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_4e283/fast' failed
+make: *** [cmTC_4e283/fast] Error 2
+
+File /media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_53b9f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_53b9f.dir/build.make CMakeFiles/cmTC_53b9f.dir/build
+make[1]: Entering directory '/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_53b9f.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_53b9f.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_53b9f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_53b9f.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_53b9f.dir/CheckFunctionExists.c.o  -o cmTC_53b9f -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_53b9f.dir/build.make:97: recipe for target 'cmTC_53b9f' failed
+make[1]: *** [cmTC_53b9f] Error 1
+make[1]: Leaving directory '/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_53b9f/fast' failed
+make: *** [cmTC_53b9f/fast] Error 2
+
+
