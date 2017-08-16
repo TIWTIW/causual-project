@@ -2,7 +2,7 @@
 
 //global variable
 int Sen_data = 0;
-char SerToCilent[4096];
+char SerToCilent[MAXLINE];
 Pose Robot_Pose;
 pthread_mutex_t ToCli_buffer_lock;
 
@@ -18,13 +18,13 @@ using namespace cv;
  * author:zft                                          *
  * Time:2017.5.17                                      *
  * ****************************************************/
-int readMsg( int fd )
+int readMsg( int &fd )
 {
     
     int n;
     char recBuf[MAXLINE];
 
-    n = recv( fd, recBuf, MAXLINE, 0 );
+    n = read( fd, recBuf, sizeof( recBuf ) );
 
         
     //if receive 0, the connection is cut by cilent
@@ -284,9 +284,10 @@ void* manageThread( void *arg )
 
     while( true )
     {
-        if( ( connfd = accept( listenfd, (struct sockaddr *)NULL, NULL ) ) != -1 )           
+        int *newfd = new int;
+        if( ( *newfd = accept( listenfd, (struct sockaddr *)NULL, NULL ) ) != -1 )           
         {
-                cout << "Accept success!" << connfd << endl;
+                cout << "Accept success! connfd is :" << *newfd << endl;
         }
         else
         {
@@ -307,7 +308,7 @@ void* manageThread( void *arg )
             pthread_exit( NULL );
         }*/
 
-        if( pthread_create( &send_thread, NULL, sendThread, (void *)connfd ) )
+        if( pthread_create( &send_thread, NULL, sendThread, (void *)newfd ) )
         {
             cout << "Create send thread failed! connfd:" << connfd << endl;
             pthread_exit( NULL );
@@ -324,14 +325,15 @@ void *receiveThread( void *arg )
     //detach this pthread at first
     pthread_detach( pthread_self() );
 
-    int connfd = *(int *)arg;
+    int *connfd = (int *)arg;
 
     while( true )
     {
-        if( readMsg( connfd ) )
+        if( readMsg( *connfd ) )
         {
-            cout << "Exit receive thread! connfd is:" << connfd << endl;
-            close( connfd );
+            cout << "Exit receive thread! connfd is:" << *connfd << endl;
+            close( *connfd );
+            delete connfd;
             pthread_exit( NULL );
         }
 
@@ -345,14 +347,16 @@ void *sendThread( void *arg )
     //detach this thread at first
     pthread_detach( pthread_self() );
 
-    int connfd = reinterpret_cast<int &>( arg );
+    int *connfd = (int *)arg;
 
+    cout << "Enter send thread. The connfd is: " << *connfd << endl;
     while( true )
     {
-        if( WriteSimpleMessage( connfd ) == 1 )
+        if( WriteSimpleMessage( *connfd ) == 1 )
         {
-            cout << "Exit send thread!Connfd is:" << connfd << endl;
-//            close( *connfd );
+            cout << "Exit send thread!Connfd is:" << *connfd << endl;
+          //  close( *connfd );
+            //delete connfd;
             pthread_exit( NULL );
         }
 
@@ -364,12 +368,19 @@ void *sendThread( void *arg )
 int WriteSimpleMessage( int &fd )
 {
 
+    int nwrite;
     pthread_mutex_lock( &ToCli_buffer_lock );
 
-    if( ( send( fd, SerToCilent, sizeof( SerToCilent ), 0 ) ) < 1 )
+    if( ( ( nwrite = write( fd, SerToCilent, sizeof( SerToCilent ) ) ) ) < 1 )
     {
         perror( "Send message failed: " );
+        
+        pthread_mutex_unlock( &ToCli_buffer_lock );
         return 1;
+    }
+    else
+    {
+        cout << "Write" << nwrite << "bytes" << endl;
     }
     pthread_mutex_unlock( &ToCli_buffer_lock );
 

@@ -30,12 +30,18 @@ int main( int argc, char **argv )
 
     char buf[4096];
 
+    int nread;
     while( true )
     {
-        if( read( sockfd, buf, sizeof( buf ) ) < 0 )
+        if( ( nread = read( sockfd, buf, sizeof( buf ) ) ) < 0 )
         {
             perror( "read failed: " );
             return -1;
+        }
+
+        while( true )
+        {
+            cout << nread << endl;
         }
 
         test::ToClient message;
