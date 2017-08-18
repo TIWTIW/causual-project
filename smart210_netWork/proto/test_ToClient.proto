@@ -3,7 +3,7 @@ package test;
 message ToClient
 {
     //head of message
-    required uint32 head = 1;
+ //   required uint32 head = 1;
     
     //frame type
     enum Type
@@ -12,18 +12,20 @@ message ToClient
         HasImage = 1;
     }
 
-    required Type DataType = 2;
+    required Type DataType = 1;
     //length of data
-    required uint32 DataLength = 3;
+    //required uint32 DataLength = 2;
 
     //sensor data
-    required uint32 Sen_data = 4;
+    required uint32 Sen_data = 3;
 
     //pose data
-    required float pose_x = 5;
-    required float pose_y = 6;
-    required float pose_theta = 7;
+    required float pose_x = 4;
+    required float pose_y = 5;
+    required float pose_theta = 6;
 
-    required uint32 tail = 8;
+    optional uint32 Image_Length = 7;
+
+   // required uint32 tail = 8;
 
 }

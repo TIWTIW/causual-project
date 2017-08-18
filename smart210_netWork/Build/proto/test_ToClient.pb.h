@@ -172,70 +172,52 @@ class ToClient : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // required uint32 head = 1;
-  bool has_head() const;
-  void clear_head();
-  static const int kHeadFieldNumber = 1;
-  ::google::protobuf::uint32 head() const;
-  void set_head(::google::protobuf::uint32 value);
-
-  // required .test.ToClient.Type DataType = 2;
+  // required .test.ToClient.Type DataType = 1;
   bool has_datatype() const;
   void clear_datatype();
-  static const int kDataTypeFieldNumber = 2;
+  static const int kDataTypeFieldNumber = 1;
   ::test::ToClient_Type datatype() const;
   void set_datatype(::test::ToClient_Type value);
 
-  // required uint32 DataLength = 3;
-  bool has_datalength() const;
-  void clear_datalength();
-  static const int kDataLengthFieldNumber = 3;
-  ::google::protobuf::uint32 datalength() const;
-  void set_datalength(::google::protobuf::uint32 value);
-
-  // required uint32 Sen_data = 4;
+  // required uint32 Sen_data = 3;
   bool has_sen_data() const;
   void clear_sen_data();
-  static const int kSenDataFieldNumber = 4;
+  static const int kSenDataFieldNumber = 3;
   ::google::protobuf::uint32 sen_data() const;
   void set_sen_data(::google::protobuf::uint32 value);
 
-  // required float pose_x = 5;
+  // required float pose_x = 4;
   bool has_pose_x() const;
   void clear_pose_x();
-  static const int kPoseXFieldNumber = 5;
+  static const int kPoseXFieldNumber = 4;
   float pose_x() const;
   void set_pose_x(float value);
 
-  // required float pose_y = 6;
+  // required float pose_y = 5;
   bool has_pose_y() const;
   void clear_pose_y();
-  static const int kPoseYFieldNumber = 6;
+  static const int kPoseYFieldNumber = 5;
   float pose_y() const;
   void set_pose_y(float value);
 
-  // required float pose_theta = 7;
+  // required float pose_theta = 6;
   bool has_pose_theta() const;
   void clear_pose_theta();
-  static const int kPoseThetaFieldNumber = 7;
+  static const int kPoseThetaFieldNumber = 6;
   float pose_theta() const;
   void set_pose_theta(float value);
 
-  // required uint32 tail = 8;
-  bool has_tail() const;
-  void clear_tail();
-  static const int kTailFieldNumber = 8;
-  ::google::protobuf::uint32 tail() const;
-  void set_tail(::google::protobuf::uint32 value);
+  // optional uint32 Image_Length = 7;
+  bool has_image_length() const;
+  void clear_image_length();
+  static const int kImageLengthFieldNumber = 7;
+  ::google::protobuf::uint32 image_length() const;
+  void set_image_length(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:test.ToClient)
  private:
-  void set_has_head();
-  void clear_has_head();
   void set_has_datatype();
   void clear_has_datatype();
-  void set_has_datalength();
-  void clear_has_datalength();
   void set_has_sen_data();
   void clear_has_sen_data();
   void set_has_pose_x();
@@ -244,8 +226,8 @@ class ToClient : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void clear_has_pose_y();
   void set_has_pose_theta();
   void clear_has_pose_theta();
-  void set_has_tail();
-  void clear_has_tail();
+  void set_has_image_length();
+  void clear_has_image_length();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -253,14 +235,12 @@ class ToClient : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::uint32 head_;
   int datatype_;
-  ::google::protobuf::uint32 datalength_;
   ::google::protobuf::uint32 sen_data_;
   float pose_x_;
   float pose_y_;
   float pose_theta_;
-  ::google::protobuf::uint32 tail_;
+  ::google::protobuf::uint32 image_length_;
   friend struct protobuf_test_5fToClient_2eproto::TableStruct;
 };
 // ===================================================================
@@ -271,39 +251,15 @@ class ToClient : public ::google::protobuf::Message /* @@protoc_insertion_point(
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // ToClient
 
-// required uint32 head = 1;
-inline bool ToClient::has_head() const {
+// required .test.ToClient.Type DataType = 1;
+inline bool ToClient::has_datatype() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ToClient::set_has_head() {
+inline void ToClient::set_has_datatype() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ToClient::clear_has_head() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ToClient::clear_head() {
-  head_ = 0u;
-  clear_has_head();
-}
-inline ::google::protobuf::uint32 ToClient::head() const {
-  // @@protoc_insertion_point(field_get:test.ToClient.head)
-  return head_;
-}
-inline void ToClient::set_head(::google::protobuf::uint32 value) {
-  set_has_head();
-  head_ = value;
-  // @@protoc_insertion_point(field_set:test.ToClient.head)
-}
-
-// required .test.ToClient.Type DataType = 2;
-inline bool ToClient::has_datatype() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ToClient::set_has_datatype() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void ToClient::clear_has_datatype() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void ToClient::clear_datatype() {
   datatype_ = 0;
@@ -320,39 +276,15 @@ inline void ToClient::set_datatype(::test::ToClient_Type value) {
   // @@protoc_insertion_point(field_set:test.ToClient.DataType)
 }
 
-// required uint32 DataLength = 3;
-inline bool ToClient::has_datalength() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ToClient::set_has_datalength() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ToClient::clear_has_datalength() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void ToClient::clear_datalength() {
-  datalength_ = 0u;
-  clear_has_datalength();
-}
-inline ::google::protobuf::uint32 ToClient::datalength() const {
-  // @@protoc_insertion_point(field_get:test.ToClient.DataLength)
-  return datalength_;
-}
-inline void ToClient::set_datalength(::google::protobuf::uint32 value) {
-  set_has_datalength();
-  datalength_ = value;
-  // @@protoc_insertion_point(field_set:test.ToClient.DataLength)
-}
-
-// required uint32 Sen_data = 4;
+// required uint32 Sen_data = 3;
 inline bool ToClient::has_sen_data() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void ToClient::set_has_sen_data() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void ToClient::clear_has_sen_data() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void ToClient::clear_sen_data() {
   sen_data_ = 0u;
@@ -368,15 +300,15 @@ inline void ToClient::set_sen_data(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:test.ToClient.Sen_data)
 }
 
-// required float pose_x = 5;
+// required float pose_x = 4;
 inline bool ToClient::has_pose_x() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ToClient::set_has_pose_x() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ToClient::clear_has_pose_x() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ToClient::clear_pose_x() {
   pose_x_ = 0;
@@ -392,15 +324,15 @@ inline void ToClient::set_pose_x(float value) {
   // @@protoc_insertion_point(field_set:test.ToClient.pose_x)
 }
 
-// required float pose_y = 6;
+// required float pose_y = 5;
 inline bool ToClient::has_pose_y() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ToClient::set_has_pose_y() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ToClient::clear_has_pose_y() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ToClient::clear_pose_y() {
   pose_y_ = 0;
@@ -416,15 +348,15 @@ inline void ToClient::set_pose_y(float value) {
   // @@protoc_insertion_point(field_set:test.ToClient.pose_y)
 }
 
-// required float pose_theta = 7;
+// required float pose_theta = 6;
 inline bool ToClient::has_pose_theta() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void ToClient::set_has_pose_theta() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void ToClient::clear_has_pose_theta() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void ToClient::clear_pose_theta() {
   pose_theta_ = 0;
@@ -440,28 +372,28 @@ inline void ToClient::set_pose_theta(float value) {
   // @@protoc_insertion_point(field_set:test.ToClient.pose_theta)
 }
 
-// required uint32 tail = 8;
-inline bool ToClient::has_tail() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+// optional uint32 Image_Length = 7;
+inline bool ToClient::has_image_length() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void ToClient::set_has_tail() {
-  _has_bits_[0] |= 0x00000080u;
+inline void ToClient::set_has_image_length() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void ToClient::clear_has_tail() {
-  _has_bits_[0] &= ~0x00000080u;
+inline void ToClient::clear_has_image_length() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void ToClient::clear_tail() {
-  tail_ = 0u;
-  clear_has_tail();
+inline void ToClient::clear_image_length() {
+  image_length_ = 0u;
+  clear_has_image_length();
 }
-inline ::google::protobuf::uint32 ToClient::tail() const {
-  // @@protoc_insertion_point(field_get:test.ToClient.tail)
-  return tail_;
+inline ::google::protobuf::uint32 ToClient::image_length() const {
+  // @@protoc_insertion_point(field_get:test.ToClient.Image_Length)
+  return image_length_;
 }
-inline void ToClient::set_tail(::google::protobuf::uint32 value) {
-  set_has_tail();
-  tail_ = value;
-  // @@protoc_insertion_point(field_set:test.ToClient.tail)
+inline void ToClient::set_image_length(::google::protobuf::uint32 value) {
+  set_has_image_length();
+  image_length_ = value;
+  // @@protoc_insertion_point(field_set:test.ToClient.Image_Length)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS

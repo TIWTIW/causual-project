@@ -19,7 +19,7 @@ int main( int argc, char **argv )
 
     bzero( &servaddr, sizeof( servaddr ) );
     servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons( 8080 );
+    servaddr.sin_port = htons( 15000 );
     inet_pton( AF_INET, ip, &servaddr.sin_addr );
 
     if( connect( sockfd, (struct sockaddr *)&servaddr, sizeof( servaddr ) ) < 0 )
@@ -31,6 +31,7 @@ int main( int argc, char **argv )
     char buf[4096];
 
     int nread;
+
     while( true )
     {
         if( ( nread = read( sockfd, buf, sizeof( buf ) ) ) < 0 )
@@ -39,16 +40,37 @@ int main( int argc, char **argv )
             return -1;
         }
 
-        while( true )
+        /*while( true )
         {
             cout << nread << endl;
+        }*/
+
+        int i = 0;
+        for( ; i < 4094; ++i )
+        {
+//            cout << buf[i] << endl;
+            if( buf[i] == 'c' && buf[i + 1] == 'c' )
+            {
+//                cout << "found!" << endl;
+                break;
+            }
+            
         }
 
         test::ToClient message;
-        message.ParseFromArray( buf, sizeof( buf ) );
+        message.ParseFromArray( buf + i + 2, sizeof( buf ) );
 
-        cout << message.head() << endl;
-        cout << message.tail() << endl;
+        cout << message.sen_data() << endl;
+        cout << message.pose_x() << endl;
+        cout << message.image_length() << endl;
+
+        if( message.HasImage )
+        {
+            char buf[message.image_length()];
+            read( sockfd, buf, sizeof( buf ) );
+        }
+        
+        //cout << buf[]
     }
 
     return 0;

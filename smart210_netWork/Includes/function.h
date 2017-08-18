@@ -19,7 +19,7 @@
 #define MAXLINE 4096    //send size
 
 //default port
-#define DEFAULT_PORT 8080
+#define DEFAULT_PORT 15000
 
 //max listen queue number
 #define LISTENQ 10
@@ -52,21 +52,23 @@
 
 /***************Function**************************/
 //about read
-int readMsg( int );
+int readMsg( int &fd );
 
 //about write
 void intToChar( long, char * );
-int writeMsg( int );
+int writeMatMsg( int & );
 int writeMsg_Mat( cv::Mat, int );
-int WriteSimpleMessage( int & );
+int WriteSimpleMessage( int &, char * );
 
 //about thread
 void* manageThread( void * );
 int createManageThread();
 void *sendThread( void * );
 void *receiveThread( void * );
-// Encode thread
-void *encodeThread( void * );
+
+// Encode
+int Encode( char *, int );
+int getFileSize();
 
 //about initial
 int initialListen( int &, int port = DEFAULT_PORT );

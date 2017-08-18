@@ -2,9 +2,10 @@
 
 //global variable
 int Sen_data = 0;
-char SerToCilent[MAXLINE];
+//char SerToCilent[MAXLINE];
 Pose Robot_Pose;
 pthread_mutex_t ToCli_buffer_lock;
+bool Need_Image = true;
 
 using namespace std;
 using namespace cv;
@@ -47,7 +48,7 @@ int readMsg( int &fd )
     if( recBuf[3] == 'b' )
         cout << "b" << endl;
 
-    return 0;
+    return -1;
 
 }
 
@@ -97,9 +98,25 @@ void intToChar( long size, char * trans )
  * author:zft                                          
  * Time:2017.5.17                                      
  * ****************************************************/
-int writeMsg_Mat( Mat image, int connfd )
+int writeMsg_Mat( Mat &image, int connfd )
 {
     return 0;
+}
+
+/**************Get file size and return**************/
+int getFileSize()
+{
+    string file_name = "./map.jpg";
+
+    struct stat buf;
+    
+    if( stat( file_name.data(), &buf ) < 0 )
+    {
+        cout << "File information failed!" << endl;
+        return -1;
+    }
+
+    return buf.st_size;
 }
 
 /********writeMsg*************************************
@@ -110,41 +127,42 @@ int writeMsg_Mat( Mat image, int connfd )
  * author:zft                                          
  * Time:2017.5.17                                      
  * ****************************************************/
-int writeMsg( int connfd )
+int writeMatMsg( int &connfd )
 {
 
 
     int len = 0;
 
-    static long num = 132315;
+    //static long num = 132315;
    
     cout << "My connfd is" << connfd << endl;
-    char file_name[43] = "./MapSnapShoots/ocpMap20120101_";
+    //char file_name[10] = "./map.jpg";
+    string file_name = "./map.jpg";
     char sendBuf[MAXLINE];
 
-    char num_ch[6];
-    intToChar( num , num_ch );
+    //char num_ch[6];
+    //intToChar( num , num_ch );
 
-    for( int i = 0; i < 6; ++i )
-    {
-        file_name[31 + i] = num_ch[i];
-    }
+    //for( int i = 0; i < 6; ++i )
+    //{
+    //    file_name[31 + i] = num_ch[i];
+   // }
 
-    char back[5] = ".jpg";
-    for( int i = 0; i < 5; ++i )
-    {
-        file_name[37 + i] = back[i];
-    }
+    //char back[5] = ".jpg";
+    //for( int i = 0; i < 5; ++i )
+    //{
+      //  file_name[37 + i] = back[i];
+    //}
 
-    file_name[42] = '\0';
+    //file_name[42] = '\0';
 
-    num++;
+    //num++;
 
-    if( num == 132520 )
-        num = 132315;
+    //if( num == 132520 )
+      //  num = 132315;
 
-    cout << file_name << endl;
-    FILE *fd = fopen( file_name, "rb" );
+    //cout << file_name << endl;
+    FILE *fd = fopen( file_name.data(), "rb" );
 
     if( fd == NULL )
     {
@@ -152,47 +170,47 @@ int writeMsg( int connfd )
         return -1;
     }
 
-    struct stat buf;
+    /*struct stat buf;
 
-    if( stat( file_name, &buf ) < 0 )
+    if( stat( file_name.data(), &buf ) < 0 )
     {
         cout << "acquire stat failed!" << endl;
         return -1;
     }
 
-    long file_size = buf.st_size;
-    char transfer_size[10];
-    char rest_size[5];
-    int rest = MAXLINE >= file_size ? MAXLINE - file_size : MAXLINE - file_size % MAXLINE;
+    long file_size = buf.st_size;*/
+    //char transfer_size[10];
+    //char rest_size[5];
+    //int rest = MAXLINE >= file_size ? MAXLINE - file_size : MAXLINE - file_size % MAXLINE;
 
 
     //将发送溢出量转化为char型
-    intToChar( rest, rest_size );
+    //intToChar( rest, rest_size );
     //将图片大小转化为char型
-    intToChar( file_size, transfer_size );
+    //intToChar( file_size, transfer_size );
 
 
     //传送帧头
-    int head_flag = send( connfd, "H", 1, 0 );   
-    if( head_flag < 0 )
-    {
-        perror( "send head error!" );
-        return 1;
-    }
+    //int head_flag = send( connfd, "H", 1, 0 );   
+    //if( head_flag < 0 )
+    //{
+      //  perror( "send head error!" );
+        //return 1;
+    //}
     //传送数据大小
-    int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );  
-    if( a  < 0 )
-    {
-        perror( "send datasize error!" ); 
-        return 1;
-    }
+    //int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );  
+    //if( a  < 0 )
+    //{
+       // perror( "send datasize error!" ); 
+       // return 1;
+    //}
     //传送剩下的值大小
-    int rest_flag = send( connfd, rest_size, sizeof( rest_size ), 0 );
-    if( rest_flag < 0 )
-    {
-        perror( "send resesize error!" );
-        return 1;
-    }
+    //int rest_flag = send( connfd, rest_size, sizeof( rest_size ), 0 );
+    //if( rest_flag < 0 )
+    //{
+      //  perror( "send resesize error!" );
+      //  return 1;
+   // }
 
     while( !feof(fd) )
     {
@@ -201,13 +219,13 @@ int writeMsg( int connfd )
         if( len <= 0 )
         {
             cout << "send msg complete!" << endl;
-            return 1;
+            return -1;
         }
-        else if( ( send( connfd, sendBuf, sizeof( sendBuf ) , 0 ) ) < 0)  
+        else if( ( write( connfd, sendBuf, len ) ) < 0)  
         {  
-            perror( "send msg error!i close connection!" );
+            perror( "Send msg error!close connection!" );
             cout << "close connfd is" << connfd << endl;
-            return 1;
+            return -1;
         }
     }
 
@@ -225,7 +243,7 @@ int writeMsg( int connfd )
  * function:initial the socket,socket(), bind(), listen()
  * parameters:1.listenfd:the fd which should be constructed
  *            2.port:the port number
- * return:1 means some error happened, 0 means success 
+ * return:-1 means some error happened, 0 means success 
  * author:zft                                          
  * Time:2017.5.17                                      
  * ****************************************************/
@@ -240,19 +258,19 @@ int initialListen( int &listenfd, int port )
     if( ( listenfd = socket( AF_INET, SOCK_STREAM, 0 ) ) < 0 )
     {
         perror( "create socket error: " );
-        return 1;
+        return -1;
     }
 
     if( bind( listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr) ) < 0 )
     {
         perror( "bind socket error: " );
-        return 1;
+        return -1;
     }
 
     if( listen( listenfd, LISTENQ ) < 0 )
     {
         perror( "listen socket error: " );
-        return 1;
+        return -1;
     }
 
     cout << "Listen socket construct success!" << endl;
@@ -302,11 +320,11 @@ void* manageThread( void *arg )
         pthread_t receive_thread;
         pthread_t send_thread;
 
-        /*if( pthread_create( &receive_thread, NULL, receiveThread, (void *)connfd ) )
+        if( pthread_create( &receive_thread, NULL, receiveThread, (void *)newfd ) )
         {
             cout << "Create reveive thread failed! connfd:" << connfd << endl;
             pthread_exit( NULL );
-        }*/
+        }
 
         if( pthread_create( &send_thread, NULL, sendThread, (void *)newfd ) )
         {
@@ -319,7 +337,15 @@ void* manageThread( void *arg )
 
 }
 
-/******************receiveThread***************************/
+/********receiveThread**********************************
+ * function:receive thread, receive information from 
+ *          client. Every client has a thread
+ * parameters: 1.arg:It's actually the pointer of the fd
+ *               of the connection, just have a type transfer
+ * return:none 
+ * author:zft                                          
+ * Time:2017.8.18                                      
+ * ****************************************************/
 void *receiveThread( void *arg )
 {
     //detach this pthread at first
@@ -331,9 +357,11 @@ void *receiveThread( void *arg )
     {
         if( readMsg( *connfd ) )
         {
+            //if read failed or, mostly, the client cut the connection
             cout << "Exit receive thread! connfd is:" << *connfd << endl;
+
+            //close the connection
             close( *connfd );
-            delete connfd;
             pthread_exit( NULL );
         }
 
@@ -341,7 +369,15 @@ void *receiveThread( void *arg )
     }
 }
 
-/******************sendThread******************************/
+/********sendThread**********************************
+ * function:send thread, send information to
+ *          client. Every client has a thread
+ * parameters: 1.arg: It's actually the pointer to the 
+ *               connected fd
+ * return:none 
+ * author:zft                                          
+ * Time:2017.8.18                                      
+ * ****************************************************/
 void *sendThread( void *arg )
 {
     //detach this thread at first
@@ -350,61 +386,74 @@ void *sendThread( void *arg )
     int *connfd = (int *)arg;
 
     cout << "Enter send thread. The connfd is: " << *connfd << endl;
+
+    //give the frame a piece of dynamic memory
+    char *SerToCilent = new char[MAXLINE];
+
     while( true )
     {
-        if( WriteSimpleMessage( *connfd ) == 1 )
+        int MatSize = getFileSize();
+        
+        if( ( Encode( SerToCilent, MatSize ) == -1 ) || ( WriteSimpleMessage( *connfd, SerToCilent ) == -1 ) )
         {
+            //encode failed or, mostly, the connection has been closed by receive thread
+            //note: here may has a question: what if other occasion happend? no need to delete connfd!
             cout << "Exit send thread!Connfd is:" << *connfd << endl;
-          //  close( *connfd );
-            //delete connfd;
+            delete connfd;
             pthread_exit( NULL );
         }
 
-        usleep( 10000 );
+        //if client needs image, send image to them
+        if( Need_Image )
+        {
+            if( writeMatMsg( *connfd ) )
+            {
+                cout << "Write image failed!" << endl;
+
+            }
+        }
+
+        usleep( 1000 );
     }
 }
 
-/******************simple send msg test v1.0***************/
-int WriteSimpleMessage( int &fd )
+/********writeSimpleMessage**********************************
+ * function:Write information except for Image information to 
+ *          the client
+ * parameters: 1.fd: The connected fd
+ *             2.SerToClient: The buffer in which there is the
+ *             information to be transferd
+ * return:0 means success, 1 means failed
+ * author:zft                                          
+ * Time:2017.8.18                                      
+ * ****************************************************/
+int WriteSimpleMessage( int &fd, char *SerToCilent )
 {
 
     int nwrite;
-    pthread_mutex_lock( &ToCli_buffer_lock );
 
-    if( ( ( nwrite = write( fd, SerToCilent, sizeof( SerToCilent ) ) ) ) < 1 )
+    if( ( ( nwrite = write( fd, SerToCilent, MAXLINE ) ) ) < 1 )
     {
-        perror( "Send message failed: " );
-        
-        pthread_mutex_unlock( &ToCli_buffer_lock );
-        return 1;
+        perror( "Send message failed: " );   
+        return -1;
     }
     else
     {
         cout << "Write" << nwrite << "bytes" << endl;
     }
-    pthread_mutex_unlock( &ToCli_buffer_lock );
 
     return 0;
 }
 
-/******************create manage thread********************/
+/********createManageThread**********************************
+ * function:Create manage thread
+ * parameters: none
+ * return: 0 means success, -1 means failed
+ * author:zft      
+ * Time:2017.8.18
+ * *********************************************************/
 int createManageThread()
 {
-
-    //create encode thread
-    pthread_t p_EncodeThread;
-    if( pthread_create( &p_EncodeThread, NULL, encodeThread, NULL ) )
-    {
-        cout << "Create encode thread failed!" << endl;
-    }
-    else
-    {
-        cout << "Create encode thread success!" << endl;
-    }
-
-    //create decode thread here...
-    //
-    //
 
     //create manage thread to manage the connection of cilent
     pthread_t p_ManageThread;
@@ -420,52 +469,49 @@ int createManageThread()
     }
 }
 
-/******************Encode thread***************************/
-void *encodeThread( void *arg )
+/********Encode**********************************
+ * function:Encode the information to be sent using Google protobuf
+ * parameters: 1.SerToClient: buffer of information to be sent
+ *             2.ImageSize:If there is a image to be sent, 
+ *             this parameter will be encoded,otherwise won't
+ * return: 0 means success, -1 means failed
+ * author:zft      
+ * Time:2017.8.18
+ * *********************************************************/
+int Encode( char *SerToCilent, int ImageSize )
 {
     //suppose there is no image data at first
     //suppose the machine is litten endian  
     
-    //Frame head
-    //SerToCilent[0] = FRAME_HEAD;
-
-    //Frame type
-    //SerToCilent[1] = DATA_TYPE;
-
-    //unsigned int data_length = 12;
-    //Frame data length
-    //SerToCilent[2] = ( data_length & 0xff000000 ) >> 24;
-    //SerToCilent[3] = ( data_length & 0x00ff0000 ) >> 16;
-    //SerToCilent[4] = ( data_length & 0x0000ff00 ) >> 8;
-    //SerToCilent[5] = ( data_length & 0x000000ff );
-    
     test::ToClient message;
-    while( true )
-    {
-        message.set_head( FRAME_HEAD );
-        message.set_datatype( test::ToClient::NoImage );
+
+    message.set_datatype( test::ToClient::HasImage );
          
-        unsigned int length = sizeof( int ) + sizeof( struct Pose );
-        message.set_datalength( length );
-        message.set_sen_data( Sen_data );
-        message.set_pose_x( Robot_Pose.x );
-        message.set_pose_y( Robot_Pose.y );
-        message.set_pose_theta( Robot_Pose.theta );
+    Sen_data = 20;
+    Robot_Pose.x = 100;
+    Robot_Pose.y = 50000;
+    Robot_Pose.theta = 20;
 
-        message.set_tail( FRAME_TAIL );
+    message.set_sen_data( Sen_data );
+    message.set_pose_x( Robot_Pose.x );
+    message.set_pose_y( Robot_Pose.y );
+    message.set_pose_theta( Robot_Pose.theta );
 
-        int size = message.ByteSize();
-        //unsigned char bits[size];
+    message.set_image_length( ImageSize );
 
-        pthread_mutex_lock( &ToCli_buffer_lock );
-        message.SerializeToArray( SerToCilent, size );
-        pthread_mutex_unlock( &ToCli_buffer_lock );
+    unsigned int size = message.ByteSize();
+    SerToCilent[0] = 'c';
+    SerToCilent[1] = 'c';
 
-/*        for( int i = 0; i < size; ++i )
-        {
-            printf( "%0xx \n", SerToCilent[i] );
-        }*/
-        usleep( 100000 );
+    if( size > MAXLINE )
+    {
+        cout << "Error! Size after Serialize is bigger than size of buffer!" << endl;
+        return -1;
     }
+    message.SerializeToArray( SerToCilent + 2, size );
+
+    usleep( 100000 );
+
+    return 0;
 
 }
