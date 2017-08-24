@@ -1,11 +1,13 @@
 #include "function.h"
+#include "test_ToServer.pb.h"
 
 //global variable
 int Sen_data = 0;
 //char SerToCilent[MAXLINE];
 Pose Robot_Pose;
 pthread_mutex_t ToCli_buffer_lock;
-bool Need_Image = true;
+bool Need_Image = false;
+bool ControlMode = false;
 
 using namespace std;
 using namespace cv;
@@ -29,65 +31,55 @@ int readMsg( int &fd )
 
         
     //if receive 0, the connection is cut by cilent
-    if( n <= 0 )
+    if( n == 0 )
     {
-        cout << "disconnected!" << endl;
+        cout << "Disconnected!" << endl;
        
-        return 1;
+        return -1;
     }
 
-    recBuf[n] = '\0';
+    //debug
+    cout << "Receive message!" << endl;
 
+    test::ToServer RecvMessage;
+    if( RecvMessage.ParseFromArray( recBuf, sizeof( recBuf ) ) )
+    {
+        cout << "Parse failed!" << endl;
+        return -1;
+    }
+
+    if( RecvMessage.datatype() == test::ToServer::NeedImage )
+    {
+        cout << "Require Image!" << endl;
+        Need_Image = true;
+    }
+
+    if( RecvMessage.modeinfo() == test::ToServer::SelfMode )
+    {
+        cout << "Enter Self Clean Mode!" << endl;
+        return 0;
+    }
+    else if( RecvMessage.modeinfo() == test::ToServer::ControlMode )
+    {
+        cout << "Enter Remote Control Mode!" << endl;
+        ControlMode = true;
+    }
+
+    if( ControlMode )
+    {
+        if( RecvMessage.forward() )
+            cout << "f" << endl;
+        else if( RecvMessage.backward() )
+            cout << "b" << endl;
+        else if( RecvMessage.left() )
+            cout << "l" << endl;
+        else if( RecvMessage.right() )
+            cout << "r" << endl;
+    }
         //解码收到的数据
-    if( recBuf[0] == 'f' )
-        cout << "f" << endl;
-    if( recBuf[1] == 'l' )
-        cout << "l" << endl;
-    if( recBuf[2] == 'r' )
-        cout << "r" << endl;
-    if( recBuf[3] == 'b' )
-        cout << "b" << endl;
-
-    return -1;
+    return 0;
 
 }
-
-
-/********intToChar*************************************
- * function:change the int(or long) to char
- * parameters:1.size:the number which should be change
- *            2.trans:the result of transfer
- * return:none                           
- * author:zft                                          
- * Time:2017.5.17                                      
- * ****************************************************/
-void intToChar( long size, char * trans )
-{
-    if( size == 0 )
-    {
-        trans[0] = '0';
-        return ;
-    }
-
-    int i = 0;
-
-    while( size != 0 )
-    {
-        trans[i++] = size - size / 10 * 10 + 48;
-        size /= 10;
-    }
-
-    trans[i] = '\0';
-
-    for( int x = 0; x <= (i - 1) / 2; ++x )
-    {
-        int temp = trans[x];
-        trans[x] = trans[i - 1 - x];
-        trans[i - x - 1] = temp;
-    }
-    
-}
-
 
 /********writeMsg_Mat*************************************
  * function:send the orignal data to connected socket
@@ -103,7 +95,14 @@ int writeMsg_Mat( Mat &image, int connfd )
     return 0;
 }
 
-/**************Get file size and return**************/
+/********getFileSize*************************************
+ * function:get the size of Image to be sent so that the 
+ *          information can be encoded to the buffer
+ * parameters:none
+ * return: The size of file or -1 means failed
+ * author:zft                                          
+ * Time:2017.8.19                                      
+ * ****************************************************/
 int getFileSize()
 {
     string file_name = "./map.jpg";
@@ -129,39 +128,12 @@ int getFileSize()
  * ****************************************************/
 int writeMatMsg( int &connfd )
 {
-
-
     int len = 0;
 
-    //static long num = 132315;
-   
-    cout << "My connfd is" << connfd << endl;
-    //char file_name[10] = "./map.jpg";
+    //cout << "My connfd is" << connfd << endl;
     string file_name = "./map.jpg";
     char sendBuf[MAXLINE];
 
-    //char num_ch[6];
-    //intToChar( num , num_ch );
-
-    //for( int i = 0; i < 6; ++i )
-    //{
-    //    file_name[31 + i] = num_ch[i];
-   // }
-
-    //char back[5] = ".jpg";
-    //for( int i = 0; i < 5; ++i )
-    //{
-      //  file_name[37 + i] = back[i];
-    //}
-
-    //file_name[42] = '\0';
-
-    //num++;
-
-    //if( num == 132520 )
-      //  num = 132315;
-
-    //cout << file_name << endl;
     FILE *fd = fopen( file_name.data(), "rb" );
 
     if( fd == NULL )
@@ -170,55 +142,13 @@ int writeMatMsg( int &connfd )
         return -1;
     }
 
-    /*struct stat buf;
-
-    if( stat( file_name.data(), &buf ) < 0 )
-    {
-        cout << "acquire stat failed!" << endl;
-        return -1;
-    }
-
-    long file_size = buf.st_size;*/
-    //char transfer_size[10];
-    //char rest_size[5];
-    //int rest = MAXLINE >= file_size ? MAXLINE - file_size : MAXLINE - file_size % MAXLINE;
-
-
-    //将发送溢出量转化为char型
-    //intToChar( rest, rest_size );
-    //将图片大小转化为char型
-    //intToChar( file_size, transfer_size );
-
-
-    //传送帧头
-    //int head_flag = send( connfd, "H", 1, 0 );   
-    //if( head_flag < 0 )
-    //{
-      //  perror( "send head error!" );
-        //return 1;
-    //}
-    //传送数据大小
-    //int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );  
-    //if( a  < 0 )
-    //{
-       // perror( "send datasize error!" ); 
-       // return 1;
-    //}
-    //传送剩下的值大小
-    //int rest_flag = send( connfd, rest_size, sizeof( rest_size ), 0 );
-    //if( rest_flag < 0 )
-    //{
-      //  perror( "send resesize error!" );
-      //  return 1;
-   // }
-
     while( !feof(fd) )
     {
         len = fread( sendBuf, 1, MAXLINE, fd );
-        cout << "read length is " << len << endl;
+      //  cout << "read length is " << len << endl;
         if( len <= 0 )
         {
-            cout << "send msg complete!" << endl;
+        //    cout << "send msg complete!" << endl;
             return -1;
         }
         else if( ( write( connfd, sendBuf, len ) ) < 0)  
@@ -234,8 +164,6 @@ int writeMatMsg( int &connfd )
 
     return 0;
 
-    //wait for xms
-   // usleep( 100000 );
 }
 
 
@@ -313,22 +241,18 @@ void* manageThread( void *arg )
             continue;
         }
 
-        //int *fd = new int;
-
-        //*fd = connfd;
-
         pthread_t receive_thread;
         pthread_t send_thread;
 
         if( pthread_create( &receive_thread, NULL, receiveThread, (void *)newfd ) )
         {
-            cout << "Create reveive thread failed! connfd:" << connfd << endl;
+            cout << "Create reveive thread failed! connfd:" << *newfd << endl;
             pthread_exit( NULL );
         }
 
         if( pthread_create( &send_thread, NULL, sendThread, (void *)newfd ) )
         {
-            cout << "Create send thread failed! connfd:" << connfd << endl;
+            cout << "Create send thread failed! connfd:" << *newfd << endl;
             pthread_exit( NULL );
         }
 
@@ -365,7 +289,7 @@ void *receiveThread( void *arg )
             pthread_exit( NULL );
         }
 
-        usleep( 1000 );
+        usleep( 5000 );
     }
 }
 
@@ -413,7 +337,7 @@ void *sendThread( void *arg )
             }
         }
 
-        usleep( 1000 );
+        usleep( 5000 );
     }
 }
 
@@ -439,7 +363,7 @@ int WriteSimpleMessage( int &fd, char *SerToCilent )
     }
     else
     {
-        cout << "Write" << nwrite << "bytes" << endl;
+    //    cout << "Write" << nwrite << "bytes" << endl;
     }
 
     return 0;
@@ -485,19 +409,21 @@ int Encode( char *SerToCilent, int ImageSize )
     
     test::ToClient message;
 
-    message.set_datatype( test::ToClient::HasImage );
+    if( Need_Image )
+    {
+        message.set_datatype( test::ToClient::HasImage );
+        message.set_image_length( ImageSize );
+    }
          
     Sen_data = 20;
-    Robot_Pose.x = 100;
-    Robot_Pose.y = 50000;
-    Robot_Pose.theta = 20;
+    Robot_Pose.x += 1;
+    Robot_Pose.y += 2;
+    Robot_Pose.theta += 3;
 
     message.set_sen_data( Sen_data );
     message.set_pose_x( Robot_Pose.x );
     message.set_pose_y( Robot_Pose.y );
     message.set_pose_theta( Robot_Pose.theta );
-
-    message.set_image_length( ImageSize );
 
     unsigned int size = message.ByteSize();
     SerToCilent[0] = 'c';
@@ -509,8 +435,6 @@ int Encode( char *SerToCilent, int ImageSize )
         return -1;
     }
     message.SerializeToArray( SerToCilent + 2, size );
-
-    usleep( 100000 );
 
     return 0;
 

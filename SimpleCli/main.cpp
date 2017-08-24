@@ -58,7 +58,11 @@ int main( int argc, char **argv )
         }
 
         test::ToClient message;
-        message.ParseFromArray( buf + i + 2, sizeof( buf ) );
+        if( message.ParseFromArray( buf + i + 2, sizeof( buf ) ) )
+        {
+            cout << "parse failed!" << endl;
+            continue;
+        }
 
         cout << message.sen_data() << endl;
         cout << message.pose_x() << endl;

@@ -6,6 +6,7 @@ Sources/CMakeFiles/SOCKET_SERVER.dir/function.cpp.o
  ../Includes/function.h
  /media/zhoufeitong/工程/causual/smart210_netWork/Sources/function.cpp
  proto/test_ToClient.pb.h
+ proto/test_ToServer.pb.h
 Sources/CMakeFiles/SOCKET_SERVER.dir/main.cpp.o
  ../Includes/Robot_Data.h
  ../Includes/function.h

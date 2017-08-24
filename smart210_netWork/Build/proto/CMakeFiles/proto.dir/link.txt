@@ -1,2 +1,2 @@
-/usr/bin/ar qc libproto.a  CMakeFiles/proto.dir/test_ToClient.pb.cc.o
+/usr/bin/ar qc libproto.a  CMakeFiles/proto.dir/test_ToClient.pb.cc.o CMakeFiles/proto.dir/test_ToServer.pb.cc.o
 /usr/bin/ranlib libproto.a

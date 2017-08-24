@@ -65,9 +65,17 @@ proto/test_ToClient.pb.h: ../proto/test_ToClient.proto
 proto/test_ToClient.pb.cc: proto/test_ToClient.pb.h
 	@$(CMAKE_COMMAND) -E touch_nocreate proto/test_ToClient.pb.cc
 
+proto/test_ToServer.pb.h: /usr/local/bin/protoc
+proto/test_ToServer.pb.h: ../proto/test_ToServer.proto
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating test_ToServer.pb.h, test_ToServer.pb.cc"
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto && /usr/local/bin/protoc /media/zhoufeitong/工程/causual/smart210_netWork/proto/test_ToServer.proto --cpp_out /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto -I/media/zhoufeitong/工程/causual/smart210_netWork/proto
+
+proto/test_ToServer.pb.cc: proto/test_ToServer.pb.h
+	@$(CMAKE_COMMAND) -E touch_nocreate proto/test_ToServer.pb.cc
+
 proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o: proto/CMakeFiles/proto.dir/flags.make
 proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o: proto/test_ToClient.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o"
 	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/proto.dir/test_ToClient.pb.cc.o -c /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto/test_ToClient.pb.cc
 
 proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.i: cmake_force
@@ -89,17 +97,43 @@ proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o.provides: proto/CMakeFiles/prot
 proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o.provides.build: proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o
 
 
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o: proto/CMakeFiles/proto.dir/flags.make
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o: proto/test_ToServer.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o"
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/proto.dir/test_ToServer.pb.cc.o -c /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto/test_ToServer.pb.cc
+
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/proto.dir/test_ToServer.pb.cc.i"
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto/test_ToServer.pb.cc > CMakeFiles/proto.dir/test_ToServer.pb.cc.i
+
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/proto.dir/test_ToServer.pb.cc.s"
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto/test_ToServer.pb.cc -o CMakeFiles/proto.dir/test_ToServer.pb.cc.s
+
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.requires:
+
+.PHONY : proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.requires
+
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.provides: proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.requires
+	$(MAKE) -f proto/CMakeFiles/proto.dir/build.make proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.provides.build
+.PHONY : proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.provides
+
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.provides.build: proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o
+
+
 # Object files for target proto
 proto_OBJECTS = \
-"CMakeFiles/proto.dir/test_ToClient.pb.cc.o"
+"CMakeFiles/proto.dir/test_ToClient.pb.cc.o" \
+"CMakeFiles/proto.dir/test_ToServer.pb.cc.o"
 
 # External object files for target proto
 proto_EXTERNAL_OBJECTS =
 
 proto/libproto.a: proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o
+proto/libproto.a: proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o
 proto/libproto.a: proto/CMakeFiles/proto.dir/build.make
 proto/libproto.a: proto/CMakeFiles/proto.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libproto.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/zhoufeitong/工程/causual/smart210_netWork/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libproto.a"
 	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto && $(CMAKE_COMMAND) -P CMakeFiles/proto.dir/cmake_clean_target.cmake
 	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/proto.dir/link.txt --verbose=$(VERBOSE)
 
@@ -109,6 +143,7 @@ proto/CMakeFiles/proto.dir/build: proto/libproto.a
 .PHONY : proto/CMakeFiles/proto.dir/build
 
 proto/CMakeFiles/proto.dir/requires: proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o.requires
+proto/CMakeFiles/proto.dir/requires: proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o.requires
 
 .PHONY : proto/CMakeFiles/proto.dir/requires
 
@@ -118,6 +153,8 @@ proto/CMakeFiles/proto.dir/clean:
 
 proto/CMakeFiles/proto.dir/depend: proto/test_ToClient.pb.h
 proto/CMakeFiles/proto.dir/depend: proto/test_ToClient.pb.cc
+proto/CMakeFiles/proto.dir/depend: proto/test_ToServer.pb.h
+proto/CMakeFiles/proto.dir/depend: proto/test_ToServer.pb.cc
 	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/zhoufeitong/工程/causual/smart210_netWork /media/zhoufeitong/工程/causual/smart210_netWork/proto /media/zhoufeitong/工程/causual/smart210_netWork/Build /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto /media/zhoufeitong/工程/causual/smart210_netWork/Build/proto/CMakeFiles/proto.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : proto/CMakeFiles/proto.dir/depend
 

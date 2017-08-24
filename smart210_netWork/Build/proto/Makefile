@@ -152,6 +152,33 @@ test_ToClient.pb.cc.s:
 	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f proto/CMakeFiles/proto.dir/build.make proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.s
 .PHONY : test_ToClient.pb.cc.s
 
+test_ToServer.pb.o: test_ToServer.pb.cc.o
+
+.PHONY : test_ToServer.pb.o
+
+# target to build an object file
+test_ToServer.pb.cc.o:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f proto/CMakeFiles/proto.dir/build.make proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o
+.PHONY : test_ToServer.pb.cc.o
+
+test_ToServer.pb.i: test_ToServer.pb.cc.i
+
+.PHONY : test_ToServer.pb.i
+
+# target to preprocess a source file
+test_ToServer.pb.cc.i:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f proto/CMakeFiles/proto.dir/build.make proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.i
+.PHONY : test_ToServer.pb.cc.i
+
+test_ToServer.pb.s: test_ToServer.pb.cc.s
+
+.PHONY : test_ToServer.pb.s
+
+# target to generate assembly for a file
+test_ToServer.pb.cc.s:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f proto/CMakeFiles/proto.dir/build.make proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.s
+.PHONY : test_ToServer.pb.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -164,6 +191,9 @@ help:
 	@echo "... test_ToClient.pb.o"
 	@echo "... test_ToClient.pb.i"
 	@echo "... test_ToClient.pb.s"
+	@echo "... test_ToServer.pb.o"
+	@echo "... test_ToServer.pb.i"
+	@echo "... test_ToServer.pb.s"
 .PHONY : help
 
 

@@ -5,6 +5,7 @@ Sources/CMakeFiles/SOCKET_SERVER.dir/function.cpp.o: ../Includes/Robot_Data.h
 Sources/CMakeFiles/SOCKET_SERVER.dir/function.cpp.o: ../Includes/function.h
 Sources/CMakeFiles/SOCKET_SERVER.dir/function.cpp.o: ../Sources/function.cpp
 Sources/CMakeFiles/SOCKET_SERVER.dir/function.cpp.o: proto/test_ToClient.pb.h
+Sources/CMakeFiles/SOCKET_SERVER.dir/function.cpp.o: proto/test_ToServer.pb.h
 
 Sources/CMakeFiles/SOCKET_SERVER.dir/main.cpp.o: ../Includes/Robot_Data.h
 Sources/CMakeFiles/SOCKET_SERVER.dir/main.cpp.o: ../Includes/function.h

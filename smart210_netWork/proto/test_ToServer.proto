@@ -1,0 +1,33 @@
+package test;
+
+message ToServer
+{
+    //head of message
+ //   required uint32 head = 1;
+    
+    //frame type
+    enum Type
+    {
+        NeedImage = 0;
+        NoNeedImage = 1;
+    }
+
+    enum Mode
+    {
+        ControlMode = 0;
+        SelfMode = 1;
+    }
+
+    //Has image or not
+    required Type DataType = 1;
+
+    //Control mode or SelfMode
+    required Mode ModeInfo = 2;
+
+    //Control Information
+    optional bool left = 3;
+    optional bool right = 4;
+    optional bool forward = 5;
+    optional bool backward = 6;
+
+}

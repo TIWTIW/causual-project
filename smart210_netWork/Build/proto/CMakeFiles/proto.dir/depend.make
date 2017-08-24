@@ -4,3 +4,6 @@
 proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o: proto/test_ToClient.pb.cc
 proto/CMakeFiles/proto.dir/test_ToClient.pb.cc.o: proto/test_ToClient.pb.h
 
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o: proto/test_ToServer.pb.cc
+proto/CMakeFiles/proto.dir/test_ToServer.pb.cc.o: proto/test_ToServer.pb.h
+
