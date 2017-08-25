@@ -19,10 +19,10 @@ message ToServer
     }
 
     //Has image or not
-    required Type DataType = 1;
+    optional Type DataType = 1;
 
     //Control mode or SelfMode
-    required Mode ModeInfo = 2;
+    optional Mode ModeInfo = 2;
 
     //Control Information
     optional bool left = 3;

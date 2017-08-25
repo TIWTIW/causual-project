@@ -35,6 +35,12 @@ public:
     QAction *actionConnect_2;
     QWidget *centralWidget;
     QGridLayout *gridLayout_5;
+    QGridLayout *gridLayout;
+    QPushButton *pushButtonBackward;
+    QPushButton *pushButtonLeft;
+    QPushButton *pushButtonRight;
+    QPushButton *pushButtonForward;
+    QFrame *line_7;
     QFrame *line_5;
     QFrame *line_4;
     QVBoxLayout *verticalLayout_2;
@@ -63,35 +69,31 @@ public:
     QLabel *label_4;
     QFrame *line_6;
     QFrame *line_8;
-    QGridLayout *gridLayout_2;
-    QTextBrowser *textBrowser;
-    QPushButton *pushButtonModeTransfer;
-    QPushButton *pushButtonConnect;
-    QLabel *labelPort;
-    QLabel *labelIP;
-    QPushButton *pushButtonClear;
-    QLineEdit *lineEditIP;
-    QPushButton *pushButtonDisconnect;
-    QLineEdit *lineEditPort;
     QFrame *line;
     QVBoxLayout *verticalLayout;
     QLabel *labelImage;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButtonNeedImage;
+    QPushButton *pushButtonNoImage;
     QSpacerItem *horizontalSpacer_2;
-    QGridLayout *gridLayout;
-    QPushButton *pushButtonBackward;
-    QPushButton *pushButtonLeft;
-    QPushButton *pushButtonRight;
-    QPushButton *pushButtonForward;
-    QFrame *line_7;
+    QGridLayout *gridLayout_2;
+    QTextBrowser *textBrowser;
+    QPushButton *pushButtonConnect;
+    QLabel *labelPort;
+    QLabel *labelIP;
+    QLineEdit *lineEditIP;
+    QPushButton *pushButtonClear;
+    QLineEdit *lineEditPort;
+    QPushButton *pushButtonDisconnect;
+    QPushButton *pushButtonSelfClean;
+    QPushButton *pushButtonControlMode;
 
     void setupUi(QMainWindow *Client)
     {
         if (Client->objectName().isEmpty())
             Client->setObjectName(QStringLiteral("Client"));
-        Client->resize(1101, 564);
+        Client->resize(886, 541);
         Client->setStyleSheet(QStringLiteral(""));
         actionConnect = new QAction(Client);
         actionConnect->setObjectName(QStringLiteral("actionConnect"));
@@ -103,6 +105,39 @@ public:
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        gridLayout = new QGridLayout();
+        gridLayout->setSpacing(6);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        pushButtonBackward = new QPushButton(centralWidget);
+        pushButtonBackward->setObjectName(QStringLiteral("pushButtonBackward"));
+
+        gridLayout->addWidget(pushButtonBackward, 2, 1, 1, 1);
+
+        pushButtonLeft = new QPushButton(centralWidget);
+        pushButtonLeft->setObjectName(QStringLiteral("pushButtonLeft"));
+
+        gridLayout->addWidget(pushButtonLeft, 1, 0, 1, 1);
+
+        pushButtonRight = new QPushButton(centralWidget);
+        pushButtonRight->setObjectName(QStringLiteral("pushButtonRight"));
+
+        gridLayout->addWidget(pushButtonRight, 1, 2, 1, 1);
+
+        pushButtonForward = new QPushButton(centralWidget);
+        pushButtonForward->setObjectName(QStringLiteral("pushButtonForward"));
+
+        gridLayout->addWidget(pushButtonForward, 0, 1, 1, 1);
+
+
+        gridLayout_5->addLayout(gridLayout, 3, 1, 1, 1);
+
+        line_7 = new QFrame(centralWidget);
+        line_7->setObjectName(QStringLiteral("line_7"));
+        line_7->setFrameShape(QFrame::HLine);
+        line_7->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_5->addWidget(line_7, 4, 1, 1, 1);
+
         line_5 = new QFrame(centralWidget);
         line_5->setObjectName(QStringLiteral("line_5"));
         line_5->setFrameShape(QFrame::VLine);
@@ -266,70 +301,6 @@ public:
 
         gridLayout_5->addWidget(line_8, 0, 1, 3, 6);
 
-        gridLayout_2 = new QGridLayout();
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        textBrowser = new QTextBrowser(centralWidget);
-        textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(1);
-        sizePolicy.setVerticalStretch(1);
-        sizePolicy.setHeightForWidth(textBrowser->sizePolicy().hasHeightForWidth());
-        textBrowser->setSizePolicy(sizePolicy);
-        textBrowser->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
-
-        gridLayout_2->addWidget(textBrowser, 3, 0, 1, 2);
-
-        pushButtonModeTransfer = new QPushButton(centralWidget);
-        pushButtonModeTransfer->setObjectName(QStringLiteral("pushButtonModeTransfer"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(1);
-        sizePolicy1.setVerticalStretch(1);
-        sizePolicy1.setHeightForWidth(pushButtonModeTransfer->sizePolicy().hasHeightForWidth());
-        pushButtonModeTransfer->setSizePolicy(sizePolicy1);
-
-        gridLayout_2->addWidget(pushButtonModeTransfer, 4, 1, 1, 1);
-
-        pushButtonConnect = new QPushButton(centralWidget);
-        pushButtonConnect->setObjectName(QStringLiteral("pushButtonConnect"));
-
-        gridLayout_2->addWidget(pushButtonConnect, 2, 0, 1, 1);
-
-        labelPort = new QLabel(centralWidget);
-        labelPort->setObjectName(QStringLiteral("labelPort"));
-
-        gridLayout_2->addWidget(labelPort, 1, 0, 1, 1);
-
-        labelIP = new QLabel(centralWidget);
-        labelIP->setObjectName(QStringLiteral("labelIP"));
-
-        gridLayout_2->addWidget(labelIP, 0, 0, 1, 1);
-
-        pushButtonClear = new QPushButton(centralWidget);
-        pushButtonClear->setObjectName(QStringLiteral("pushButtonClear"));
-        sizePolicy1.setHeightForWidth(pushButtonClear->sizePolicy().hasHeightForWidth());
-        pushButtonClear->setSizePolicy(sizePolicy1);
-
-        gridLayout_2->addWidget(pushButtonClear, 4, 0, 1, 1);
-
-        lineEditIP = new QLineEdit(centralWidget);
-        lineEditIP->setObjectName(QStringLiteral("lineEditIP"));
-
-        gridLayout_2->addWidget(lineEditIP, 0, 1, 1, 1);
-
-        pushButtonDisconnect = new QPushButton(centralWidget);
-        pushButtonDisconnect->setObjectName(QStringLiteral("pushButtonDisconnect"));
-
-        gridLayout_2->addWidget(pushButtonDisconnect, 2, 1, 1, 1);
-
-        lineEditPort = new QLineEdit(centralWidget);
-        lineEditPort->setObjectName(QStringLiteral("lineEditPort"));
-
-        gridLayout_2->addWidget(lineEditPort, 1, 1, 1, 1);
-
-
-        gridLayout_5->addLayout(gridLayout_2, 5, 1, 1, 1);
-
         line = new QFrame(centralWidget);
         line->setObjectName(QStringLiteral("line"));
         line->setFrameShape(QFrame::VLine);
@@ -342,6 +313,9 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         labelImage = new QLabel(centralWidget);
         labelImage->setObjectName(QStringLiteral("labelImage"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(1);
+        sizePolicy.setVerticalStretch(1);
         sizePolicy.setHeightForWidth(labelImage->sizePolicy().hasHeightForWidth());
         labelImage->setSizePolicy(sizePolicy);
         labelImage->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
@@ -360,6 +334,11 @@ public:
 
         horizontalLayout->addWidget(pushButtonNeedImage);
 
+        pushButtonNoImage = new QPushButton(centralWidget);
+        pushButtonNoImage->setObjectName(QStringLiteral("pushButtonNoImage"));
+
+        horizontalLayout->addWidget(pushButtonNoImage);
+
         horizontalSpacer_2 = new QSpacerItem(208, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_2);
@@ -370,66 +349,73 @@ public:
 
         gridLayout_5->addLayout(verticalLayout, 2, 6, 4, 1);
 
-        gridLayout = new QGridLayout();
-        gridLayout->setSpacing(6);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        pushButtonBackward = new QPushButton(centralWidget);
-        pushButtonBackward->setObjectName(QStringLiteral("pushButtonBackward"));
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        textBrowser = new QTextBrowser(centralWidget);
+        textBrowser->setObjectName(QStringLiteral("textBrowser"));
+        sizePolicy.setHeightForWidth(textBrowser->sizePolicy().hasHeightForWidth());
+        textBrowser->setSizePolicy(sizePolicy);
+        textBrowser->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
 
-        gridLayout->addWidget(pushButtonBackward, 2, 1, 1, 1);
+        gridLayout_2->addWidget(textBrowser, 3, 0, 1, 2);
 
-        pushButtonLeft = new QPushButton(centralWidget);
-        pushButtonLeft->setObjectName(QStringLiteral("pushButtonLeft"));
+        pushButtonConnect = new QPushButton(centralWidget);
+        pushButtonConnect->setObjectName(QStringLiteral("pushButtonConnect"));
 
-        gridLayout->addWidget(pushButtonLeft, 1, 0, 1, 1);
+        gridLayout_2->addWidget(pushButtonConnect, 2, 0, 1, 1);
 
-        pushButtonRight = new QPushButton(centralWidget);
-        pushButtonRight->setObjectName(QStringLiteral("pushButtonRight"));
+        labelPort = new QLabel(centralWidget);
+        labelPort->setObjectName(QStringLiteral("labelPort"));
 
-        gridLayout->addWidget(pushButtonRight, 1, 2, 1, 1);
+        gridLayout_2->addWidget(labelPort, 1, 0, 1, 1);
 
-        pushButtonForward = new QPushButton(centralWidget);
-        pushButtonForward->setObjectName(QStringLiteral("pushButtonForward"));
+        labelIP = new QLabel(centralWidget);
+        labelIP->setObjectName(QStringLiteral("labelIP"));
 
-        gridLayout->addWidget(pushButtonForward, 0, 1, 1, 1);
+        gridLayout_2->addWidget(labelIP, 0, 0, 1, 1);
+
+        lineEditIP = new QLineEdit(centralWidget);
+        lineEditIP->setObjectName(QStringLiteral("lineEditIP"));
+
+        gridLayout_2->addWidget(lineEditIP, 0, 1, 1, 1);
+
+        pushButtonClear = new QPushButton(centralWidget);
+        pushButtonClear->setObjectName(QStringLiteral("pushButtonClear"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(1);
+        sizePolicy1.setVerticalStretch(1);
+        sizePolicy1.setHeightForWidth(pushButtonClear->sizePolicy().hasHeightForWidth());
+        pushButtonClear->setSizePolicy(sizePolicy1);
+
+        gridLayout_2->addWidget(pushButtonClear, 5, 0, 1, 1);
+
+        lineEditPort = new QLineEdit(centralWidget);
+        lineEditPort->setObjectName(QStringLiteral("lineEditPort"));
+
+        gridLayout_2->addWidget(lineEditPort, 1, 1, 1, 1);
+
+        pushButtonDisconnect = new QPushButton(centralWidget);
+        pushButtonDisconnect->setObjectName(QStringLiteral("pushButtonDisconnect"));
+
+        gridLayout_2->addWidget(pushButtonDisconnect, 2, 1, 1, 1);
+
+        pushButtonSelfClean = new QPushButton(centralWidget);
+        pushButtonSelfClean->setObjectName(QStringLiteral("pushButtonSelfClean"));
+
+        gridLayout_2->addWidget(pushButtonSelfClean, 6, 0, 1, 1);
+
+        pushButtonControlMode = new QPushButton(centralWidget);
+        pushButtonControlMode->setObjectName(QStringLiteral("pushButtonControlMode"));
+        sizePolicy1.setHeightForWidth(pushButtonControlMode->sizePolicy().hasHeightForWidth());
+        pushButtonControlMode->setSizePolicy(sizePolicy1);
+
+        gridLayout_2->addWidget(pushButtonControlMode, 6, 1, 1, 1);
 
 
-        gridLayout_5->addLayout(gridLayout, 3, 1, 1, 1);
-
-        line_7 = new QFrame(centralWidget);
-        line_7->setObjectName(QStringLiteral("line_7"));
-        line_7->setFrameShape(QFrame::HLine);
-        line_7->setFrameShadow(QFrame::Sunken);
-
-        gridLayout_5->addWidget(line_7, 4, 1, 1, 1);
+        gridLayout_5->addLayout(gridLayout_2, 5, 1, 1, 1);
 
         Client->setCentralWidget(centralWidget);
-        textBrowser->raise();
-        pushButtonClear->raise();
-        pushButtonForward->raise();
-        pushButtonBackward->raise();
-        pushButtonRight->raise();
-        pushButtonLeft->raise();
-        pushButtonBackward->raise();
-        pushButtonModeTransfer->raise();
-        labelX->raise();
-        labelY->raise();
-        labelTheta->raise();
-        lineEditX->raise();
-        lineEditY->raise();
-        lineEditTheta->raise();
-        lineEdit_4->raise();
-        lineEdit_5->raise();
-        label_5->raise();
-        lineEdit_6->raise();
-        label_6->raise();
-        lineEdit_7->raise();
-        label_7->raise();
-        lineEdit_8->raise();
-        label_8->raise();
-        lineEdit_9->raise();
-        label_9->raise();
-        pushButtonNeedImage->raise();
         line_3->raise();
         line_4->raise();
         line->raise();
@@ -448,6 +434,10 @@ public:
         Client->setWindowTitle(QApplication::translate("Client", "Client", Q_NULLPTR));
         actionConnect->setText(QApplication::translate("Client", "Connect", Q_NULLPTR));
         actionConnect_2->setText(QApplication::translate("Client", "Connect", Q_NULLPTR));
+        pushButtonBackward->setText(QApplication::translate("Client", "Backward", Q_NULLPTR));
+        pushButtonLeft->setText(QApplication::translate("Client", "Left", Q_NULLPTR));
+        pushButtonRight->setText(QApplication::translate("Client", "Right", Q_NULLPTR));
+        pushButtonForward->setText(QApplication::translate("Client", "Forward", Q_NULLPTR));
         labelTheta->setText(QApplication::translate("Client", "Theta", Q_NULLPTR));
         labelY->setText(QApplication::translate("Client", "Y", Q_NULLPTR));
         labelX->setText(QApplication::translate("Client", "X", Q_NULLPTR));
@@ -457,18 +447,16 @@ public:
         label_7->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
         label_9->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
         label_4->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
-        pushButtonModeTransfer->setText(QApplication::translate("Client", "Mode Transfer", Q_NULLPTR));
+        labelImage->setText(QString());
+        pushButtonNeedImage->setText(QApplication::translate("Client", "Need Image", Q_NULLPTR));
+        pushButtonNoImage->setText(QApplication::translate("Client", "No Image", Q_NULLPTR));
         pushButtonConnect->setText(QApplication::translate("Client", "Connect", Q_NULLPTR));
         labelPort->setText(QApplication::translate("Client", "Port Number", Q_NULLPTR));
         labelIP->setText(QApplication::translate("Client", "IP Address", Q_NULLPTR));
         pushButtonClear->setText(QApplication::translate("Client", "Clear", Q_NULLPTR));
         pushButtonDisconnect->setText(QApplication::translate("Client", "Disconnect", Q_NULLPTR));
-        labelImage->setText(QString());
-        pushButtonNeedImage->setText(QApplication::translate("Client", "Need Image", Q_NULLPTR));
-        pushButtonBackward->setText(QApplication::translate("Client", "Backward", Q_NULLPTR));
-        pushButtonLeft->setText(QApplication::translate("Client", "Left", Q_NULLPTR));
-        pushButtonRight->setText(QApplication::translate("Client", "Right", Q_NULLPTR));
-        pushButtonForward->setText(QApplication::translate("Client", "Forward", Q_NULLPTR));
+        pushButtonSelfClean->setText(QApplication::translate("Client", "Self Clean Mode", Q_NULLPTR));
+        pushButtonControlMode->setText(QApplication::translate("Client", "Control Mode", Q_NULLPTR));
     } // retranslateUi
 
 };

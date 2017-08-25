@@ -50,6 +50,8 @@
     Control
 } TYPE;*/
 
+//thread structure
+
 /***************Function**************************/
 //about read
 int readMsg( int &fd );

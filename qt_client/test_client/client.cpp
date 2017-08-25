@@ -4,7 +4,7 @@
 #include <QThread>
 
 //global variable
-bool NeedImage = false;
+bool HasImage = false;
 
 Client::Client(QWidget *parent) :
     QMainWindow(parent),
@@ -31,6 +31,8 @@ void Client::Initial()
     ui->lineEditY->setReadOnly(true);
 
     ClientSocket = new QTcpSocket(this);
+    ClientSocket->setReadBufferSize(MAXLINE * 10);
+
     MapImage = new QImage;
 
     //Client has connected with host
@@ -107,10 +109,14 @@ void Client::ClientRecvData()
     //show Image
     if( RecvMessage.datatype() == test::ToClient::HasImage )
     {
-        NeedImage = true;
+        HasImage = true;
+    }
+    else
+    {
+        HasImage = false;
     }
 
-    if( NeedImage )
+    if( HasImage )
     {
         int ImageLength = RecvMessage.image_length();
         char ImageBuffer[ImageLength];
@@ -180,19 +186,19 @@ void Client::on_pushButtonConnect_clicked()
 void Client::on_pushButtonDisconnect_clicked()
 {
     ClientSocket->disconnectFromHost();
+    SendMessage.Clear();
 }
 
 void Client::on_pushButtonClear_clicked()
 {
     ui->textBrowser->clear();
+    ui->labelImage->clear();
 }
 
-void Client::on_pushButtonModeTransfer_clicked()
+void Client::on_pushButtonControlMode_clicked()
 {
-    SendMessage.clear_backward();
-    SendMessage.clear_forward();
-    SendMessage.clear_left();
-    SendMessage.clear_right();
+    SendMessage.Clear();
+    SendMessage.clear_datatype();
 
     SendMessage.set_modeinfo(test::ToServer::ControlMode);
 
@@ -205,10 +211,8 @@ void Client::on_pushButtonModeTransfer_clicked()
 
 void Client::on_pushButtonNeedImage_clicked()
 {
-    SendMessage.clear_backward();
-    SendMessage.clear_forward();
-    SendMessage.clear_left();
-    SendMessage.clear_right();
+    SendMessage.Clear();
+    SendMessage.clear_modeinfo();
 
     SendMessage.set_datatype(test::ToServer::NeedImage);
 
@@ -221,4 +225,30 @@ void Client::on_pushButtonNeedImage_clicked()
 void Client::ClientSendData(qint64 bytes)
 {
     qDebug() << bytes << " data has been sent";
+}
+
+void Client::on_pushButtonSelfClean_clicked()
+{
+    SendMessage.Clear();
+    SendMessage.clear_datatype();
+
+    SendMessage.set_modeinfo(test::ToServer::SelfMode);
+
+    char buf[MAXLINE];
+    SendMessage.SerializeToArray(buf, sizeof(buf));
+
+    ClientSocket->write(buf, sizeof(buf));
+}
+
+void Client::on_pushButtonNoImage_clicked()
+{
+    SendMessage.Clear();
+    SendMessage.clear_modeinfo();
+
+    SendMessage.set_datatype(test::ToServer::NoNeedImage);
+
+    char buf[MAXLINE];
+    SendMessage.SerializeToArray(buf, sizeof(buf));
+
+    ClientSocket->write(buf, sizeof(buf));
 }

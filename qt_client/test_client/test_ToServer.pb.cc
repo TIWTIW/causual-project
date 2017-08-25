@@ -117,8 +117,8 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
       "\n\023test_ToServer.proto\022\004test\"\347\001\n\010ToServer"
-      "\022%\n\010DataType\030\001 \002(\0162\023.test.ToServer.Type\022"
-      "%\n\010ModeInfo\030\002 \002(\0162\023.test.ToServer.Mode\022\014"
+      "\022%\n\010DataType\030\001 \001(\0162\023.test.ToServer.Type\022"
+      "%\n\010ModeInfo\030\002 \001(\0162\023.test.ToServer.Mode\022\014"
       "\n\004left\030\003 \001(\010\022\r\n\005right\030\004 \001(\010\022\017\n\007forward\030\005"
       " \001(\010\022\020\n\010backward\030\006 \001(\010\"&\n\004Type\022\r\n\tNeedIm"
       "age\020\000\022\017\n\013NoNeedImage\020\001\"%\n\004Mode\022\017\n\013Contro"
@@ -278,7 +278,7 @@ bool ToServer::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .test.ToServer.Type DataType = 1;
+      // optional .test.ToServer.Type DataType = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u)) {
@@ -298,7 +298,7 @@ bool ToServer::MergePartialFromCodedStream(
         break;
       }
 
-      // required .test.ToServer.Mode ModeInfo = 2;
+      // optional .test.ToServer.Mode ModeInfo = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u)) {
@@ -403,13 +403,13 @@ void ToServer::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required .test.ToServer.Type DataType = 1;
+  // optional .test.ToServer.Type DataType = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->datatype(), output);
   }
 
-  // required .test.ToServer.Mode ModeInfo = 2;
+  // optional .test.ToServer.Mode ModeInfo = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->modeinfo(), output);
@@ -450,13 +450,13 @@ void ToServer::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required .test.ToServer.Type DataType = 1;
+  // optional .test.ToServer.Type DataType = 1;
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->datatype(), target);
   }
 
-  // required .test.ToServer.Mode ModeInfo = 2;
+  // optional .test.ToServer.Mode ModeInfo = 2;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->modeinfo(), target);
@@ -490,24 +490,6 @@ void ToServer::SerializeWithCachedSizes(
   return target;
 }
 
-size_t ToServer::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:test.ToServer)
-  size_t total_size = 0;
-
-  if (has_datatype()) {
-    // required .test.ToServer.Type DataType = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->datatype());
-  }
-
-  if (has_modeinfo()) {
-    // required .test.ToServer.Mode ModeInfo = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->modeinfo());
-  }
-
-  return total_size;
-}
 size_t ToServer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:test.ToServer)
   size_t total_size = 0;
@@ -517,19 +499,19 @@ size_t ToServer::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required .test.ToServer.Type DataType = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->datatype());
+  if (_has_bits_[0 / 32] & 63u) {
+    // optional .test.ToServer.Type DataType = 1;
+    if (has_datatype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->datatype());
+    }
 
-    // required .test.ToServer.Mode ModeInfo = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->modeinfo());
+    // optional .test.ToServer.Mode ModeInfo = 2;
+    if (has_modeinfo()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->modeinfo());
+    }
 
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  if (_has_bits_[0 / 32] & 60u) {
     // optional bool left = 3;
     if (has_left()) {
       total_size += 1 + 1;
@@ -619,7 +601,6 @@ void ToServer::CopyFrom(const ToServer& from) {
 }
 
 bool ToServer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
   return true;
 }
 
@@ -647,7 +628,7 @@ void ToServer::InternalSwap(ToServer* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // ToServer
 
-// required .test.ToServer.Type DataType = 1;
+// optional .test.ToServer.Type DataType = 1;
 bool ToServer::has_datatype() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -672,7 +653,7 @@ void ToServer::set_datatype(::test::ToServer_Type value) {
   // @@protoc_insertion_point(field_set:test.ToServer.DataType)
 }
 
-// required .test.ToServer.Mode ModeInfo = 2;
+// optional .test.ToServer.Mode ModeInfo = 2;
 bool ToServer::has_modeinfo() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }

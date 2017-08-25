@@ -217,14 +217,14 @@ class ToServer : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // required .test.ToServer.Type DataType = 1;
+  // optional .test.ToServer.Type DataType = 1;
   bool has_datatype() const;
   void clear_datatype();
   static const int kDataTypeFieldNumber = 1;
   ::test::ToServer_Type datatype() const;
   void set_datatype(::test::ToServer_Type value);
 
-  // required .test.ToServer.Mode ModeInfo = 2;
+  // optional .test.ToServer.Mode ModeInfo = 2;
   bool has_modeinfo() const;
   void clear_modeinfo();
   static const int kModeInfoFieldNumber = 2;
@@ -274,9 +274,6 @@ class ToServer : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void set_has_backward();
   void clear_has_backward();
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
@@ -296,7 +293,7 @@ class ToServer : public ::google::protobuf::Message /* @@protoc_insertion_point(
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // ToServer
 
-// required .test.ToServer.Type DataType = 1;
+// optional .test.ToServer.Type DataType = 1;
 inline bool ToServer::has_datatype() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -321,7 +318,7 @@ inline void ToServer::set_datatype(::test::ToServer_Type value) {
   // @@protoc_insertion_point(field_set:test.ToServer.DataType)
 }
 
-// required .test.ToServer.Mode ModeInfo = 2;
+// optional .test.ToServer.Mode ModeInfo = 2;
 inline bool ToServer::has_modeinfo() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }

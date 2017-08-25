@@ -37,7 +37,7 @@ private slots:
     void on_pushButtonConnect_clicked();
     void on_pushButtonDisconnect_clicked();
     void on_pushButtonClear_clicked();
-    void on_pushButtonModeTransfer_clicked();
+    void on_pushButtonControlMode_clicked();
     void on_pushButtonNeedImage_clicked();
 
 //my add private slots
@@ -47,6 +47,10 @@ private slots:
     void ClientSocketError(QAbstractSocket::SocketError e);
     void ClientRecvData();
     void ClientSendData(qint64 bytes);
+
+    void on_pushButtonSelfClean_clicked();
+
+    void on_pushButtonNoImage_clicked();
 
 private:
     QTcpSocket *ClientSocket;

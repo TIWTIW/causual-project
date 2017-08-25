@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1101</width>
-    <height>564</height>
+    <width>886</width>
+    <height>541</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,6 +18,45 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_5">
+    <item row="3" column="1">
+     <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0" columnstretch="0,0,0">
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButtonBackward">
+        <property name="text">
+         <string>Backward</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButtonLeft">
+        <property name="text">
+         <string>Left</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="pushButtonRight">
+        <property name="text">
+         <string>Right</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButtonForward">
+        <property name="text">
+         <string>Forward</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="1">
+     <widget class="Line" name="line_7">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0" rowspan="8">
      <widget class="Line" name="line_5">
       <property name="orientation">
@@ -211,83 +250,6 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="1">
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="3" column="0" colspan="2">
-       <widget class="QTextBrowser" name="textBrowser">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>1</horstretch>
-          <verstretch>1</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QPushButton" name="pushButtonModeTransfer">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>1</horstretch>
-          <verstretch>1</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Mode Transfer</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButtonConnect">
-        <property name="text">
-         <string>Connect</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labelPort">
-        <property name="text">
-         <string>Port Number</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelIP">
-        <property name="text">
-         <string>IP Address</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QPushButton" name="pushButtonClear">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>1</horstretch>
-          <verstretch>1</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Clear</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditIP"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="pushButtonDisconnect">
-        <property name="text">
-         <string>Disconnect</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditPort"/>
-      </item>
-     </layout>
-    </item>
     <item row="6" column="3" rowspan="3" colspan="3">
      <widget class="Line" name="line">
       <property name="orientation">
@@ -336,6 +298,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButtonNoImage">
+          <property name="text">
+           <string>No Image</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -352,80 +321,91 @@
       </item>
      </layout>
     </item>
-    <item row="3" column="1">
-     <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0" columnstretch="0,0,0">
-      <item row="2" column="1">
-       <widget class="QPushButton" name="pushButtonBackward">
+    <item row="5" column="1">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="3" column="0" colspan="2">
+       <widget class="QTextBrowser" name="textBrowser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButtonConnect">
         <property name="text">
-         <string>Backward</string>
+         <string>Connect</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QPushButton" name="pushButtonLeft">
+       <widget class="QLabel" name="labelPort">
         <property name="text">
-         <string>Left</string>
+         <string>Port Number</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="pushButtonRight">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelIP">
         <property name="text">
-         <string>Right</string>
+         <string>IP Address</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QPushButton" name="pushButtonForward">
+       <widget class="QLineEdit" name="lineEditIP"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="pushButtonClear">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
-         <string>Forward</string>
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEditPort"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButtonDisconnect">
+        <property name="text">
+         <string>Disconnect</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QPushButton" name="pushButtonSelfClean">
+        <property name="text">
+         <string>Self Clean Mode</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QPushButton" name="pushButtonControlMode">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Control Mode</string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="4" column="1">
-     <widget class="Line" name="line_7">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
    </layout>
-   <zorder>textBrowser</zorder>
-   <zorder>pushButtonClear</zorder>
-   <zorder>pushButtonForward</zorder>
-   <zorder>pushButtonBackward</zorder>
-   <zorder>pushButtonRight</zorder>
-   <zorder>pushButtonLeft</zorder>
-   <zorder>pushButtonBackward</zorder>
-   <zorder></zorder>
-   <zorder></zorder>
-   <zorder>pushButtonModeTransfer</zorder>
-   <zorder>labelX</zorder>
-   <zorder>labelY</zorder>
-   <zorder>labelTheta</zorder>
-   <zorder>lineEditX</zorder>
-   <zorder>lineEditY</zorder>
-   <zorder>lineEditTheta</zorder>
-   <zorder>lineEdit_4</zorder>
-   <zorder>lineEdit_5</zorder>
-   <zorder>label_5</zorder>
-   <zorder>lineEdit_6</zorder>
-   <zorder>label_6</zorder>
-   <zorder>lineEdit_7</zorder>
-   <zorder>label_7</zorder>
-   <zorder>lineEdit_8</zorder>
-   <zorder>label_8</zorder>
-   <zorder>lineEdit_9</zorder>
-   <zorder>label_9</zorder>
-   <zorder>pushButtonNeedImage</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>horizontalSpacer_2</zorder>
-   <zorder>verticalSpacer_2</zorder>
-   <zorder>horizontalSpacer_3</zorder>
-   <zorder>horizontalSpacer_4</zorder>
-   <zorder>verticalSpacer_3</zorder>
    <zorder>line_3</zorder>
    <zorder>line_4</zorder>
    <zorder>line</zorder>

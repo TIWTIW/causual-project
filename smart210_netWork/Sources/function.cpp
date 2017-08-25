@@ -36,10 +36,16 @@ int readMsg( int &fd )
         cout << "Disconnected!" << endl;
        
         return -1;
+    } 
+    else if( n < 0 )
+    {
+        perror( "Read failed : " );
+        return -1;
     }
 
+    cout << "Receive " << n << " bytes" << endl;
     //debug
-    cout << "Receive message!" << endl;
+    //cout << "Receive message!" << endl;
 
     test::ToServer RecvMessage;
     if( RecvMessage.ParseFromArray( recBuf, sizeof( recBuf ) ) )
@@ -53,10 +59,16 @@ int readMsg( int &fd )
         cout << "Require Image!" << endl;
         Need_Image = true;
     }
+    else if( RecvMessage.datatype() == test::ToServer::NoNeedImage )
+    {
+        cout << "Don't need Image any more!" << endl;
+        Need_Image = false;
+    }
 
     if( RecvMessage.modeinfo() == test::ToServer::SelfMode )
     {
         cout << "Enter Self Clean Mode!" << endl;
+        ControlMode = false;
         return 0;
     }
     else if( RecvMessage.modeinfo() == test::ToServer::ControlMode )
@@ -219,7 +231,7 @@ void* manageThread( void *arg )
     //detach the manage thread(actuall may be not useful)
     pthread_detach( pthread_self() );
 
-    int connfd, listenfd;
+    int listenfd;
 
     //initial listening...
     if( initialListen( listenfd ) )
@@ -286,6 +298,11 @@ void *receiveThread( void *arg )
 
             //close the connection
             close( *connfd );
+
+            //reset status
+            Need_Image = false;
+            ControlMode = false;
+
             pthread_exit( NULL );
         }
 
@@ -413,6 +430,10 @@ int Encode( char *SerToCilent, int ImageSize )
     {
         message.set_datatype( test::ToClient::HasImage );
         message.set_image_length( ImageSize );
+    }
+    else
+    {
+        message.set_datatype( test::ToClient::NoImage );
     }
          
     Sen_data = 20;
