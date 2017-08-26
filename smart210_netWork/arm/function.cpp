@@ -1,7 +1,18 @@
 #include "function.h"
+#include "test_ToServer.pb.h"
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 using namespace cv;
+
+//global variable
+int Sen_data = 0;
+Pose Robot_Pose;
+
+//fd vector-- save the client fd now in connection
+vector<int> ClientVec;
+pthread_mutex_t CliMutex_lock;
 
 /********readMsg****************************************
  * function:decode the message received, and when recv *
@@ -12,88 +23,110 @@ using namespace cv;
  * author:zft                                          *
  * Time:2017.5.17                                      *
  * ****************************************************/
-int readMsg( int fd )
+int readMsg( int &fd, Thread_p *Thread_this )
 {
     
     int n;
     char recBuf[MAXLINE];
 
-    n = recv( fd, recBuf, MAXLINE, 0 );
+    n = read( fd, recBuf, sizeof( recBuf ) );
 
         
     //if receive 0, the connection is cut by cilent
-    if( n <= 0 )
+    if( n == 0 )
     {
-        cout << "disconnected!" << endl;
+        cout << "Disconnected!" << endl;
        
-        return 1;
+        return -1;
+    } 
+    else if( n < 0 )
+    {
+        perror( "Read failed : " );
+        return -1;
     }
 
-    recBuf[n] = '\0';
+    cout << "Receive " << n << " bytes" << endl;
+    //debug
+    //cout << "Receive message!" << endl;
 
+    test::ToServer RecvMessage;
+    if( RecvMessage.ParseFromArray( recBuf, sizeof( recBuf ) ) )
+    {
+        cout << "Parse failed!" << endl;
+        return -1;
+    }
+
+    if( RecvMessage.datatype() == test::ToServer::NeedImage )
+    {
+        cout << "Require Image!" << endl;
+        Thread_this->Need_Image = true;
+    }
+    else if( RecvMessage.datatype() == test::ToServer::NoNeedImage )
+    {
+        cout << "Don't need Image any more!" << endl;
+        Thread_this->Need_Image = false;
+    }
+
+    pthread_mutex_lock( &CliMutex_lock );
+
+    //if control isn't in this thread(client), then just return
+    if( find( ClientVec.begin(), ClientVec.end(), Thread_this->connfd ) != ClientVec.begin() )
+    {
+        pthread_mutex_unlock( &CliMutex_lock );
+        return 0;
+    }
+
+    pthread_mutex_unlock( &CliMutex_lock );
+
+    if( RecvMessage.modeinfo() == test::ToServer::SelfMode )
+    {
+        cout << "Enter Self Clean Mode!" << endl;
+        Thread_this->ControlMode = false;
+        return 0;
+    }
+    else if( RecvMessage.modeinfo() == test::ToServer::ControlMode )
+    {
+        cout << "Enter Remote Control Mode!" << endl;
+        Thread_this->ControlMode = true;
+    }
+
+    if( Thread_this->ControlMode )
+    {
+        if( RecvMessage.forward() )
+            cout << "f" << endl;
+        else if( RecvMessage.backward() )
+            cout << "b" << endl;
+        else if( RecvMessage.left() )
+            cout << "l" << endl;
+        else if( RecvMessage.right() )
+            cout << "r" << endl;
+    }
         //解码收到的数据
-    if( recBuf[0] == 'f' )
-        cout << "f" << endl;
-    if( recBuf[1] == 'l' )
-        cout << "l" << endl;
-    if( recBuf[2] == 'r' )
-        cout << "r" << endl;
-    if( recBuf[3] == 'b' )
-        cout << "b" << endl;
-
     return 0;
 
 }
 
-
-/********intToChar*************************************
- * function:change the int(or long) to char
- * parameters:1.size:the number which should be change
- *            2.trans:the result of transfer
- * return:none                           
+/********getFileSize*************************************
+ * function:get the size of Image to be sent so that the 
+ *          information can be encoded to the buffer
+ * parameters:none
+ * return: The size of file or -1 means failed
  * author:zft                                          
- * Time:2017.5.17                                      
+ * Time:2017.8.19                                      
  * ****************************************************/
-void intToChar( long size, char * trans )
+int getFileSize()
 {
-    if( size == 0 )
-    {
-        trans[0] = '0';
-        return ;
-    }
+    string file_name = "./map.jpg";
 
-    int i = 0;
-
-    while( size != 0 )
-    {
-        trans[i++] = size - size / 10 * 10 + 48;
-        size /= 10;
-    }
-
-    trans[i] = '\0';
-
-    for( int x = 0; x <= (i - 1) / 2; ++x )
-    {
-        int temp = trans[x];
-        trans[x] = trans[i - 1 - x];
-        trans[i - x - 1] = temp;
-    }
+    struct stat buf;
     
-}
+    if( stat( file_name.data(), &buf ) < 0 )
+    {
+        cout << "File information failed!" << endl;
+        return -1;
+    }
 
-
-/********writeMsg_Mat*************************************
- * function:send the orignal data to connected socket
- * parameters:1.Mat:orignal Mat data
- *            2.connfd:the fd of connected socket
- * return:1 means send error,0 means success, -1 means 
- *        file operations failed
- * author:zft                                          
- * Time:2017.5.17                                      
- * ****************************************************/
-int writeMsg_Mat( Mat image, int connfd )
-{
-    return 0;
+    return buf.st_size;
 }
 
 /********writeMsg*************************************
@@ -104,41 +137,14 @@ int writeMsg_Mat( Mat image, int connfd )
  * author:zft                                          
  * Time:2017.5.17                                      
  * ****************************************************/
-int writeMsg( int connfd )
+int writeMatMsg( int &connfd )
 {
-
-
     int len = 0;
 
-    static long num = 132315;
-   
-    cout << "My connfd is" << connfd << endl;
-    char file_name[43] = "./MapSnapShoots/ocpMap20120101_";
+    string file_name = "./map.jpg";
     char sendBuf[MAXLINE];
 
-    char num_ch[6];
-    intToChar( num , num_ch );
-
-    for( int i = 0; i < 6; ++i )
-    {
-        file_name[31 + i] = num_ch[i];
-    }
-
-    char back[5] = ".jpg";
-    for( int i = 0; i < 5; ++i )
-    {
-        file_name[37 + i] = back[i];
-    }
-
-    file_name[42] = '\0';
-
-    num++;
-
-    if( num == 132520 )
-        num = 132315;
-
-    cout << file_name << endl;
-    FILE *fd = fopen( file_name, "rb" );
+    FILE *fd = fopen( file_name.data(), "rb" );
 
     if( fd == NULL )
     {
@@ -146,62 +152,18 @@ int writeMsg( int connfd )
         return -1;
     }
 
-    struct stat buf;
-
-    if( stat( file_name, &buf ) < 0 )
-    {
-        cout << "acquire stat failed!" << endl;
-        return -1;
-    }
-
-    long file_size = buf.st_size;
-    char transfer_size[10];
-    char rest_size[5];
-    int rest = MAXLINE >= file_size ? MAXLINE - file_size : MAXLINE - file_size % MAXLINE;
-
-
-    //将发送溢出量转化为char型
-    intToChar( rest, rest_size );
-    //将图片大小转化为char型
-    intToChar( file_size, transfer_size );
-
-
-    //传送帧头
-    int head_flag = send( connfd, "H", 1, 0 );   
-    if( head_flag < 0 )
-    {
-        perror( "send head error!" );
-        return 1;
-    }
-    //传送数据大小
-    int a = send( connfd, transfer_size, sizeof( transfer_size ), 0 );  
-    if( a  < 0 )
-    {
-        perror( "send datasize error!" ); 
-        return 1;
-    }
-    //传送剩下的值大小
-    int rest_flag = send( connfd, rest_size, sizeof( rest_size ), 0 );
-    if( rest_flag < 0 )
-    {
-        perror( "send resesize error!" );
-        return 1;
-    }
-
     while( !feof(fd) )
     {
         len = fread( sendBuf, 1, MAXLINE, fd );
-        cout << "read length is " << len << endl;
         if( len <= 0 )
         {
-            cout << "send msg complete!" << endl;
-            return 1;
+            return -1;
         }
-        else if( ( send( connfd, sendBuf, sizeof( sendBuf ) , 0 ) ) < 0)  
+        else if( ( write( connfd, sendBuf, len ) ) < 0)  
         {  
-            perror( "send msg error!i close connection!" );
+            perror( "Send msg error!close connection!" );
             cout << "close connfd is" << connfd << endl;
-            return 1;
+            return -1;
         }
     }
 
@@ -210,8 +172,6 @@ int writeMsg( int connfd )
 
     return 0;
 
-    //wait for xms
-   // usleep( 100000 );
 }
 
 
@@ -219,7 +179,7 @@ int writeMsg( int connfd )
  * function:initial the socket,socket(), bind(), listen()
  * parameters:1.listenfd:the fd which should be constructed
  *            2.port:the port number
- * return:1 means some error happened, 0 means success 
+ * return:-1 means some error happened, 0 means success 
  * author:zft                                          
  * Time:2017.5.17                                      
  * ****************************************************/
@@ -228,35 +188,35 @@ int initialListen( int &listenfd, int port )
     struct sockaddr_in servaddr;
 
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = htonl (INADDR_ANY );
+    servaddr.sin_addr.s_addr = htonl ( INADDR_ANY );
     servaddr.sin_port = htons( port );
 
-    if( ( listenfd = socket( AF_INET, SOCK_STREAM, 0 ) ) == -1 )
+    if( ( listenfd = socket( AF_INET, SOCK_STREAM, 0 ) ) < 0 )
     {
-        perror( "create socket error!" );
-        return 1;
+        perror( "create socket error: " );
+        return -1;
     }
 
-    if( bind( listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr) ) == -1 )
+    if( bind( listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr) ) < 0 )
     {
-        perror( "bind socket error!" );
-        return 1;
+        perror( "bind socket error: " );
+        return -1;
     }
 
-    if( listen( listenfd, 10 ) == -1 )
+    if( listen( listenfd, LISTENQ ) < 0 )
     {
-        perror( "listen socket error!" );
-        return 1;
+        perror( "listen socket error: " );
+        return -1;
     }
 
-    cout << "socket construct success!" << endl;
+    cout << "Listen socket construct success!" << endl;
     return 0;
 }
 
 
 /********manageThread**********************************
- * function:the main thread.create epoll and listen the 
- *          connected socket
+ * function:the main thread.create child thread and 
+ *          listen the connected socket
  * parameters:none
  * return:none 
  * author:zft                                          
@@ -264,101 +224,261 @@ int initialListen( int &listenfd, int port )
  * ****************************************************/
 void* manageThread( void *arg )
 {
-    int connfd, listenfd;
+    //detach the manage thread(actuall may be not useful)
+    pthread_detach( pthread_self() );
+
+    int listenfd;
 
     //initial listening...
     if( initialListen( listenfd ) )
     {
-        cout << "initial failed!" << endl;
+        cout << "Initial listen socket failed!" << endl;
         pthread_exit( NULL );
     }
 
     while( true )
     {
-        if( ( connfd = accept( listenfd, (struct sockaddr *)NULL, NULL ) ) != -1 )           
+        int *newfd = new int;
+        if( ( *newfd = accept( listenfd, (struct sockaddr *)NULL, NULL ) ) != -1 )           
         {
-                cout << "accept success!" << connfd << endl;
+                cout << "Accept success! connfd is :" << *newfd << endl;
         }
         else
         {
-            perror( "accept failed!" );
+            perror( "Accept failed: " );
             continue;
         }
-
-        int *fd = new int;
-
-        *fd = connfd;
 
         pthread_t receive_thread;
         pthread_t send_thread;
 
-        if( pthread_create( &receive_thread, NULL, receiveThread, fd ) )
+        Thread_p *m_Thread_p = new Thread_p;
+
+        m_Thread_p->Need_Image = false;
+        m_Thread_p->ControlMode = false;
+        m_Thread_p->connfd = *newfd;
+
+        delete newfd;
+        newfd = NULL;
+
+        if( pthread_create( &receive_thread, NULL, receiveThread, (void *)m_Thread_p ) )
         {
-            cout << "create reveive thread failed! connfd:" << connfd << endl;
+            cout << "Create reveive thread failed! connfd:" << m_Thread_p->connfd << endl;
             pthread_exit( NULL );
         }
 
-        if( pthread_create( &send_thread, NULL, sendThread, fd ) )
+        if( pthread_create( &send_thread, NULL, sendThread, (void *)m_Thread_p ) )
         {
-            cout << "create send thread failed! connfd:" << connfd << endl;
+            cout << "Create send thread failed! connfd:" << m_Thread_p->connfd << endl;
             pthread_exit( NULL );
         }
 
+        pthread_mutex_lock( &CliMutex_lock );
+        ClientVec.push_back( m_Thread_p->connfd );
+        pthread_mutex_unlock( &CliMutex_lock );
+        
 
+        usleep( 1000 );
    }
-        usleep( 100000 );
 
 }
 
-/******************receiveTHread***************************/
+/********receiveThread**********************************
+ * function:receive thread, receive information from 
+ *          client. Every client has a thread
+ * parameters: 1.arg:It's actually the pointer of the fd
+ *               of the connection, just have a type transfer
+ * return:none 
+ * author:zft                                          
+ * Time:2017.8.18                                      
+ * ****************************************************/
 void *receiveThread( void *arg )
 {
-    int *connfd = (int *)arg;
+    //detach this pthread at first
+    pthread_detach( pthread_self() );
+
+    Thread_p *Thread_this = (Thread_p *)arg;
+
+    int connfd = Thread_this->connfd;
 
     while( true )
     {
-        if( readMsg( *connfd ) )
+        if( readMsg( connfd, Thread_this ) )
         {
-            cout << "exit receive thread! connfd is:" << *connfd << endl;
-            close( *connfd );
-            delete connfd;
+            //if read failed or, mostly, the client cut the connection
+            cout << "Exit receive thread! connfd is:" << connfd << endl;
+
+            //close the connection
+            close( connfd );
+
+            //reset status
+            //Need_Image = false;
+            //ControlMode = false;
+
             pthread_exit( NULL );
         }
 
-        usleep( 100000 );
+        usleep( 5000 );
     }
 }
 
-/******************sendThread******************************/
+/********sendThread**********************************
+ * function:send thread, send information to
+ *          client. Every client has a thread
+ * parameters: 1.arg: It's actually the pointer to the 
+ *               connected fd
+ * return:none 
+ * author:zft                                          
+ * Time:2017.8.18                                      
+ * ****************************************************/
 void *sendThread( void *arg )
 {
-    int *connfd = (int *)arg;
+    //detach this thread at first
+    pthread_detach( pthread_self() );
+
+    Thread_p *Thread_this = (Thread_p *)arg;
+
+    int connfd = Thread_this->connfd;
+
+    cout << "Enter send thread. The connfd is: " << connfd << endl;
+
+    //give the frame a piece of dynamic memory
+    char *SerToCilent = new char[MAXLINE];
 
     while( true )
     {
-        if( writeMsg( *connfd ) == 1 )
+        int MatSize = getFileSize();
+        
+        if( ( Encode( SerToCilent, MatSize, Thread_this ) == -1 ) || ( WriteSimpleMessage( connfd, SerToCilent ) == -1 ) )
         {
-            cout << "exit send thread!connfd is:" << *connfd << endl;
-//            close( *connfd );
+            //encode failed or, mostly, the connection has been closed by receive thread
+            //note: here may has a question: what if other occasion happend? no need to delete connfd!
+            cout << "Exit send thread!Connfd is:" << connfd << endl;
+            
+            //Erase the client from client vector
+            pthread_mutex_lock( &CliMutex_lock );
+
+            ClientVec.erase( find( ClientVec.begin(), ClientVec.end(), connfd ) );
+
+            pthread_mutex_unlock( &CliMutex_lock );
+
+            //delete this thread's structure
+            delete Thread_this;
             pthread_exit( NULL );
         }
 
-        usleep( 100000 );
+        //if client needs image, send image to them
+        if( Thread_this->Need_Image )
+        {
+            if( writeMatMsg( connfd ) )
+            {
+                cout << "Write image failed!" << endl;
+
+            }
+        }
+
+        usleep( 5000 );
     }
 }
 
-/******************create manage thread********************/
-int createManageThread()
+/********writeSimpleMessage**********************************
+ * function:Write information except for Image information to 
+ *          the client
+ * parameters: 1.fd: The connected fd
+ *             2.SerToClient: The buffer in which there is the
+ *       Bad file       information to be transferd
+ * return:0 means success, 1 means failed
+ * author:zft                                          
+ * Time:2017.8.18                                      
+ * ****************************************************/
+int WriteSimpleMessage( int &fd, char *SerToCilent )
 {
-    pthread_t p_ManageThread;
-    if( pthread_create( &p_ManageThread, NULL, manageThread, NULL ) )
+
+    int nwrite;
+
+    if( ( ( nwrite = write( fd, SerToCilent, MAXLINE ) ) ) < 1 )
     {
-        cout << "create manage thread failed!" << endl;
+        perror( "Send message failed: " );   
         return -1;
     }
     else
     {
-        cout << "create manage thread success!" << endl;
+    //    cout << "Write" << nwrite << "bytes" << endl;
+    }
+
+    return 0;
+}
+
+/********createManageThread**********************************
+ * function:Create manage thread
+ * parameters: none
+ * return: 0 means success, -1 means failed
+ * author:zft      
+ * Time:2017.8.18
+ * *********************************************************/
+int createManageThread()
+{
+
+    //create manage thread to manage the connection of cilent
+    pthread_t p_ManageThread;
+    if( pthread_create( &p_ManageThread, NULL, manageThread, NULL ) )
+    {
+        cout << "Create manage thread failed!" << endl;
+        return -1;
+    }
+    else
+    {
+        cout << "Create manage thread success!" << endl;
         return 0;
     }
+}
+
+/********Encode**********************************
+ * function:Encode the information to be sent using Google protobuf
+ * parameters: 1.SerToClient: buffer of information to be sent
+ *             2.ImageSize:If there is a image to be sent, 
+ *             this parameter will be encoded,otherwise won't
+ * return: 0 means success, -1 means failed
+ * author:zft      
+ * Time:2017.8.18
+ * *********************************************************/
+int Encode( char *SerToCilent, int ImageSize, Thread_p *Thread_this )
+{
+    //suppose there is no image data at first
+    //suppose the machine is litten endian  
+    
+    test::ToClient Sendmessage;
+
+    if( Thread_this->Need_Image )
+    {
+        Sendmessage.set_datatype( test::ToClient::HasImage );
+        Sendmessage.set_image_length( ImageSize );
+    }
+    else
+    {
+        Sendmessage.set_datatype( test::ToClient::NoImage );
+    }
+         
+    Sen_data = 20;
+    Robot_Pose.x += 1;
+    Robot_Pose.y += 2;
+    Robot_Pose.theta += 3;
+
+    Sendmessage.set_sen_data( Sen_data );
+    Sendmessage.set_pose_x( Robot_Pose.x );
+    Sendmessage.set_pose_y( Robot_Pose.y );
+    Sendmessage.set_pose_theta( Robot_Pose.theta );
+
+    unsigned int size = Sendmessage.ByteSize();
+    SerToCilent[0] = 'c';
+    SerToCilent[1] = 'c';
+
+    if( size > MAXLINE )
+    {
+        cout << "Error! Size after Serialize is bigger than size of buffer!" << endl;
+        return -1;
+    }
+    Sendmessage.SerializeToArray( SerToCilent + 2, size );
+
+    return 0;
 }

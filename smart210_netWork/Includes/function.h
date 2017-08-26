@@ -34,6 +34,9 @@
 #define DATA_TYPE 0xda
 #define CONTROL_TYPE 0Xca
 
+//MAX CLI
+#define MAXCLI 10
+
 /**************Variable****************************/
 //int Sen_data;
 //int Image_data = 0;
@@ -50,14 +53,28 @@
     Control
 } TYPE;*/
 
-//thread structure
+//Thread Parameters
+struct Thread_p
+{
+    //Need Image or not
+    bool Need_Image;
+
+    //Mode transfer
+    bool ControlMode;
+
+    //connection fd
+    int connfd;
+
+    //tid of receive thread and send thread
+    pthread_t receive_thread_tid;
+    pthread_t send_thread_tid;
+};
 
 /***************Function**************************/
 //about read
-int readMsg( int &fd );
+int readMsg( int &fd, Thread_p * );
 
 //about write
-void intToChar( long, char * );
 int writeMatMsg( int & );
 int writeMsg_Mat( cv::Mat, int );
 int WriteSimpleMessage( int &, char * );
@@ -69,7 +86,7 @@ void *sendThread( void * );
 void *receiveThread( void * );
 
 // Encode
-int Encode( char *, int );
+int Encode( char *, int, Thread_p * );
 int getFileSize();
 
 //about initial

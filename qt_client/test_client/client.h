@@ -52,6 +52,14 @@ private slots:
 
     void on_pushButtonNoImage_clicked();
 
+    void on_pushButtonForward_clicked();
+
+    void on_pushButtonLeft_clicked();
+
+    void on_pushButtonRight_clicked();
+
+    void on_pushButtonBackward_clicked();
+
 private:
     QTcpSocket *ClientSocket;
     test::ToClient RecvMessage;

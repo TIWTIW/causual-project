@@ -8,14 +8,16 @@ message ToServer
     //frame type
     enum Type
     {
-        NeedImage = 0;
-        NoNeedImage = 1;
+        DefaultType = 0;
+        NeedImage = 1;
+        NoNeedImage = 2;
     }
 
     enum Mode
     {
-        ControlMode = 0;
-        SelfMode = 1;
+        DefaultMode = 0;
+        ControlMode = 1;
+        SelfMode = 2;
     }
 
     //Has image or not

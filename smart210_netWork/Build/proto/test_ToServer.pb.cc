@@ -116,16 +116,17 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
-      "\n\023test_ToServer.proto\022\004test\"\347\001\n\010ToServer"
+      "\n\023test_ToServer.proto\022\004test\"\211\002\n\010ToServer"
       "\022%\n\010DataType\030\001 \001(\0162\023.test.ToServer.Type\022"
       "%\n\010ModeInfo\030\002 \001(\0162\023.test.ToServer.Mode\022\014"
       "\n\004left\030\003 \001(\010\022\r\n\005right\030\004 \001(\010\022\017\n\007forward\030\005"
-      " \001(\010\022\020\n\010backward\030\006 \001(\010\"&\n\004Type\022\r\n\tNeedIm"
-      "age\020\000\022\017\n\013NoNeedImage\020\001\"%\n\004Mode\022\017\n\013Contro"
-      "lMode\020\000\022\014\n\010SelfMode\020\001"
+      " \001(\010\022\020\n\010backward\030\006 \001(\010\"7\n\004Type\022\017\n\013Defaul"
+      "tType\020\000\022\r\n\tNeedImage\020\001\022\017\n\013NoNeedImage\020\002\""
+      "6\n\004Mode\022\017\n\013DefaultMode\020\000\022\017\n\013ControlMode\020"
+      "\001\022\014\n\010SelfMode\020\002"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 261);
+      descriptor, 295);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "test_ToServer.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -153,6 +154,7 @@ bool ToServer_Type_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -160,6 +162,7 @@ bool ToServer_Type_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const ToServer_Type ToServer::DefaultType;
 const ToServer_Type ToServer::NeedImage;
 const ToServer_Type ToServer::NoNeedImage;
 const ToServer_Type ToServer::Type_MIN;
@@ -174,6 +177,7 @@ bool ToServer_Mode_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -181,6 +185,7 @@ bool ToServer_Mode_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const ToServer_Mode ToServer::DefaultMode;
 const ToServer_Mode ToServer::ControlMode;
 const ToServer_Mode ToServer::SelfMode;
 const ToServer_Mode ToServer::Mode_MIN;

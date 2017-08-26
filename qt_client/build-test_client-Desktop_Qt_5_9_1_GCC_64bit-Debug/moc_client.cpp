@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Client_t {
-    QByteArrayData data[17];
-    char stringdata0[340];
+    QByteArrayData data[21];
+    char stringdata0[452];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,7 +47,11 @@ QT_MOC_LITERAL(12, 244, 14), // "ClientRecvData"
 QT_MOC_LITERAL(13, 259, 14), // "ClientSendData"
 QT_MOC_LITERAL(14, 274, 5), // "bytes"
 QT_MOC_LITERAL(15, 280, 30), // "on_pushButtonSelfClean_clicked"
-QT_MOC_LITERAL(16, 311, 28) // "on_pushButtonNoImage_clicked"
+QT_MOC_LITERAL(16, 311, 28), // "on_pushButtonNoImage_clicked"
+QT_MOC_LITERAL(17, 340, 28), // "on_pushButtonForward_clicked"
+QT_MOC_LITERAL(18, 369, 25), // "on_pushButtonLeft_clicked"
+QT_MOC_LITERAL(19, 395, 26), // "on_pushButtonRight_clicked"
+QT_MOC_LITERAL(20, 422, 29) // "on_pushButtonBackward_clicked"
 
     },
     "Client\0on_pushButtonConnect_clicked\0"
@@ -59,7 +63,11 @@ QT_MOC_LITERAL(16, 311, 28) // "on_pushButtonNoImage_clicked"
     "ClientSocketError\0QAbstractSocket::SocketError\0"
     "e\0ClientRecvData\0ClientSendData\0bytes\0"
     "on_pushButtonSelfClean_clicked\0"
-    "on_pushButtonNoImage_clicked"
+    "on_pushButtonNoImage_clicked\0"
+    "on_pushButtonForward_clicked\0"
+    "on_pushButtonLeft_clicked\0"
+    "on_pushButtonRight_clicked\0"
+    "on_pushButtonBackward_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +77,7 @@ static const uint qt_meta_data_Client[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -77,18 +85,22 @@ static const uint qt_meta_data_Client[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   74,    2, 0x08 /* Private */,
-       3,    0,   75,    2, 0x08 /* Private */,
-       4,    0,   76,    2, 0x08 /* Private */,
-       5,    0,   77,    2, 0x08 /* Private */,
-       6,    0,   78,    2, 0x08 /* Private */,
-       7,    0,   79,    2, 0x08 /* Private */,
-       8,    0,   80,    2, 0x08 /* Private */,
-       9,    1,   81,    2, 0x08 /* Private */,
-      12,    0,   84,    2, 0x08 /* Private */,
-      13,    1,   85,    2, 0x08 /* Private */,
-      15,    0,   88,    2, 0x08 /* Private */,
-      16,    0,   89,    2, 0x08 /* Private */,
+       1,    0,   94,    2, 0x08 /* Private */,
+       3,    0,   95,    2, 0x08 /* Private */,
+       4,    0,   96,    2, 0x08 /* Private */,
+       5,    0,   97,    2, 0x08 /* Private */,
+       6,    0,   98,    2, 0x08 /* Private */,
+       7,    0,   99,    2, 0x08 /* Private */,
+       8,    0,  100,    2, 0x08 /* Private */,
+       9,    1,  101,    2, 0x08 /* Private */,
+      12,    0,  104,    2, 0x08 /* Private */,
+      13,    1,  105,    2, 0x08 /* Private */,
+      15,    0,  108,    2, 0x08 /* Private */,
+      16,    0,  109,    2, 0x08 /* Private */,
+      17,    0,  110,    2, 0x08 /* Private */,
+      18,    0,  111,    2, 0x08 /* Private */,
+      19,    0,  112,    2, 0x08 /* Private */,
+      20,    0,  113,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -101,6 +113,10 @@ static const uint qt_meta_data_Client[] = {
     QMetaType::Void, 0x80000000 | 10,   11,
     QMetaType::Void,
     QMetaType::Void, QMetaType::LongLong,   14,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -125,6 +141,10 @@ void Client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 9: _t->ClientSendData((*reinterpret_cast< qint64(*)>(_a[1]))); break;
         case 10: _t->on_pushButtonSelfClean_clicked(); break;
         case 11: _t->on_pushButtonNoImage_clicked(); break;
+        case 12: _t->on_pushButtonForward_clicked(); break;
+        case 13: _t->on_pushButtonLeft_clicked(); break;
+        case 14: _t->on_pushButtonRight_clicked(); break;
+        case 15: _t->on_pushButtonBackward_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -166,13 +186,13 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 16;
     }
     return _id;
 }

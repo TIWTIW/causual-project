@@ -2,9 +2,8 @@
 
 int main( int argc, char *argv[] )
 {
-//    socketServer Server;
-    
-  //  Server.waiting();
+
+    //create manage thread
     createManageThread();
 
     while( true )

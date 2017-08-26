@@ -54,11 +54,12 @@ void InitDefaults();
 }  // namespace protobuf_test_5fToServer_2eproto
 
 enum ToServer_Type {
-  ToServer_Type_NeedImage = 0,
-  ToServer_Type_NoNeedImage = 1
+  ToServer_Type_DefaultType = 0,
+  ToServer_Type_NeedImage = 1,
+  ToServer_Type_NoNeedImage = 2
 };
 bool ToServer_Type_IsValid(int value);
-const ToServer_Type ToServer_Type_Type_MIN = ToServer_Type_NeedImage;
+const ToServer_Type ToServer_Type_Type_MIN = ToServer_Type_DefaultType;
 const ToServer_Type ToServer_Type_Type_MAX = ToServer_Type_NoNeedImage;
 const int ToServer_Type_Type_ARRAYSIZE = ToServer_Type_Type_MAX + 1;
 
@@ -73,11 +74,12 @@ inline bool ToServer_Type_Parse(
     ToServer_Type_descriptor(), name, value);
 }
 enum ToServer_Mode {
-  ToServer_Mode_ControlMode = 0,
-  ToServer_Mode_SelfMode = 1
+  ToServer_Mode_DefaultMode = 0,
+  ToServer_Mode_ControlMode = 1,
+  ToServer_Mode_SelfMode = 2
 };
 bool ToServer_Mode_IsValid(int value);
-const ToServer_Mode ToServer_Mode_Mode_MIN = ToServer_Mode_ControlMode;
+const ToServer_Mode ToServer_Mode_Mode_MIN = ToServer_Mode_DefaultMode;
 const ToServer_Mode ToServer_Mode_Mode_MAX = ToServer_Mode_SelfMode;
 const int ToServer_Mode_Mode_ARRAYSIZE = ToServer_Mode_Mode_MAX + 1;
 
@@ -164,6 +166,8 @@ class ToServer : public ::google::protobuf::Message /* @@protoc_insertion_point(
   // nested types ----------------------------------------------------
 
   typedef ToServer_Type Type;
+  static const Type DefaultType =
+    ToServer_Type_DefaultType;
   static const Type NeedImage =
     ToServer_Type_NeedImage;
   static const Type NoNeedImage =
@@ -190,6 +194,8 @@ class ToServer : public ::google::protobuf::Message /* @@protoc_insertion_point(
   }
 
   typedef ToServer_Mode Mode;
+  static const Mode DefaultMode =
+    ToServer_Mode_DefaultMode;
   static const Mode ControlMode =
     ToServer_Mode_ControlMode;
   static const Mode SelfMode =

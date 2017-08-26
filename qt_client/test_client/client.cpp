@@ -31,7 +31,7 @@ void Client::Initial()
     ui->lineEditY->setReadOnly(true);
 
     ClientSocket = new QTcpSocket(this);
-    ClientSocket->setReadBufferSize(MAXLINE * 10);
+    ClientSocket->setReadBufferSize(MAXLINE * 3);
 
     MapImage = new QImage;
 
@@ -198,7 +198,6 @@ void Client::on_pushButtonClear_clicked()
 void Client::on_pushButtonControlMode_clicked()
 {
     SendMessage.Clear();
-    SendMessage.clear_datatype();
 
     SendMessage.set_modeinfo(test::ToServer::ControlMode);
 
@@ -212,7 +211,6 @@ void Client::on_pushButtonControlMode_clicked()
 void Client::on_pushButtonNeedImage_clicked()
 {
     SendMessage.Clear();
-    SendMessage.clear_modeinfo();
 
     SendMessage.set_datatype(test::ToServer::NeedImage);
 
@@ -230,7 +228,6 @@ void Client::ClientSendData(qint64 bytes)
 void Client::on_pushButtonSelfClean_clicked()
 {
     SendMessage.Clear();
-    SendMessage.clear_datatype();
 
     SendMessage.set_modeinfo(test::ToServer::SelfMode);
 
@@ -243,9 +240,56 @@ void Client::on_pushButtonSelfClean_clicked()
 void Client::on_pushButtonNoImage_clicked()
 {
     SendMessage.Clear();
-    SendMessage.clear_modeinfo();
 
     SendMessage.set_datatype(test::ToServer::NoNeedImage);
+
+    char buf[MAXLINE];
+    SendMessage.SerializeToArray(buf, sizeof(buf));
+
+    ClientSocket->write(buf, sizeof(buf));
+}
+
+void Client::on_pushButtonForward_clicked()
+{
+    SendMessage.Clear();
+
+    SendMessage.set_forward(true);
+
+    char buf[MAXLINE];
+    SendMessage.SerializeToArray(buf, sizeof(buf));
+
+    ClientSocket->write(buf, sizeof(buf));
+}
+
+void Client::on_pushButtonLeft_clicked()
+{
+    SendMessage.Clear();
+
+    SendMessage.set_left(true);
+
+    char buf[MAXLINE];
+    SendMessage.SerializeToArray(buf, sizeof(buf));
+
+    ClientSocket->write(buf, sizeof(buf));
+}
+
+void Client::on_pushButtonRight_clicked()
+{
+    SendMessage.Clear();
+
+    SendMessage.set_right(true);
+
+    char buf[MAXLINE];
+    SendMessage.SerializeToArray(buf, sizeof(buf));
+
+    ClientSocket->write(buf, sizeof(buf));
+}
+
+void Client::on_pushButtonBackward_clicked()
+{
+    SendMessage.Clear();
+
+    SendMessage.set_backward(true);
 
     char buf[MAXLINE];
     SendMessage.SerializeToArray(buf, sizeof(buf));
