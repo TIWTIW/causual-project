@@ -2,6 +2,17 @@
 #include "test_ToServer.pb.h"
 #include <vector>
 #include <algorithm>
+#include "WrapFunction.h"
+#include <sys/socket.h>
+#include <cerrno>
+#include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+#include <iostream>
+#include <string>
+#include <netinet/in.h>
+#include "Robot_Data.h"
+#include "test_ToClient.pb.h"
 
 using namespace std;
 using namespace cv;
@@ -29,7 +40,7 @@ int readMsg( int &fd, Thread_p *Thread_this )
     int n;
     char recBuf[MAXLINE];
 
-    n = read( fd, recBuf, sizeof( recBuf ) );
+    n = Readn( fd, recBuf, sizeof( recBuf ) );
 
         
     //if receive 0, the connection is cut by cilent
@@ -159,7 +170,7 @@ int writeMatMsg( int &connfd )
         {
             return -1;
         }
-        else if( ( write( connfd, sendBuf, len ) ) < 0)  
+        else if( ( Writen( connfd, sendBuf, len ) ) < 0)  
         {  
             perror( "Send msg error!close connection!" );
             cout << "close connfd is" << connfd << endl;
@@ -193,19 +204,19 @@ int initialListen( int &listenfd, int port )
 
     if( ( listenfd = socket( AF_INET, SOCK_STREAM, 0 ) ) < 0 )
     {
-        perror( "create socket error: " );
+        perror( "create socket error" );
         return -1;
     }
 
     if( bind( listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr) ) < 0 )
     {
-        perror( "bind socket error: " );
+        perror( "bind socket error" );
         return -1;
     }
 
     if( listen( listenfd, LISTENQ ) < 0 )
     {
-        perror( "listen socket error: " );
+        perror( "listen socket error" );
         return -1;
     }
 
@@ -396,7 +407,7 @@ int WriteSimpleMessage( int &fd, char *SerToCilent )
 
     int nwrite;
 
-    if( ( ( nwrite = write( fd, SerToCilent, MAXLINE ) ) ) < 1 )
+    if( ( ( nwrite = Writen( fd, SerToCilent, MAXLINE ) ) ) < 1 )
     {
         perror( "Send message failed: " );   
         return -1;
@@ -447,6 +458,9 @@ int Encode( char *SerToCilent, int ImageSize, Thread_p *Thread_this )
     //suppose there is no image data at first
     //suppose the machine is litten endian  
     
+    //debug
+    static bool first = true;
+
     test::ToClient Sendmessage;
 
     if( Thread_this->Need_Image )
@@ -459,10 +473,21 @@ int Encode( char *SerToCilent, int ImageSize, Thread_p *Thread_this )
         Sendmessage.set_datatype( test::ToClient::NoImage );
     }
          
-    Sen_data = 20;
-    Robot_Pose.x += 1;
-    Robot_Pose.y += 2;
-    Robot_Pose.theta += 3;
+    //Sen_data = 20;
+    //Robot_Pose.x += 1;
+    //Robot_Pose.y += 2;
+    //Robot_Pose.theta += 3;
+
+    if( first )
+    {
+        printf( "encode:%x", p_addr );
+        first = false;
+
+    }
+    Sen_data = p_addr->Sen_data;
+    Robot_Pose = p_addr->p_RobotPose;
+
+    printf( "Encode: Sen data %d\n", p_addr->Sen_data );
 
     Sendmessage.set_sen_data( Sen_data );
     Sendmessage.set_pose_x( Robot_Pose.x );

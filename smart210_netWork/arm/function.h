@@ -77,7 +77,7 @@ int readMsg( int &fd, Thread_p * );
 //about write
 int writeMatMsg( int & );
 int writeMsg_Mat( cv::Mat, int );
-int WriteSimpleMessage( int &, char * );
+int WriteSimpleMessage( int &, char *, int );
 
 //about thread
 void* manageThread( void * );
@@ -86,7 +86,7 @@ void *sendThread( void * );
 void *receiveThread( void * );
 
 // Encode
-int Encode( char *, int, Thread_p * );
+int Encode( char *, int, Thread_p *, int & );
 int getFileSize();
 
 //about initial

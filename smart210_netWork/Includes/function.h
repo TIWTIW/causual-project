@@ -1,19 +1,9 @@
 #ifndef _FUNCTION_H
 #define _FUNCTION_H
 
-#include <sys/socket.h>
-#include <cerrno>
 #include <pthread.h>
-#include <sys/stat.h>
-#include <sys/ioctl.h>
-#include <fcntl.h>
-#include <iostream>
-#include <string>
-#include <netinet/in.h>
 #include <unistd.h>
 #include <opencv2/opencv.hpp>
-#include "Robot_Data.h"
-#include "test_ToClient.pb.h"
 
 /***************Macro******************************/
 #define MAXLINE 4096    //send size

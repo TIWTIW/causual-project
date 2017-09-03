@@ -2,6 +2,7 @@
 #include "test_ToServer.pb.h"
 #include <vector>
 #include <algorithm>
+#include "WrapFunction.h"
 
 using namespace std;
 using namespace cv;
@@ -29,7 +30,7 @@ int readMsg( int &fd, Thread_p *Thread_this )
     int n;
     char recBuf[MAXLINE];
 
-    n = read( fd, recBuf, sizeof( recBuf ) );
+    n = Readn( fd, recBuf, sizeof( recBuf ) );
 
         
     //if receive 0, the connection is cut by cilent
@@ -159,7 +160,7 @@ int writeMatMsg( int &connfd )
         {
             return -1;
         }
-        else if( ( write( connfd, sendBuf, len ) ) < 0)  
+        else if( ( Writen( connfd, sendBuf, len ) ) < 0)  
         {  
             perror( "Send msg error!close connection!" );
             cout << "close connfd is" << connfd << endl;
@@ -252,6 +253,7 @@ void* manageThread( void *arg )
         pthread_t receive_thread;
         pthread_t send_thread;
 
+        //when did the thread_p needed to be delete??
         Thread_p *m_Thread_p = new Thread_p;
 
         m_Thread_p->Need_Image = false;
@@ -348,8 +350,9 @@ void *sendThread( void *arg )
     while( true )
     {
         int MatSize = getFileSize();
-        
-        if( ( Encode( SerToCilent, MatSize, Thread_this ) == -1 ) || ( WriteSimpleMessage( connfd, SerToCilent ) == -1 ) )
+        int MessageSize;
+
+        if( ( Encode( SerToCilent, MatSize, Thread_this, MessageSize ) == -1 ) || ( WriteSimpleMessage( connfd, SerToCilent, MessageSize ) == -1 ) )
         {
             //encode failed or, mostly, the connection has been closed by receive thread
             //note: here may has a question: what if other occasion happend? no need to delete connfd!
@@ -364,6 +367,8 @@ void *sendThread( void *arg )
 
             //delete this thread's structure
             delete Thread_this;
+            delete SerToCilent;
+            
             pthread_exit( NULL );
         }
 
@@ -391,19 +396,19 @@ void *sendThread( void *arg )
  * author:zft                                          
  * Time:2017.8.18                                      
  * ****************************************************/
-int WriteSimpleMessage( int &fd, char *SerToCilent )
+int WriteSimpleMessage( int &fd, char *SerToCilent, int MessageSize )
 {
 
     int nwrite;
 
-    if( ( ( nwrite = write( fd, SerToCilent, MAXLINE ) ) ) < 1 )
+    if( ( ( nwrite = Writen( fd, SerToCilent, MessageSize ) ) ) < 1 )
     {
         perror( "Send message failed: " );   
         return -1;
     }
     else
     {
-    //    cout << "Write" << nwrite << "bytes" << endl;
+        cout << "Write" << nwrite << "bytes" << endl;
     }
 
     return 0;
@@ -442,7 +447,7 @@ int createManageThread()
  * author:zft      
  * Time:2017.8.18
  * *********************************************************/
-int Encode( char *SerToCilent, int ImageSize, Thread_p *Thread_this )
+int Encode( char *SerToCilent, int ImageSize, Thread_p *Thread_this, int &MessageSize )
 {
     //suppose there is no image data at first
     //suppose the machine is litten endian  
@@ -472,6 +477,7 @@ int Encode( char *SerToCilent, int ImageSize, Thread_p *Thread_this )
     unsigned int size = Sendmessage.ByteSize();
     SerToCilent[0] = 'c';
     SerToCilent[1] = 'c';
+    MessageSize = size + 2;
 
     if( size > MAXLINE )
     {

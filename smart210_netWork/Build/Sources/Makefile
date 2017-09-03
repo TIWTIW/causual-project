@@ -125,6 +125,60 @@ SOCKET_SERVER/fast:
 	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f Sources/CMakeFiles/SOCKET_SERVER.dir/build.make Sources/CMakeFiles/SOCKET_SERVER.dir/build
 .PHONY : SOCKET_SERVER/fast
 
+OtherPro.o: OtherPro.cpp.o
+
+.PHONY : OtherPro.o
+
+# target to build an object file
+OtherPro.cpp.o:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f Sources/CMakeFiles/SOCKET_SERVER.dir/build.make Sources/CMakeFiles/SOCKET_SERVER.dir/OtherPro.cpp.o
+.PHONY : OtherPro.cpp.o
+
+OtherPro.i: OtherPro.cpp.i
+
+.PHONY : OtherPro.i
+
+# target to preprocess a source file
+OtherPro.cpp.i:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f Sources/CMakeFiles/SOCKET_SERVER.dir/build.make Sources/CMakeFiles/SOCKET_SERVER.dir/OtherPro.cpp.i
+.PHONY : OtherPro.cpp.i
+
+OtherPro.s: OtherPro.cpp.s
+
+.PHONY : OtherPro.s
+
+# target to generate assembly for a file
+OtherPro.cpp.s:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f Sources/CMakeFiles/SOCKET_SERVER.dir/build.make Sources/CMakeFiles/SOCKET_SERVER.dir/OtherPro.cpp.s
+.PHONY : OtherPro.cpp.s
+
+WrapFunction.o: WrapFunction.cpp.o
+
+.PHONY : WrapFunction.o
+
+# target to build an object file
+WrapFunction.cpp.o:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f Sources/CMakeFiles/SOCKET_SERVER.dir/build.make Sources/CMakeFiles/SOCKET_SERVER.dir/WrapFunction.cpp.o
+.PHONY : WrapFunction.cpp.o
+
+WrapFunction.i: WrapFunction.cpp.i
+
+.PHONY : WrapFunction.i
+
+# target to preprocess a source file
+WrapFunction.cpp.i:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f Sources/CMakeFiles/SOCKET_SERVER.dir/build.make Sources/CMakeFiles/SOCKET_SERVER.dir/WrapFunction.cpp.i
+.PHONY : WrapFunction.cpp.i
+
+WrapFunction.s: WrapFunction.cpp.s
+
+.PHONY : WrapFunction.s
+
+# target to generate assembly for a file
+WrapFunction.cpp.s:
+	cd /media/zhoufeitong/工程/causual/smart210_netWork/Build && $(MAKE) -f Sources/CMakeFiles/SOCKET_SERVER.dir/build.make Sources/CMakeFiles/SOCKET_SERVER.dir/WrapFunction.cpp.s
+.PHONY : WrapFunction.cpp.s
+
 function.o: function.cpp.o
 
 .PHONY : function.o
@@ -188,6 +242,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... SOCKET_SERVER"
 	@echo "... rebuild_cache"
+	@echo "... OtherPro.o"
+	@echo "... OtherPro.i"
+	@echo "... OtherPro.s"
+	@echo "... WrapFunction.o"
+	@echo "... WrapFunction.i"
+	@echo "... WrapFunction.s"
 	@echo "... function.o"
 	@echo "... function.i"
 	@echo "... function.s"

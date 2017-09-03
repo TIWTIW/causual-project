@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/media/zhoufeitong/工程/causual/smart210_netWork/Sources/OtherPro.cpp" "/media/zhoufeitong/工程/causual/smart210_netWork/Build/Sources/CMakeFiles/SOCKET_SERVER.dir/OtherPro.cpp.o"
+  "/media/zhoufeitong/工程/causual/smart210_netWork/Sources/WrapFunction.cpp" "/media/zhoufeitong/工程/causual/smart210_netWork/Build/Sources/CMakeFiles/SOCKET_SERVER.dir/WrapFunction.cpp.o"
   "/media/zhoufeitong/工程/causual/smart210_netWork/Sources/function.cpp" "/media/zhoufeitong/工程/causual/smart210_netWork/Build/Sources/CMakeFiles/SOCKET_SERVER.dir/function.cpp.o"
   "/media/zhoufeitong/工程/causual/smart210_netWork/Sources/main.cpp" "/media/zhoufeitong/工程/causual/smart210_netWork/Build/Sources/CMakeFiles/SOCKET_SERVER.dir/main.cpp.o"
   )

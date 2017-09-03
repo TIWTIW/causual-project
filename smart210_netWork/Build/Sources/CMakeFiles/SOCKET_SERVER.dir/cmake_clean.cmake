@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/SOCKET_SERVER.dir/function.cpp.o"
   "CMakeFiles/SOCKET_SERVER.dir/main.cpp.o"
+  "CMakeFiles/SOCKET_SERVER.dir/OtherPro.cpp.o"
+  "CMakeFiles/SOCKET_SERVER.dir/WrapFunction.cpp.o"
   "SOCKET_SERVER.pdb"
   "SOCKET_SERVER"
 )

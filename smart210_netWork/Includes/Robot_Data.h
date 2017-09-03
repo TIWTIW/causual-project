@@ -23,4 +23,12 @@ struct Path
     std::vector<int> Path_data;
 };
 
+struct p_IPC
+{
+    int Sen_data;
+    Pose p_RobotPose;
+};
+
+extern p_IPC *p_addr;
+
 #endif

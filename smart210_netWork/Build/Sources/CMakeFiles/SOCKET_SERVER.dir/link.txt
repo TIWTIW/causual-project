@@ -1,1 +1,1 @@
-/usr/bin/c++    -Wall -g -std=c++11   CMakeFiles/SOCKET_SERVER.dir/function.cpp.o CMakeFiles/SOCKET_SERVER.dir/main.cpp.o  -o SOCKET_SERVER  -L/usr/local/lib -rdynamic -lpthread ../proto/libproto.a -lprotobuf -Wl,-rpath,/usr/local/lib 
+/usr/bin/c++    -Wall -g -std=c++11   CMakeFiles/SOCKET_SERVER.dir/function.cpp.o CMakeFiles/SOCKET_SERVER.dir/main.cpp.o CMakeFiles/SOCKET_SERVER.dir/OtherPro.cpp.o CMakeFiles/SOCKET_SERVER.dir/WrapFunction.cpp.o  -o SOCKET_SERVER  -L/usr/local/lib -rdynamic -lpthread ../proto/libproto.a -lprotobuf -Wl,-rpath,/usr/local/lib 
