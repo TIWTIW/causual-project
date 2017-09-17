@@ -1,1 +1,0 @@
-/usr/bin/c++    -Wall -g -std=c++11   CMakeFiles/SOCKET_SERVER.dir/function.cpp.o CMakeFiles/SOCKET_SERVER.dir/main.cpp.o  -o SOCKET_SERVER -rdynamic -lpthread 
