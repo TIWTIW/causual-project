@@ -42,11 +42,11 @@ win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../usr/loca
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../../usr/local/lib/debug/ -lprotobuf
 else:unix: LIBS += -L$$PWD/../../../../../../usr/local/lib/ -lprotobuf
 
-INCLUDEPATH += $$PWD/../../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/include
+INCLUDEPATH += $$PWD/../../../../../../opt/FriendlyARM/toolschain/4.5.1/include
+DEPENDPATH += $$PWD/../../../../../../opt/FriendlyARM/toolschain/4.5.1/include
 
 win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/release/libprotobuf.a
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/debug/libprotobuf.a
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/release/protobuf.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/debug/protobuf.lib
-else:unix: PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libprotobuf.a
+else:unix: PRE_TARGETDEPS += $$PWD/../../../../../../opt/FriendlyARM/toolschain/4.5.1/lib/libprotobuf.a

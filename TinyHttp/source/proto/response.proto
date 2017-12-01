@@ -1,0 +1,12 @@
+syntax = "proto3"
+package networkLearn
+
+import "google/protobuf/timestamp.proto"
+import "httpResponse.proto"
+
+message Response{
+    int32 length = 1;
+    string version = 2;
+    httpResponse content = 3;
+    google.protobuf.Timestamp last_updated = 4;
+}

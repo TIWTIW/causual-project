@@ -1,0 +1,5 @@
+/media/zhoufeitong/projects/causual/TinyHttp/build/CMakeFiles/edit_cache.dir
+/media/zhoufeitong/projects/causual/TinyHttp/build/CMakeFiles/rebuild_cache.dir
+/media/zhoufeitong/projects/causual/TinyHttp/build/source/CMakeFiles/edit_cache.dir
+/media/zhoufeitong/projects/causual/TinyHttp/build/source/CMakeFiles/rebuild_cache.dir
+/media/zhoufeitong/projects/causual/TinyHttp/build/source/CMakeFiles/tinyHttp.dir

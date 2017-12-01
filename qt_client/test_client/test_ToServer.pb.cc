@@ -18,140 +18,109 @@
 // @@protoc_insertion_point(includes)
 
 namespace test {
-class ToServerDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<ToServer> {
-} _ToServer_default_instance_;
-
-namespace protobuf_test_5fToServer_2eproto {
-
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[1];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[2];
+const ::google::protobuf::Descriptor* ToServer_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ToServer_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* ToServer_Type_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ToServer_Mode_descriptor_ = NULL;
 
 }  // namespace
 
-PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTableField
-    const TableStruct::entries[] = {
-  {0, 0, 0, ::google::protobuf::internal::kInvalidMask, 0, 0},
-};
 
-PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
-    const TableStruct::aux[] = {
-  ::google::protobuf::internal::AuxillaryParseTableField(),
-};
-PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
-    TableStruct::schema[] = {
-  { NULL, NULL, 0, -1, -1, false },
-};
-
-const ::google::protobuf::uint32 TableStruct::offsets[] = {
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, datatype_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, modeinfo_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, left_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, right_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, forward_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, backward_),
-  0,
-  1,
-  2,
-  3,
-  4,
-  5,
-};
-
-static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 11, sizeof(ToServer)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&_ToServer_default_instance_),
-};
+void protobuf_AssignDesc_test_5fToServer_2eproto() GOOGLE_ATTRIBUTE_COLD;
+void protobuf_AssignDesc_test_5fToServer_2eproto() {
+  protobuf_AddDesc_test_5fToServer_2eproto();
+  const ::google::protobuf::FileDescriptor* file =
+    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
+      "test_ToServer.proto");
+  GOOGLE_CHECK(file != NULL);
+  ToServer_descriptor_ = file->message_type(0);
+  static const int ToServer_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, datatype_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, modeinfo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, left_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, right_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, forward_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, backward_),
+  };
+  ToServer_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      ToServer_descriptor_,
+      ToServer::default_instance_,
+      ToServer_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(ToServer),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToServer, _internal_metadata_),
+      -1);
+  ToServer_Type_descriptor_ = ToServer_descriptor_->enum_type(0);
+  ToServer_Mode_descriptor_ = ToServer_descriptor_->enum_type(1);
+}
 
 namespace {
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "test_ToServer.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, file_level_enum_descriptors, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
+inline void protobuf_AssignDescriptorsOnce() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
+                 &protobuf_AssignDesc_test_5fToServer_2eproto);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      ToServer_descriptor_, &ToServer::default_instance());
 }
 
 }  // namespace
 
-void TableStruct::Shutdown() {
-  _ToServer_default_instance_.Shutdown();
-  delete file_level_metadata[0].reflection;
+void protobuf_ShutdownFile_test_5fToServer_2eproto() {
+  delete ToServer::default_instance_;
+  delete ToServer_reflection_;
 }
 
-void TableStruct::InitDefaultsImpl() {
+void protobuf_AddDesc_test_5fToServer_2eproto() GOOGLE_ATTRIBUTE_COLD;
+void protobuf_AddDesc_test_5fToServer_2eproto() {
+  static bool already_here = false;
+  if (already_here) return;
+  already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::google::protobuf::internal::InitProtobufDefaults();
-  _ToServer_default_instance_.DefaultConstruct();
-}
-
-void InitDefaults() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
-}
-namespace {
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] = {
-      "\n\023test_ToServer.proto\022\004test\"\211\002\n\010ToServer"
-      "\022%\n\010DataType\030\001 \001(\0162\023.test.ToServer.Type\022"
-      "%\n\010ModeInfo\030\002 \001(\0162\023.test.ToServer.Mode\022\014"
-      "\n\004left\030\003 \001(\010\022\r\n\005right\030\004 \001(\010\022\017\n\007forward\030\005"
-      " \001(\010\022\020\n\010backward\030\006 \001(\010\"7\n\004Type\022\017\n\013Defaul"
-      "tType\020\000\022\r\n\tNeedImage\020\001\022\017\n\013NoNeedImage\020\002\""
-      "6\n\004Mode\022\017\n\013DefaultMode\020\000\022\017\n\013ControlMode\020"
-      "\001\022\014\n\010SelfMode\020\002"
-  };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 295);
+    "\n\023test_ToServer.proto\022\004test\"\211\002\n\010ToServer"
+    "\022%\n\010DataType\030\001 \001(\0162\023.test.ToServer.Type\022"
+    "%\n\010ModeInfo\030\002 \001(\0162\023.test.ToServer.Mode\022\014"
+    "\n\004left\030\003 \001(\010\022\r\n\005right\030\004 \001(\010\022\017\n\007forward\030\005"
+    " \001(\010\022\020\n\010backward\030\006 \001(\010\"7\n\004Type\022\017\n\013Defaul"
+    "tType\020\000\022\r\n\tNeedImage\020\001\022\017\n\013NoNeedImage\020\002\""
+    "6\n\004Mode\022\017\n\013DefaultMode\020\000\022\017\n\013ControlMode\020"
+    "\001\022\014\n\010SelfMode\020\002", 295);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "test_ToServer.proto", &protobuf_RegisterTypes);
-  ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
+  ToServer::default_instance_ = new ToServer();
+  ToServer::default_instance_->InitAsDefaultInstance();
+  ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_test_5fToServer_2eproto);
 }
-} // anonymous namespace
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
+// Force AddDescriptors() to be called at static initialization time.
+struct StaticDescriptorInitializer_test_5fToServer_2eproto {
+  StaticDescriptorInitializer_test_5fToServer_2eproto() {
+    protobuf_AddDesc_test_5fToServer_2eproto();
   }
-} static_descriptor_initializer;
+} static_descriptor_initializer_test_5fToServer_2eproto_;
 
-}  // namespace protobuf_test_5fToServer_2eproto
+// ===================================================================
 
 const ::google::protobuf::EnumDescriptor* ToServer_Type_descriptor() {
-  protobuf_test_5fToServer_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_test_5fToServer_2eproto::file_level_enum_descriptors[0];
+  protobuf_AssignDescriptorsOnce();
+  return ToServer_Type_descriptor_;
 }
 bool ToServer_Type_IsValid(int value) {
-  switch (value) {
+  switch(value) {
     case 0:
     case 1:
     case 2:
@@ -170,11 +139,11 @@ const ToServer_Type ToServer::Type_MAX;
 const int ToServer::Type_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* ToServer_Mode_descriptor() {
-  protobuf_test_5fToServer_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_test_5fToServer_2eproto::file_level_enum_descriptors[1];
+  protobuf_AssignDescriptorsOnce();
+  return ToServer_Mode_descriptor_;
 }
 bool ToServer_Mode_IsValid(int value) {
-  switch (value) {
+  switch(value) {
     case 0:
     case 1:
     case 2:
@@ -192,9 +161,6 @@ const ToServer_Mode ToServer::Mode_MIN;
 const ToServer_Mode ToServer::Mode_MAX;
 const int ToServer::Mode_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-// ===================================================================
-
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ToServer::kDataTypeFieldNumber;
 const int ToServer::kModeInfoFieldNumber;
@@ -206,29 +172,30 @@ const int ToServer::kBackwardFieldNumber;
 
 ToServer::ToServer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_test_5fToServer_2eproto::InitDefaults();
-  }
   SharedCtor();
   // @@protoc_insertion_point(constructor:test.ToServer)
 }
+
+void ToServer::InitAsDefaultInstance() {
+}
+
 ToServer::ToServer(const ToServer& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&datatype_, &from.datatype_,
-    static_cast<size_t>(reinterpret_cast<char*>(&backward_) -
-    reinterpret_cast<char*>(&datatype_)) + sizeof(backward_));
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:test.ToServer)
 }
 
 void ToServer::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&datatype_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&backward_) -
-      reinterpret_cast<char*>(&datatype_)) + sizeof(backward_));
+  datatype_ = 0;
+  modeinfo_ = 0;
+  left_ = false;
+  right_ = false;
+  forward_ = false;
+  backward_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ToServer::~ToServer() {
@@ -237,6 +204,8 @@ ToServer::~ToServer() {
 }
 
 void ToServer::SharedDtor() {
+  if (this != default_instance_) {
+  }
 }
 
 void ToServer::SetCachedSize(int size) const {
@@ -245,14 +214,16 @@ void ToServer::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
 const ::google::protobuf::Descriptor* ToServer::descriptor() {
-  protobuf_test_5fToServer_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_test_5fToServer_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  protobuf_AssignDescriptorsOnce();
+  return ToServer_descriptor_;
 }
 
 const ToServer& ToServer::default_instance() {
-  protobuf_test_5fToServer_2eproto::InitDefaults();
-  return *internal_default_instance();
+  if (default_instance_ == NULL) protobuf_AddDesc_test_5fToServer_2eproto();
+  return *default_instance_;
 }
+
+ToServer* ToServer::default_instance_ = NULL;
 
 ToServer* ToServer::New(::google::protobuf::Arena* arena) const {
   ToServer* n = new ToServer;
@@ -264,13 +235,33 @@ ToServer* ToServer::New(::google::protobuf::Arena* arena) const {
 
 void ToServer::Clear() {
 // @@protoc_insertion_point(message_clear_start:test.ToServer)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(ToServer, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<ToServer*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
   if (_has_bits_[0 / 32] & 63u) {
-    ::memset(&datatype_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&backward_) -
-        reinterpret_cast<char*>(&datatype_)) + sizeof(backward_));
+    ZR_(datatype_, backward_);
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+
+#undef ZR_HELPER_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool ToServer::MergePartialFromCodedStream(
@@ -279,14 +270,13 @@ bool ToServer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:test.ToServer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional .test.ToServer.Type DataType = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u)) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -294,19 +284,19 @@ bool ToServer::MergePartialFromCodedStream(
           if (::test::ToServer_Type_IsValid(value)) {
             set_datatype(static_cast< ::test::ToServer_Type >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(
-                1, static_cast< ::google::protobuf::uint64>(value));
+            mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(16)) goto parse_ModeInfo;
         break;
       }
 
       // optional .test.ToServer.Mode ModeInfo = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u)) {
+        if (tag == 16) {
+         parse_ModeInfo:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -314,68 +304,72 @@ bool ToServer::MergePartialFromCodedStream(
           if (::test::ToServer_Mode_IsValid(value)) {
             set_modeinfo(static_cast< ::test::ToServer_Mode >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(
-                2, static_cast< ::google::protobuf::uint64>(value));
+            mutable_unknown_fields()->AddVarint(2, value);
           }
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(24)) goto parse_left;
         break;
       }
 
       // optional bool left = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u)) {
-          set_has_left();
+        if (tag == 24) {
+         parse_left:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &left_)));
+          set_has_left();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(32)) goto parse_right;
         break;
       }
 
       // optional bool right = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u)) {
-          set_has_right();
+        if (tag == 32) {
+         parse_right:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &right_)));
+          set_has_right();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(40)) goto parse_forward;
         break;
       }
 
       // optional bool forward = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u)) {
-          set_has_forward();
+        if (tag == 40) {
+         parse_forward:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &forward_)));
+          set_has_forward();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(48)) goto parse_backward;
         break;
       }
 
       // optional bool backward = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u)) {
-          set_has_backward();
+        if (tag == 48) {
+         parse_backward:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &backward_)));
+          set_has_backward();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
@@ -404,39 +398,35 @@ failure:
 void ToServer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:test.ToServer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
   // optional .test.ToServer.Type DataType = 1;
-  if (cached_has_bits & 0x00000001u) {
+  if (has_datatype()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->datatype(), output);
   }
 
   // optional .test.ToServer.Mode ModeInfo = 2;
-  if (cached_has_bits & 0x00000002u) {
+  if (has_modeinfo()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->modeinfo(), output);
   }
 
   // optional bool left = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (has_left()) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->left(), output);
   }
 
   // optional bool right = 4;
-  if (cached_has_bits & 0x00000008u) {
+  if (has_right()) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->right(), output);
   }
 
   // optional bool forward = 5;
-  if (cached_has_bits & 0x00000010u) {
+  if (has_forward()) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->forward(), output);
   }
 
   // optional bool backward = 6;
-  if (cached_has_bits & 0x00000020u) {
+  if (has_backward()) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->backward(), output);
   }
 
@@ -449,41 +439,36 @@ void ToServer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ToServer::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:test.ToServer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
   // optional .test.ToServer.Type DataType = 1;
-  if (cached_has_bits & 0x00000001u) {
+  if (has_datatype()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->datatype(), target);
   }
 
   // optional .test.ToServer.Mode ModeInfo = 2;
-  if (cached_has_bits & 0x00000002u) {
+  if (has_modeinfo()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->modeinfo(), target);
   }
 
   // optional bool left = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (has_left()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->left(), target);
   }
 
   // optional bool right = 4;
-  if (cached_has_bits & 0x00000008u) {
+  if (has_right()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->right(), target);
   }
 
   // optional bool forward = 5;
-  if (cached_has_bits & 0x00000010u) {
+  if (has_forward()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->forward(), target);
   }
 
   // optional bool backward = 6;
-  if (cached_has_bits & 0x00000020u) {
+  if (has_backward()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->backward(), target);
   }
 
@@ -495,15 +480,10 @@ void ToServer::SerializeWithCachedSizes(
   return target;
 }
 
-size_t ToServer::ByteSizeLong() const {
+int ToServer::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:test.ToServer)
-  size_t total_size = 0;
+  int total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   if (_has_bits_[0 / 32] & 63u) {
     // optional .test.ToServer.Type DataType = 1;
     if (has_datatype()) {
@@ -538,17 +518,23 @@ size_t ToServer::ByteSizeLong() const {
     }
 
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
+  _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
 void ToServer::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:test.ToServer)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ToServer* source =
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const ToServer* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const ToServer>(
           &from);
   if (source == NULL) {
@@ -562,32 +548,31 @@ void ToServer::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ToServer::MergeFrom(const ToServer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:test.ToServer)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 63u) {
-    if (cached_has_bits & 0x00000001u) {
-      datatype_ = from.datatype_;
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_datatype()) {
+      set_datatype(from.datatype());
     }
-    if (cached_has_bits & 0x00000002u) {
-      modeinfo_ = from.modeinfo_;
+    if (from.has_modeinfo()) {
+      set_modeinfo(from.modeinfo());
     }
-    if (cached_has_bits & 0x00000004u) {
-      left_ = from.left_;
+    if (from.has_left()) {
+      set_left(from.left());
     }
-    if (cached_has_bits & 0x00000008u) {
-      right_ = from.right_;
+    if (from.has_right()) {
+      set_right(from.right());
     }
-    if (cached_has_bits & 0x00000010u) {
-      forward_ = from.forward_;
+    if (from.has_forward()) {
+      set_forward(from.forward());
     }
-    if (cached_has_bits & 0x00000020u) {
-      backward_ = from.backward_;
+    if (from.has_backward()) {
+      set_backward(from.backward());
     }
-    _has_bits_[0] |= cached_has_bits;
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
   }
 }
 
@@ -606,6 +591,7 @@ void ToServer::CopyFrom(const ToServer& from) {
 }
 
 bool ToServer::IsInitialized() const {
+
   return true;
 }
 
@@ -626,8 +612,11 @@ void ToServer::InternalSwap(ToServer* other) {
 }
 
 ::google::protobuf::Metadata ToServer::GetMetadata() const {
-  protobuf_test_5fToServer_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_test_5fToServer_2eproto::file_level_metadata[kIndexInFileMessages];
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ToServer_descriptor_;
+  metadata.reflection = ToServer_reflection_;
+  return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -647,11 +636,11 @@ void ToServer::clear_datatype() {
   datatype_ = 0;
   clear_has_datatype();
 }
-::test::ToServer_Type ToServer::datatype() const {
+ ::test::ToServer_Type ToServer::datatype() const {
   // @@protoc_insertion_point(field_get:test.ToServer.DataType)
   return static_cast< ::test::ToServer_Type >(datatype_);
 }
-void ToServer::set_datatype(::test::ToServer_Type value) {
+ void ToServer::set_datatype(::test::ToServer_Type value) {
   assert(::test::ToServer_Type_IsValid(value));
   set_has_datatype();
   datatype_ = value;
@@ -672,11 +661,11 @@ void ToServer::clear_modeinfo() {
   modeinfo_ = 0;
   clear_has_modeinfo();
 }
-::test::ToServer_Mode ToServer::modeinfo() const {
+ ::test::ToServer_Mode ToServer::modeinfo() const {
   // @@protoc_insertion_point(field_get:test.ToServer.ModeInfo)
   return static_cast< ::test::ToServer_Mode >(modeinfo_);
 }
-void ToServer::set_modeinfo(::test::ToServer_Mode value) {
+ void ToServer::set_modeinfo(::test::ToServer_Mode value) {
   assert(::test::ToServer_Mode_IsValid(value));
   set_has_modeinfo();
   modeinfo_ = value;
@@ -697,11 +686,11 @@ void ToServer::clear_left() {
   left_ = false;
   clear_has_left();
 }
-bool ToServer::left() const {
+ bool ToServer::left() const {
   // @@protoc_insertion_point(field_get:test.ToServer.left)
   return left_;
 }
-void ToServer::set_left(bool value) {
+ void ToServer::set_left(bool value) {
   set_has_left();
   left_ = value;
   // @@protoc_insertion_point(field_set:test.ToServer.left)
@@ -721,11 +710,11 @@ void ToServer::clear_right() {
   right_ = false;
   clear_has_right();
 }
-bool ToServer::right() const {
+ bool ToServer::right() const {
   // @@protoc_insertion_point(field_get:test.ToServer.right)
   return right_;
 }
-void ToServer::set_right(bool value) {
+ void ToServer::set_right(bool value) {
   set_has_right();
   right_ = value;
   // @@protoc_insertion_point(field_set:test.ToServer.right)
@@ -745,11 +734,11 @@ void ToServer::clear_forward() {
   forward_ = false;
   clear_has_forward();
 }
-bool ToServer::forward() const {
+ bool ToServer::forward() const {
   // @@protoc_insertion_point(field_get:test.ToServer.forward)
   return forward_;
 }
-void ToServer::set_forward(bool value) {
+ void ToServer::set_forward(bool value) {
   set_has_forward();
   forward_ = value;
   // @@protoc_insertion_point(field_set:test.ToServer.forward)
@@ -769,11 +758,11 @@ void ToServer::clear_backward() {
   backward_ = false;
   clear_has_backward();
 }
-bool ToServer::backward() const {
+ bool ToServer::backward() const {
   // @@protoc_insertion_point(field_get:test.ToServer.backward)
   return backward_;
 }
-void ToServer::set_backward(bool value) {
+ void ToServer::set_backward(bool value) {
   set_has_backward();
   backward_ = value;
   // @@protoc_insertion_point(field_set:test.ToServer.backward)

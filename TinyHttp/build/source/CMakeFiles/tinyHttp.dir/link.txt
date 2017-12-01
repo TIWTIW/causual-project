@@ -1,0 +1,1 @@
+/usr/bin/c++    -O0 -Wall -std=c++11 -g -ggdb   CMakeFiles/tinyHttp.dir/main.cpp.o CMakeFiles/tinyHttp.dir/server.cpp.o CMakeFiles/tinyHttp.dir/proto/build/request.pb.cc.o CMakeFiles/tinyHttp.dir/proto/build/httpRequest.pb.cc.o  -o tinyHttp -rdynamic -lprotobuf -lpthread 

@@ -1,0 +1,40 @@
+syntax "proto3"
+package networkLearn
+
+message responseLine
+{
+    string httpVersion;
+    string statusCode;
+    string messages;
+}
+
+message responseHead
+{
+
+}
+
+message universalHead
+{
+
+}
+
+message instanceHead
+{
+
+}
+
+message mainContent
+{
+
+}
+
+message httpResponse{
+    message responseLine = 1;
+    responseHead resHead = 2;
+    universalHead uniHead = 3;
+    instanceHead insHead = 4;
+
+    string CRLF = 5 //need modify
+
+    mainContent body = 6;
+}

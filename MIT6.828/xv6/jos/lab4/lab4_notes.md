@@ -46,4 +46,4 @@
 2. `sched_yield`必须从不在两个CPU上运行相同的进程。它能够表明当前在一些CPU上运行的进程因为进程的状态是`ENV_RUNNING`。  
 3. 我们为你完成了一个新的系统调用`sys_yield()`，这是我们的用户进程用来调用内核`sched_yield`函数的，并且会周期性的放弃CPU给一个不同的进程。  
 练习6：在`sched_yield`中完成轮询调度。不要忘记修改`syscall`来解包`sys_yield`.确保在`mp_main`中接触`sched_yield`.  
-修改`kern/init.c`来创造三个或者更多进程都运行着`user/yield.c`。
+修改`kern/init.c`来创造三个或者更多都运行着`user/yield.c`的进程。

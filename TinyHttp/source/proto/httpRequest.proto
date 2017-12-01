@@ -1,0 +1,27 @@
+syntax = "proto3";
+package networkLearn;
+
+message requestLine
+{
+    string method = 1;
+    string pathToResource = 2;
+    string httpVersion = 3;
+}
+
+message requestHead
+{
+    string headTemp = 1;
+}
+
+message mainContent
+{
+    string bodyTemp = 1;
+}
+
+message httpRequest
+{
+    requestLine resLine = 1;
+    requestHead resHead = 2;
+    string CRLF = 3;
+    mainContent body = 4;
+}

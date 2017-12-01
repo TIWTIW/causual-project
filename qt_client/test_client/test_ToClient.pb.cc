@@ -18,138 +18,105 @@
 // @@protoc_insertion_point(includes)
 
 namespace test {
-class ToClientDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<ToClient> {
-} _ToClient_default_instance_;
-
-namespace protobuf_test_5fToClient_2eproto {
-
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[1];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
+const ::google::protobuf::Descriptor* ToClient_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ToClient_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* ToClient_Type_descriptor_ = NULL;
 
 }  // namespace
 
-PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTableField
-    const TableStruct::entries[] = {
-  {0, 0, 0, ::google::protobuf::internal::kInvalidMask, 0, 0},
-};
 
-PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
-    const TableStruct::aux[] = {
-  ::google::protobuf::internal::AuxillaryParseTableField(),
-};
-PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
-    TableStruct::schema[] = {
-  { NULL, NULL, 0, -1, -1, false },
-};
-
-const ::google::protobuf::uint32 TableStruct::offsets[] = {
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, datatype_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, sen_data_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_x_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_y_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_theta_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, image_length_),
-  0,
-  1,
-  2,
-  3,
-  4,
-  5,
-};
-
-static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 11, sizeof(ToClient)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&_ToClient_default_instance_),
-};
+void protobuf_AssignDesc_test_5fToClient_2eproto() GOOGLE_ATTRIBUTE_COLD;
+void protobuf_AssignDesc_test_5fToClient_2eproto() {
+  protobuf_AddDesc_test_5fToClient_2eproto();
+  const ::google::protobuf::FileDescriptor* file =
+    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
+      "test_ToClient.proto");
+  GOOGLE_CHECK(file != NULL);
+  ToClient_descriptor_ = file->message_type(0);
+  static const int ToClient_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, datatype_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, sen_data_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_theta_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, image_length_),
+  };
+  ToClient_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      ToClient_descriptor_,
+      ToClient::default_instance_,
+      ToClient_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(ToClient),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, _internal_metadata_),
+      -1);
+  ToClient_Type_descriptor_ = ToClient_descriptor_->enum_type(0);
+}
 
 namespace {
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "test_ToClient.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, file_level_enum_descriptors, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
+inline void protobuf_AssignDescriptorsOnce() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
+                 &protobuf_AssignDesc_test_5fToClient_2eproto);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      ToClient_descriptor_, &ToClient::default_instance());
 }
 
 }  // namespace
 
-void TableStruct::Shutdown() {
-  _ToClient_default_instance_.Shutdown();
-  delete file_level_metadata[0].reflection;
+void protobuf_ShutdownFile_test_5fToClient_2eproto() {
+  delete ToClient::default_instance_;
+  delete ToClient_reflection_;
 }
 
-void TableStruct::InitDefaultsImpl() {
+void protobuf_AddDesc_test_5fToClient_2eproto() GOOGLE_ATTRIBUTE_COLD;
+void protobuf_AddDesc_test_5fToClient_2eproto() {
+  static bool already_here = false;
+  if (already_here) return;
+  already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::google::protobuf::internal::InitProtobufDefaults();
-  _ToClient_default_instance_.DefaultConstruct();
-}
-
-void InitDefaults() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
-}
-namespace {
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] = {
-      "\n\023test_ToClient.proto\022\004test\"\260\001\n\010ToClient"
-      "\022%\n\010DataType\030\001 \002(\0162\023.test.ToClient.Type\022"
-      "\020\n\010Sen_data\030\003 \002(\r\022\016\n\006pose_x\030\004 \002(\002\022\016\n\006pos"
-      "e_y\030\005 \002(\002\022\022\n\npose_theta\030\006 \002(\002\022\024\n\014Image_L"
-      "ength\030\007 \001(\r\"!\n\004Type\022\013\n\007NoImage\020\000\022\014\n\010HasI"
-      "mage\020\001"
-  };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 206);
+    "\n\023test_ToClient.proto\022\004test\"\260\001\n\010ToClient"
+    "\022%\n\010DataType\030\001 \002(\0162\023.test.ToClient.Type\022"
+    "\020\n\010Sen_data\030\003 \002(\r\022\016\n\006pose_x\030\004 \002(\002\022\016\n\006pos"
+    "e_y\030\005 \002(\002\022\022\n\npose_theta\030\006 \002(\002\022\024\n\014Image_L"
+    "ength\030\007 \001(\r\"!\n\004Type\022\013\n\007NoImage\020\000\022\014\n\010HasI"
+    "mage\020\001", 206);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "test_ToClient.proto", &protobuf_RegisterTypes);
-  ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
+  ToClient::default_instance_ = new ToClient();
+  ToClient::default_instance_->InitAsDefaultInstance();
+  ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_test_5fToClient_2eproto);
 }
-} // anonymous namespace
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
+// Force AddDescriptors() to be called at static initialization time.
+struct StaticDescriptorInitializer_test_5fToClient_2eproto {
+  StaticDescriptorInitializer_test_5fToClient_2eproto() {
+    protobuf_AddDesc_test_5fToClient_2eproto();
   }
-} static_descriptor_initializer;
+} static_descriptor_initializer_test_5fToClient_2eproto_;
 
-}  // namespace protobuf_test_5fToClient_2eproto
+// ===================================================================
 
 const ::google::protobuf::EnumDescriptor* ToClient_Type_descriptor() {
-  protobuf_test_5fToClient_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_test_5fToClient_2eproto::file_level_enum_descriptors[0];
+  protobuf_AssignDescriptorsOnce();
+  return ToClient_Type_descriptor_;
 }
 bool ToClient_Type_IsValid(int value) {
-  switch (value) {
+  switch(value) {
     case 0:
     case 1:
       return true;
@@ -165,9 +132,6 @@ const ToClient_Type ToClient::Type_MIN;
 const ToClient_Type ToClient::Type_MAX;
 const int ToClient::Type_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-// ===================================================================
-
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ToClient::kDataTypeFieldNumber;
 const int ToClient::kSenDataFieldNumber;
@@ -179,29 +143,30 @@ const int ToClient::kImageLengthFieldNumber;
 
 ToClient::ToClient()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_test_5fToClient_2eproto::InitDefaults();
-  }
   SharedCtor();
   // @@protoc_insertion_point(constructor:test.ToClient)
 }
+
+void ToClient::InitAsDefaultInstance() {
+}
+
 ToClient::ToClient(const ToClient& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&datatype_, &from.datatype_,
-    static_cast<size_t>(reinterpret_cast<char*>(&image_length_) -
-    reinterpret_cast<char*>(&datatype_)) + sizeof(image_length_));
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:test.ToClient)
 }
 
 void ToClient::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&datatype_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&image_length_) -
-      reinterpret_cast<char*>(&datatype_)) + sizeof(image_length_));
+  datatype_ = 0;
+  sen_data_ = 0u;
+  pose_x_ = 0;
+  pose_y_ = 0;
+  pose_theta_ = 0;
+  image_length_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ToClient::~ToClient() {
@@ -210,6 +175,8 @@ ToClient::~ToClient() {
 }
 
 void ToClient::SharedDtor() {
+  if (this != default_instance_) {
+  }
 }
 
 void ToClient::SetCachedSize(int size) const {
@@ -218,14 +185,16 @@ void ToClient::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
 const ::google::protobuf::Descriptor* ToClient::descriptor() {
-  protobuf_test_5fToClient_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_test_5fToClient_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  protobuf_AssignDescriptorsOnce();
+  return ToClient_descriptor_;
 }
 
 const ToClient& ToClient::default_instance() {
-  protobuf_test_5fToClient_2eproto::InitDefaults();
-  return *internal_default_instance();
+  if (default_instance_ == NULL) protobuf_AddDesc_test_5fToClient_2eproto();
+  return *default_instance_;
 }
+
+ToClient* ToClient::default_instance_ = NULL;
 
 ToClient* ToClient::New(::google::protobuf::Arena* arena) const {
   ToClient* n = new ToClient;
@@ -237,13 +206,33 @@ ToClient* ToClient::New(::google::protobuf::Arena* arena) const {
 
 void ToClient::Clear() {
 // @@protoc_insertion_point(message_clear_start:test.ToClient)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(ToClient, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<ToClient*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
   if (_has_bits_[0 / 32] & 63u) {
-    ::memset(&datatype_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&image_length_) -
-        reinterpret_cast<char*>(&datatype_)) + sizeof(image_length_));
+    ZR_(datatype_, image_length_);
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+
+#undef ZR_HELPER_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool ToClient::MergePartialFromCodedStream(
@@ -252,14 +241,13 @@ bool ToClient::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:test.ToClient)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .test.ToClient.Type DataType = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u)) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -267,82 +255,87 @@ bool ToClient::MergePartialFromCodedStream(
           if (::test::ToClient_Type_IsValid(value)) {
             set_datatype(static_cast< ::test::ToClient_Type >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(
-                1, static_cast< ::google::protobuf::uint64>(value));
+            mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(24)) goto parse_Sen_data;
         break;
       }
 
       // required uint32 Sen_data = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u)) {
-          set_has_sen_data();
+        if (tag == 24) {
+         parse_Sen_data:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &sen_data_)));
+          set_has_sen_data();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(37)) goto parse_pose_x;
         break;
       }
 
       // required float pose_x = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(37u)) {
-          set_has_pose_x();
+        if (tag == 37) {
+         parse_pose_x:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &pose_x_)));
+          set_has_pose_x();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(45)) goto parse_pose_y;
         break;
       }
 
       // required float pose_y = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(45u)) {
-          set_has_pose_y();
+        if (tag == 45) {
+         parse_pose_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &pose_y_)));
+          set_has_pose_y();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(53)) goto parse_pose_theta;
         break;
       }
 
       // required float pose_theta = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(53u)) {
-          set_has_pose_theta();
+        if (tag == 53) {
+         parse_pose_theta:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &pose_theta_)));
+          set_has_pose_theta();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(56)) goto parse_Image_Length;
         break;
       }
 
       // optional uint32 Image_Length = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(56u)) {
-          set_has_image_length();
+        if (tag == 56) {
+         parse_Image_Length:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &image_length_)));
+          set_has_image_length();
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
@@ -371,38 +364,34 @@ failure:
 void ToClient::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:test.ToClient)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
   // required .test.ToClient.Type DataType = 1;
-  if (cached_has_bits & 0x00000001u) {
+  if (has_datatype()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->datatype(), output);
   }
 
   // required uint32 Sen_data = 3;
-  if (cached_has_bits & 0x00000002u) {
+  if (has_sen_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->sen_data(), output);
   }
 
   // required float pose_x = 4;
-  if (cached_has_bits & 0x00000004u) {
+  if (has_pose_x()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->pose_x(), output);
   }
 
   // required float pose_y = 5;
-  if (cached_has_bits & 0x00000008u) {
+  if (has_pose_y()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->pose_y(), output);
   }
 
   // required float pose_theta = 6;
-  if (cached_has_bits & 0x00000010u) {
+  if (has_pose_theta()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->pose_theta(), output);
   }
 
   // optional uint32 Image_Length = 7;
-  if (cached_has_bits & 0x00000020u) {
+  if (has_image_length()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(7, this->image_length(), output);
   }
 
@@ -415,40 +404,35 @@ void ToClient::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ToClient::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:test.ToClient)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
   // required .test.ToClient.Type DataType = 1;
-  if (cached_has_bits & 0x00000001u) {
+  if (has_datatype()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->datatype(), target);
   }
 
   // required uint32 Sen_data = 3;
-  if (cached_has_bits & 0x00000002u) {
+  if (has_sen_data()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->sen_data(), target);
   }
 
   // required float pose_x = 4;
-  if (cached_has_bits & 0x00000004u) {
+  if (has_pose_x()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->pose_x(), target);
   }
 
   // required float pose_y = 5;
-  if (cached_has_bits & 0x00000008u) {
+  if (has_pose_y()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->pose_y(), target);
   }
 
   // required float pose_theta = 6;
-  if (cached_has_bits & 0x00000010u) {
+  if (has_pose_theta()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->pose_theta(), target);
   }
 
   // optional uint32 Image_Length = 7;
-  if (cached_has_bits & 0x00000020u) {
+  if (has_image_length()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(7, this->image_length(), target);
   }
 
@@ -460,9 +444,9 @@ void ToClient::SerializeWithCachedSizes(
   return target;
 }
 
-size_t ToClient::RequiredFieldsByteSizeFallback() const {
+int ToClient::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:test.ToClient)
-  size_t total_size = 0;
+  int total_size = 0;
 
   if (has_datatype()) {
     // required .test.ToClient.Type DataType = 1;
@@ -494,15 +478,10 @@ size_t ToClient::RequiredFieldsByteSizeFallback() const {
 
   return total_size;
 }
-size_t ToClient::ByteSizeLong() const {
+int ToClient::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:test.ToClient)
-  size_t total_size = 0;
+  int total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
     // required .test.ToClient.Type DataType = 1;
     total_size += 1 +
@@ -532,17 +511,23 @@ size_t ToClient::ByteSizeLong() const {
         this->image_length());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
+  _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
 void ToClient::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:test.ToClient)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ToClient* source =
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const ToClient* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const ToClient>(
           &from);
   if (source == NULL) {
@@ -556,32 +541,31 @@ void ToClient::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ToClient::MergeFrom(const ToClient& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:test.ToClient)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 63u) {
-    if (cached_has_bits & 0x00000001u) {
-      datatype_ = from.datatype_;
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_datatype()) {
+      set_datatype(from.datatype());
     }
-    if (cached_has_bits & 0x00000002u) {
-      sen_data_ = from.sen_data_;
+    if (from.has_sen_data()) {
+      set_sen_data(from.sen_data());
     }
-    if (cached_has_bits & 0x00000004u) {
-      pose_x_ = from.pose_x_;
+    if (from.has_pose_x()) {
+      set_pose_x(from.pose_x());
     }
-    if (cached_has_bits & 0x00000008u) {
-      pose_y_ = from.pose_y_;
+    if (from.has_pose_y()) {
+      set_pose_y(from.pose_y());
     }
-    if (cached_has_bits & 0x00000010u) {
-      pose_theta_ = from.pose_theta_;
+    if (from.has_pose_theta()) {
+      set_pose_theta(from.pose_theta());
     }
-    if (cached_has_bits & 0x00000020u) {
-      image_length_ = from.image_length_;
+    if (from.has_image_length()) {
+      set_image_length(from.image_length());
     }
-    _has_bits_[0] |= cached_has_bits;
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
   }
 }
 
@@ -601,6 +585,7 @@ void ToClient::CopyFrom(const ToClient& from) {
 
 bool ToClient::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+
   return true;
 }
 
@@ -621,8 +606,11 @@ void ToClient::InternalSwap(ToClient* other) {
 }
 
 ::google::protobuf::Metadata ToClient::GetMetadata() const {
-  protobuf_test_5fToClient_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_test_5fToClient_2eproto::file_level_metadata[kIndexInFileMessages];
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ToClient_descriptor_;
+  metadata.reflection = ToClient_reflection_;
+  return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -642,11 +630,11 @@ void ToClient::clear_datatype() {
   datatype_ = 0;
   clear_has_datatype();
 }
-::test::ToClient_Type ToClient::datatype() const {
+ ::test::ToClient_Type ToClient::datatype() const {
   // @@protoc_insertion_point(field_get:test.ToClient.DataType)
   return static_cast< ::test::ToClient_Type >(datatype_);
 }
-void ToClient::set_datatype(::test::ToClient_Type value) {
+ void ToClient::set_datatype(::test::ToClient_Type value) {
   assert(::test::ToClient_Type_IsValid(value));
   set_has_datatype();
   datatype_ = value;
@@ -667,11 +655,11 @@ void ToClient::clear_sen_data() {
   sen_data_ = 0u;
   clear_has_sen_data();
 }
-::google::protobuf::uint32 ToClient::sen_data() const {
+ ::google::protobuf::uint32 ToClient::sen_data() const {
   // @@protoc_insertion_point(field_get:test.ToClient.Sen_data)
   return sen_data_;
 }
-void ToClient::set_sen_data(::google::protobuf::uint32 value) {
+ void ToClient::set_sen_data(::google::protobuf::uint32 value) {
   set_has_sen_data();
   sen_data_ = value;
   // @@protoc_insertion_point(field_set:test.ToClient.Sen_data)
@@ -691,11 +679,11 @@ void ToClient::clear_pose_x() {
   pose_x_ = 0;
   clear_has_pose_x();
 }
-float ToClient::pose_x() const {
+ float ToClient::pose_x() const {
   // @@protoc_insertion_point(field_get:test.ToClient.pose_x)
   return pose_x_;
 }
-void ToClient::set_pose_x(float value) {
+ void ToClient::set_pose_x(float value) {
   set_has_pose_x();
   pose_x_ = value;
   // @@protoc_insertion_point(field_set:test.ToClient.pose_x)
@@ -715,11 +703,11 @@ void ToClient::clear_pose_y() {
   pose_y_ = 0;
   clear_has_pose_y();
 }
-float ToClient::pose_y() const {
+ float ToClient::pose_y() const {
   // @@protoc_insertion_point(field_get:test.ToClient.pose_y)
   return pose_y_;
 }
-void ToClient::set_pose_y(float value) {
+ void ToClient::set_pose_y(float value) {
   set_has_pose_y();
   pose_y_ = value;
   // @@protoc_insertion_point(field_set:test.ToClient.pose_y)
@@ -739,11 +727,11 @@ void ToClient::clear_pose_theta() {
   pose_theta_ = 0;
   clear_has_pose_theta();
 }
-float ToClient::pose_theta() const {
+ float ToClient::pose_theta() const {
   // @@protoc_insertion_point(field_get:test.ToClient.pose_theta)
   return pose_theta_;
 }
-void ToClient::set_pose_theta(float value) {
+ void ToClient::set_pose_theta(float value) {
   set_has_pose_theta();
   pose_theta_ = value;
   // @@protoc_insertion_point(field_set:test.ToClient.pose_theta)
@@ -763,11 +751,11 @@ void ToClient::clear_image_length() {
   image_length_ = 0u;
   clear_has_image_length();
 }
-::google::protobuf::uint32 ToClient::image_length() const {
+ ::google::protobuf::uint32 ToClient::image_length() const {
   // @@protoc_insertion_point(field_get:test.ToClient.Image_Length)
   return image_length_;
 }
-void ToClient::set_image_length(::google::protobuf::uint32 value) {
+ void ToClient::set_image_length(::google::protobuf::uint32 value) {
   set_has_image_length();
   image_length_ = value;
   // @@protoc_insertion_point(field_set:test.ToClient.Image_Length)
