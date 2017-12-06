@@ -1,8 +1,6 @@
 #ifndef _ZFT_SIMPLE_ALLOC_H
 #define _ZFT_SIMPLE_ALLOC_H
 
-
-
 namespace zft
 {
 template <class T, class Alloc>
