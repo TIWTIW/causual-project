@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+.././Include/memory/zft_default_alloc.h
+zft_malloc_alloc.h
+.././Include/memory/zft_malloc_alloc.h
+
+.././Include/memory/zft_malloc_alloc.h
+new
+-
+iostream
+-
+
+.././Include/memory/zft_simple_alloc.h
+
+/media/zhoufeitong/projects/causual/TinySTL/Source/main.cpp
+memory/zft_default_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Source/memory/zft_default_alloc.h
+memory/zft_simple_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Source/memory/zft_simple_alloc.h
+iostream
+-
+

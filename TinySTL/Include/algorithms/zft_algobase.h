@@ -163,6 +163,208 @@ inline void swap(T &a, T &b)
     b = tmp;
 }
 
+template <class InputIterator, class OutputIterator>
+inline OutputIterator copy(InputIterator first, InputIterator last,
+                            OutputIterator result)
+{
+    return __copy_dispatch<InputIterator, OutputIterator>()
+                            (first, last, result);
+}
+
+inline char *copy(const char *first, const char *last, char *result)
+{
+    memmove(result, first, last - first);
+    return result + (last - first);
+}
+
+inline wchar_t *copy(const wchar_t *first, const wchar_t *last,
+                     wchar_t *result)
+{
+    memmove(result, first, sizeof(wchar_t) * (last - first));
+    return result + (last - first);
+}
+
+template <class InputIterator, class OutputIterator>
+struct __copy_dispatch
+{
+    OutputIterator operator()(InputIterator first, InputIterator last,
+                              OutputIterator result)
+    {
+        return __copy(first, last, result, iterator_category(first));
+    }
+};
+
+template <class T>
+struct __copy_dispatch<T*, T*>
+{
+    T *operator()(T *first, T *last, T *result)
+    {
+        typedef typename __type_traits<T>::has_trivial_assignment_operator t;
+        return __copy_t(first, last, result, t());
+    }
+};
+
+template <class T>
+struct __copy_dispatch<const T*, T*>
+{
+    T *operator()(const T *first, const T *last, T *result)
+    {
+        typedef typename __type_traits<T>::has_trivial_assignment_operator t;
+        return __copy_t(first, last, result, t());
+    }
+}
+
+template <class InputIterator, class OutputIterator>
+inline OutputIterator __copy(InputIterator first, InputIterator last,
+                             OutputIterator result, input_iterator_tag)
+{
+    //using two iterator is same or not to decide whether to stop
+    //it's slower
+    for(; first != last; ++result, ++first)
+        *result = *first;
+    return result;
+}
+
+template <class RandomAccessIterator, class OutputIterator>
+inline OutputIterator
+__copy(RandomAccessIterator first, RandomAccessIterator last,
+       OutputIterator result, random_access_iterator_tag)
+{
+    return __copy_d(first, last, result, distance_type(first));
+}
+
+template <class RandomAccessIterator, class OutputIterator, class Distance>
+inline OutputIterator
+__copy_d(RandomAccessIterator first, RandomAccessIterator last,
+        OutputIterator result, Distance *)
+{
+    //using n to decide whether to stop, it's faster
+    for(Distance n = last - first; n > 0; --n, ++result, ++first)
+        *result = *first;
+    return result;
+}
+
+template <class T>
+inline T * __copy_t(const T *first, const T *last, T *result. __true_type)
+{
+    memmove(result, first, sizeof(T) * (last - first));
+    return result + (last - first);
+}
+
+template <class T>
+inline T* __copy_t(const T *first, const T *last, T *result, __false_type)
+{
+    return __copy_d(first, last, result, (ptrdiff_t *)0);
+}
+
+template <class InputIterator1, class InputIterator2, class OutputIterator>
+OutputIterator set_union(InputIterator1 first1, InputIterator1 last1,
+                         InputIterator2 first2, InputIterator2 last2,
+                         OutputIterator result)
+{
+    while(first1 != last1 && first2 != last2)
+    {
+        if(*first1 < *first2)
+        {
+            *result = *first1;
+            ++first1;
+        }
+        else if(*first2 < *first1)
+        {
+            *result = *first2;
+            ++first2;
+        }
+        else
+        {
+            *result = *first1;
+            ++first1;
+            ++first2;
+        }
+        ++result;
+    }
+
+    return copy(first2, last2, copy(first1, last1, result));
+}
+
+template <class InputIterator1, class InputIterator2, class OutputIterator>
+OutputIterator set_intersection(InputIterator1 first1, InputIterator1 last1,
+                                InputIterator2 first2, InputIterator2 last2,
+                                OutputIterator result)
+{
+    while(first1 != last1 && first2 != last2)
+    {
+        if(*first1 < *first2)
+            ++first1;
+        else if(*first2 < *first1)
+            ++first2;
+        else
+        {
+            *result = *first1;
+            ++first1;
+            ++first2;
+            ++result;
+        }
+
+        return result;
+    }
+}
+
+template <class InputIterator1, class InputIterator2, class OutputIterator>
+OutputIterator set_difference(InputIterator1 first1, InputIterator1 last1,
+                              InputIterator2 first2, InputIterator2 last2,
+                              OutputIterator result)
+{
+    while(first1 != last1 && first2 != last2)
+    {
+        if(*first1 < *first2)
+        {
+            *result = *first1;
+            ++first1;
+            ++result;
+        }
+        else if(*first2 < *first1)
+            ++first2;
+        else
+        {
+            ++first1;
+            ++first2;
+        }
+
+        return copy(first1, last1, result);
+    }
+}
+
+template <class InputIterator1, class InputIterator2, class OutputIterator>
+OutputIterator set_symmetric_difference(InputIterator1 first1,
+                                        InputIterator1 last1,
+                                        InputIterator2 first2,
+                                        InputIterator2 last2,
+                                        OutputIterator result)
+{
+    while(first1 != last1 && first2 != last2)
+    {
+        if(*first1 < *first2)
+        {
+            *result = *first1;
+            ++first1;
+            ++result;
+        }
+        else if(*first2 < *first1)
+        {
+            *result = *first2;
+            ++first2;
+            ++result;
+        }
+        else
+        {
+            ++first1;
+            ++first2;
+        }
+
+        return copy(first2, last2, copy(first1, last1, result));
+    }
+}
+
 }
 
 #endif

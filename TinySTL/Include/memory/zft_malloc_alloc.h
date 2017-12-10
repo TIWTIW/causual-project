@@ -3,10 +3,10 @@
 
 #if 0
 #  include <new>
-#  define __THROW_BAD_ALLOC throw bad_alloc
-#elif !define(__THROW_BAD_ALLOC)
-#  include <iostream.h>
-#  define __THROW_BAD_ALLOC cerr << "out of memory" << endl; exit(1);
+# define __THROW_BAD_ALLOC throw bad_alloc
+#else
+#  include <iostream>
+#  define __THROW_BAD_ALLOC std::cerr << "out of memory" << std::endl; exit(1);
 #endif
 
 namespace zft
@@ -23,7 +23,8 @@ private:
     static void (* __malloc_alloc_oom_handler)();
 
 public:
-
+    //call malloc to get memory
+    //if the calling failed, call oom_malloc
     static void *allocate(size_t n)
     {
         void *result = malloc(n);
@@ -33,12 +34,14 @@ public:
         return result;
     }
 
+    //just call free to free the memory
     static void deallocate(void *p, size_t /* n */)
     {
         free(p);
     }
 
-    static void *reallocate(void *p, size_t /* old_sz */, size_t new_sz)
+    //called reallo, if failed, call oom_realloc
+    static void *reallocate(void *p, size_t  old_sz, size_t new_sz)
     {
         void *result = realloc(p, new_sz);
         if(0 == result)
@@ -63,6 +66,8 @@ public:
 template <int inst>
 void (*__malloc_alloc_template<inst>::__malloc_alloc_oom_handler)() = 0;
 
+//call __malloc_alloc_oom_handler to handle the case that there is no enough memory
+//however, the __malloc_alloc_oom_handler is not finished, so here an exception would be thrown
 template <int inst>
 void *__malloc_alloc_template<inst>::oom_malloc(size_t n)
 {
@@ -83,6 +88,7 @@ void *__malloc_alloc_template<inst>::oom_malloc(size_t n)
     }
 }
 
+//same as above
 template <int inst>
 void *__malloc_alloc_template<inst>::oom_realloc(void *p, size_t n)
 {

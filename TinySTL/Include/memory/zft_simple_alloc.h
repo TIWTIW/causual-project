@@ -3,6 +3,7 @@
 
 namespace zft
 {
+//Actually it's just a wrap of allocator which made container can allocate easier
 template <class T, class Alloc>
 class simple_alloc
 {

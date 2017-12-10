@@ -2,6 +2,7 @@
 #define _ZFT_UNINITIALIZED_H
 
 #include "zft_construct.h"
+#include "../algorithms/zft_algo.h"
 
 namespace zft
 {
