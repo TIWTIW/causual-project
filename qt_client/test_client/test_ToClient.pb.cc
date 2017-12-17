@@ -37,9 +37,14 @@ void protobuf_AssignDesc_test_5fToClient_2eproto() {
       "test_ToClient.proto");
   GOOGLE_CHECK(file != NULL);
   ToClient_descriptor_ = file->message_type(0);
-  static const int ToClient_offsets_[6] = {
+  static const int ToClient_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, datatype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, sen_data_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, gp2y0a_left_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, gp2y0a_right_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, sen1_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, hall_left_total_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, motionst_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, motiones_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_y_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ToClient, pose_theta_),
@@ -89,12 +94,14 @@ void protobuf_AddDesc_test_5fToClient_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023test_ToClient.proto\022\004test\"\260\001\n\010ToClient"
+    "\n\023test_ToClient.proto\022\004test\"\224\002\n\010ToClient"
     "\022%\n\010DataType\030\001 \002(\0162\023.test.ToClient.Type\022"
-    "\020\n\010Sen_data\030\003 \002(\r\022\016\n\006pose_x\030\004 \002(\002\022\016\n\006pos"
-    "e_y\030\005 \002(\002\022\022\n\npose_theta\030\006 \002(\002\022\024\n\014Image_L"
-    "ength\030\007 \001(\r\"!\n\004Type\022\013\n\007NoImage\020\000\022\014\n\010HasI"
-    "mage\020\001", 206);
+    "\023\n\013GP2Y0A_Left\030\002 \002(\r\022\024\n\014GP2Y0A_Right\030\003 \002"
+    "(\r\022\014\n\004SEN1\030\004 \002(\r\022\027\n\017Hall_Left_Total\030\005 \002("
+    "\005\022\020\n\010MotionSt\030\006 \002(\r\022\020\n\010MotionEs\030\007 \002(\r\022\016\n"
+    "\006pose_x\030\010 \002(\002\022\016\n\006pose_y\030\t \002(\002\022\022\n\npose_th"
+    "eta\030\n \002(\002\022\024\n\014Image_Length\030\013 \001(\r\"!\n\004Type\022"
+    "\013\n\007NoImage\020\000\022\014\n\010HasImage\020\001", 306);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "test_ToClient.proto", &protobuf_RegisterTypes);
   ToClient::default_instance_ = new ToClient();
@@ -134,7 +141,12 @@ const int ToClient::Type_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ToClient::kDataTypeFieldNumber;
-const int ToClient::kSenDataFieldNumber;
+const int ToClient::kGP2Y0ALeftFieldNumber;
+const int ToClient::kGP2Y0ARightFieldNumber;
+const int ToClient::kSEN1FieldNumber;
+const int ToClient::kHallLeftTotalFieldNumber;
+const int ToClient::kMotionStFieldNumber;
+const int ToClient::kMotionEsFieldNumber;
 const int ToClient::kPoseXFieldNumber;
 const int ToClient::kPoseYFieldNumber;
 const int ToClient::kPoseThetaFieldNumber;
@@ -161,7 +173,12 @@ ToClient::ToClient(const ToClient& from)
 void ToClient::SharedCtor() {
   _cached_size_ = 0;
   datatype_ = 0;
-  sen_data_ = 0u;
+  gp2y0a_left_ = 0u;
+  gp2y0a_right_ = 0u;
+  sen1_ = 0u;
+  hall_left_total_ = 0;
+  motionst_ = 0u;
+  motiones_ = 0u;
   pose_x_ = 0;
   pose_y_ = 0;
   pose_theta_ = 0;
@@ -222,9 +239,10 @@ void ToClient::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  if (_has_bits_[0 / 32] & 63u) {
-    ZR_(datatype_, image_length_);
+  if (_has_bits_[0 / 32] & 255u) {
+    ZR_(datatype_, pose_x_);
   }
+  ZR_(pose_y_, image_length_);
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -260,28 +278,103 @@ bool ToClient::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_Sen_data;
+        if (input->ExpectTag(16)) goto parse_GP2Y0A_Left;
         break;
       }
 
-      // required uint32 Sen_data = 3;
-      case 3: {
-        if (tag == 24) {
-         parse_Sen_data:
+      // required uint32 GP2Y0A_Left = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_GP2Y0A_Left:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &sen_data_)));
-          set_has_sen_data();
+                 input, &gp2y0a_left_)));
+          set_has_gp2y0a_left();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(37)) goto parse_pose_x;
+        if (input->ExpectTag(24)) goto parse_GP2Y0A_Right;
         break;
       }
 
-      // required float pose_x = 4;
+      // required uint32 GP2Y0A_Right = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_GP2Y0A_Right:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &gp2y0a_right_)));
+          set_has_gp2y0a_right();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_SEN1;
+        break;
+      }
+
+      // required uint32 SEN1 = 4;
       case 4: {
-        if (tag == 37) {
+        if (tag == 32) {
+         parse_SEN1:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &sen1_)));
+          set_has_sen1();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_Hall_Left_Total;
+        break;
+      }
+
+      // required int32 Hall_Left_Total = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_Hall_Left_Total:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &hall_left_total_)));
+          set_has_hall_left_total();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_MotionSt;
+        break;
+      }
+
+      // required uint32 MotionSt = 6;
+      case 6: {
+        if (tag == 48) {
+         parse_MotionSt:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &motionst_)));
+          set_has_motionst();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(56)) goto parse_MotionEs;
+        break;
+      }
+
+      // required uint32 MotionEs = 7;
+      case 7: {
+        if (tag == 56) {
+         parse_MotionEs:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &motiones_)));
+          set_has_motiones();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(69)) goto parse_pose_x;
+        break;
+      }
+
+      // required float pose_x = 8;
+      case 8: {
+        if (tag == 69) {
          parse_pose_x:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -290,13 +383,13 @@ bool ToClient::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(45)) goto parse_pose_y;
+        if (input->ExpectTag(77)) goto parse_pose_y;
         break;
       }
 
-      // required float pose_y = 5;
-      case 5: {
-        if (tag == 45) {
+      // required float pose_y = 9;
+      case 9: {
+        if (tag == 77) {
          parse_pose_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -305,13 +398,13 @@ bool ToClient::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(53)) goto parse_pose_theta;
+        if (input->ExpectTag(85)) goto parse_pose_theta;
         break;
       }
 
-      // required float pose_theta = 6;
-      case 6: {
-        if (tag == 53) {
+      // required float pose_theta = 10;
+      case 10: {
+        if (tag == 85) {
          parse_pose_theta:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -320,13 +413,13 @@ bool ToClient::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(56)) goto parse_Image_Length;
+        if (input->ExpectTag(88)) goto parse_Image_Length;
         break;
       }
 
-      // optional uint32 Image_Length = 7;
-      case 7: {
-        if (tag == 56) {
+      // optional uint32 Image_Length = 11;
+      case 11: {
+        if (tag == 88) {
          parse_Image_Length:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
@@ -370,29 +463,54 @@ void ToClient::SerializeWithCachedSizes(
       1, this->datatype(), output);
   }
 
-  // required uint32 Sen_data = 3;
-  if (has_sen_data()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->sen_data(), output);
+  // required uint32 GP2Y0A_Left = 2;
+  if (has_gp2y0a_left()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->gp2y0a_left(), output);
   }
 
-  // required float pose_x = 4;
+  // required uint32 GP2Y0A_Right = 3;
+  if (has_gp2y0a_right()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->gp2y0a_right(), output);
+  }
+
+  // required uint32 SEN1 = 4;
+  if (has_sen1()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->sen1(), output);
+  }
+
+  // required int32 Hall_Left_Total = 5;
+  if (has_hall_left_total()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->hall_left_total(), output);
+  }
+
+  // required uint32 MotionSt = 6;
+  if (has_motionst()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(6, this->motionst(), output);
+  }
+
+  // required uint32 MotionEs = 7;
+  if (has_motiones()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(7, this->motiones(), output);
+  }
+
+  // required float pose_x = 8;
   if (has_pose_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->pose_x(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->pose_x(), output);
   }
 
-  // required float pose_y = 5;
+  // required float pose_y = 9;
   if (has_pose_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->pose_y(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->pose_y(), output);
   }
 
-  // required float pose_theta = 6;
+  // required float pose_theta = 10;
   if (has_pose_theta()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->pose_theta(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->pose_theta(), output);
   }
 
-  // optional uint32 Image_Length = 7;
+  // optional uint32 Image_Length = 11;
   if (has_image_length()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(7, this->image_length(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(11, this->image_length(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -411,29 +529,54 @@ void ToClient::SerializeWithCachedSizes(
       1, this->datatype(), target);
   }
 
-  // required uint32 Sen_data = 3;
-  if (has_sen_data()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->sen_data(), target);
+  // required uint32 GP2Y0A_Left = 2;
+  if (has_gp2y0a_left()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->gp2y0a_left(), target);
   }
 
-  // required float pose_x = 4;
+  // required uint32 GP2Y0A_Right = 3;
+  if (has_gp2y0a_right()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->gp2y0a_right(), target);
+  }
+
+  // required uint32 SEN1 = 4;
+  if (has_sen1()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->sen1(), target);
+  }
+
+  // required int32 Hall_Left_Total = 5;
+  if (has_hall_left_total()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->hall_left_total(), target);
+  }
+
+  // required uint32 MotionSt = 6;
+  if (has_motionst()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(6, this->motionst(), target);
+  }
+
+  // required uint32 MotionEs = 7;
+  if (has_motiones()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(7, this->motiones(), target);
+  }
+
+  // required float pose_x = 8;
   if (has_pose_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->pose_x(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->pose_x(), target);
   }
 
-  // required float pose_y = 5;
+  // required float pose_y = 9;
   if (has_pose_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->pose_y(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->pose_y(), target);
   }
 
-  // required float pose_theta = 6;
+  // required float pose_theta = 10;
   if (has_pose_theta()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->pose_theta(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->pose_theta(), target);
   }
 
-  // optional uint32 Image_Length = 7;
+  // optional uint32 Image_Length = 11;
   if (has_image_length()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(7, this->image_length(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(11, this->image_length(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -454,25 +597,60 @@ int ToClient::RequiredFieldsByteSizeFallback() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->datatype());
   }
 
-  if (has_sen_data()) {
-    // required uint32 Sen_data = 3;
+  if (has_gp2y0a_left()) {
+    // required uint32 GP2Y0A_Left = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->sen_data());
+        this->gp2y0a_left());
+  }
+
+  if (has_gp2y0a_right()) {
+    // required uint32 GP2Y0A_Right = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->gp2y0a_right());
+  }
+
+  if (has_sen1()) {
+    // required uint32 SEN1 = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->sen1());
+  }
+
+  if (has_hall_left_total()) {
+    // required int32 Hall_Left_Total = 5;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->hall_left_total());
+  }
+
+  if (has_motionst()) {
+    // required uint32 MotionSt = 6;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->motionst());
+  }
+
+  if (has_motiones()) {
+    // required uint32 MotionEs = 7;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->motiones());
   }
 
   if (has_pose_x()) {
-    // required float pose_x = 4;
+    // required float pose_x = 8;
     total_size += 1 + 4;
   }
 
   if (has_pose_y()) {
-    // required float pose_y = 5;
+    // required float pose_y = 9;
     total_size += 1 + 4;
   }
 
   if (has_pose_theta()) {
-    // required float pose_theta = 6;
+    // required float pose_theta = 10;
     total_size += 1 + 4;
   }
 
@@ -482,29 +660,54 @@ int ToClient::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:test.ToClient)
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x000003ff) ^ 0x000003ff) == 0) {  // All required fields are present.
     // required .test.ToClient.Type DataType = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->datatype());
 
-    // required uint32 Sen_data = 3;
+    // required uint32 GP2Y0A_Left = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->sen_data());
+        this->gp2y0a_left());
 
-    // required float pose_x = 4;
+    // required uint32 GP2Y0A_Right = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->gp2y0a_right());
+
+    // required uint32 SEN1 = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->sen1());
+
+    // required int32 Hall_Left_Total = 5;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->hall_left_total());
+
+    // required uint32 MotionSt = 6;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->motionst());
+
+    // required uint32 MotionEs = 7;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->motiones());
+
+    // required float pose_x = 8;
     total_size += 1 + 4;
 
-    // required float pose_y = 5;
+    // required float pose_y = 9;
     total_size += 1 + 4;
 
-    // required float pose_theta = 6;
+    // required float pose_theta = 10;
     total_size += 1 + 4;
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  // optional uint32 Image_Length = 7;
+  // optional uint32 Image_Length = 11;
   if (has_image_length()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
@@ -548,12 +751,29 @@ void ToClient::MergeFrom(const ToClient& from) {
     if (from.has_datatype()) {
       set_datatype(from.datatype());
     }
-    if (from.has_sen_data()) {
-      set_sen_data(from.sen_data());
+    if (from.has_gp2y0a_left()) {
+      set_gp2y0a_left(from.gp2y0a_left());
+    }
+    if (from.has_gp2y0a_right()) {
+      set_gp2y0a_right(from.gp2y0a_right());
+    }
+    if (from.has_sen1()) {
+      set_sen1(from.sen1());
+    }
+    if (from.has_hall_left_total()) {
+      set_hall_left_total(from.hall_left_total());
+    }
+    if (from.has_motionst()) {
+      set_motionst(from.motionst());
+    }
+    if (from.has_motiones()) {
+      set_motiones(from.motiones());
     }
     if (from.has_pose_x()) {
       set_pose_x(from.pose_x());
     }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_pose_y()) {
       set_pose_y(from.pose_y());
     }
@@ -584,7 +804,7 @@ void ToClient::CopyFrom(const ToClient& from) {
 }
 
 bool ToClient::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+  if ((_has_bits_[0] & 0x000003ff) != 0x000003ff) return false;
 
   return true;
 }
@@ -595,7 +815,12 @@ void ToClient::Swap(ToClient* other) {
 }
 void ToClient::InternalSwap(ToClient* other) {
   std::swap(datatype_, other->datatype_);
-  std::swap(sen_data_, other->sen_data_);
+  std::swap(gp2y0a_left_, other->gp2y0a_left_);
+  std::swap(gp2y0a_right_, other->gp2y0a_right_);
+  std::swap(sen1_, other->sen1_);
+  std::swap(hall_left_total_, other->hall_left_total_);
+  std::swap(motionst_, other->motionst_);
+  std::swap(motiones_, other->motiones_);
   std::swap(pose_x_, other->pose_x_);
   std::swap(pose_y_, other->pose_y_);
   std::swap(pose_theta_, other->pose_theta_);
@@ -641,39 +866,159 @@ void ToClient::clear_datatype() {
   // @@protoc_insertion_point(field_set:test.ToClient.DataType)
 }
 
-// required uint32 Sen_data = 3;
-bool ToClient::has_sen_data() const {
+// required uint32 GP2Y0A_Left = 2;
+bool ToClient::has_gp2y0a_left() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-void ToClient::set_has_sen_data() {
+void ToClient::set_has_gp2y0a_left() {
   _has_bits_[0] |= 0x00000002u;
 }
-void ToClient::clear_has_sen_data() {
+void ToClient::clear_has_gp2y0a_left() {
   _has_bits_[0] &= ~0x00000002u;
 }
-void ToClient::clear_sen_data() {
-  sen_data_ = 0u;
-  clear_has_sen_data();
+void ToClient::clear_gp2y0a_left() {
+  gp2y0a_left_ = 0u;
+  clear_has_gp2y0a_left();
 }
- ::google::protobuf::uint32 ToClient::sen_data() const {
-  // @@protoc_insertion_point(field_get:test.ToClient.Sen_data)
-  return sen_data_;
+ ::google::protobuf::uint32 ToClient::gp2y0a_left() const {
+  // @@protoc_insertion_point(field_get:test.ToClient.GP2Y0A_Left)
+  return gp2y0a_left_;
 }
- void ToClient::set_sen_data(::google::protobuf::uint32 value) {
-  set_has_sen_data();
-  sen_data_ = value;
-  // @@protoc_insertion_point(field_set:test.ToClient.Sen_data)
+ void ToClient::set_gp2y0a_left(::google::protobuf::uint32 value) {
+  set_has_gp2y0a_left();
+  gp2y0a_left_ = value;
+  // @@protoc_insertion_point(field_set:test.ToClient.GP2Y0A_Left)
 }
 
-// required float pose_x = 4;
-bool ToClient::has_pose_x() const {
+// required uint32 GP2Y0A_Right = 3;
+bool ToClient::has_gp2y0a_right() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-void ToClient::set_has_pose_x() {
+void ToClient::set_has_gp2y0a_right() {
   _has_bits_[0] |= 0x00000004u;
 }
-void ToClient::clear_has_pose_x() {
+void ToClient::clear_has_gp2y0a_right() {
   _has_bits_[0] &= ~0x00000004u;
+}
+void ToClient::clear_gp2y0a_right() {
+  gp2y0a_right_ = 0u;
+  clear_has_gp2y0a_right();
+}
+ ::google::protobuf::uint32 ToClient::gp2y0a_right() const {
+  // @@protoc_insertion_point(field_get:test.ToClient.GP2Y0A_Right)
+  return gp2y0a_right_;
+}
+ void ToClient::set_gp2y0a_right(::google::protobuf::uint32 value) {
+  set_has_gp2y0a_right();
+  gp2y0a_right_ = value;
+  // @@protoc_insertion_point(field_set:test.ToClient.GP2Y0A_Right)
+}
+
+// required uint32 SEN1 = 4;
+bool ToClient::has_sen1() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void ToClient::set_has_sen1() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void ToClient::clear_has_sen1() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void ToClient::clear_sen1() {
+  sen1_ = 0u;
+  clear_has_sen1();
+}
+ ::google::protobuf::uint32 ToClient::sen1() const {
+  // @@protoc_insertion_point(field_get:test.ToClient.SEN1)
+  return sen1_;
+}
+ void ToClient::set_sen1(::google::protobuf::uint32 value) {
+  set_has_sen1();
+  sen1_ = value;
+  // @@protoc_insertion_point(field_set:test.ToClient.SEN1)
+}
+
+// required int32 Hall_Left_Total = 5;
+bool ToClient::has_hall_left_total() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void ToClient::set_has_hall_left_total() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void ToClient::clear_has_hall_left_total() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void ToClient::clear_hall_left_total() {
+  hall_left_total_ = 0;
+  clear_has_hall_left_total();
+}
+ ::google::protobuf::int32 ToClient::hall_left_total() const {
+  // @@protoc_insertion_point(field_get:test.ToClient.Hall_Left_Total)
+  return hall_left_total_;
+}
+ void ToClient::set_hall_left_total(::google::protobuf::int32 value) {
+  set_has_hall_left_total();
+  hall_left_total_ = value;
+  // @@protoc_insertion_point(field_set:test.ToClient.Hall_Left_Total)
+}
+
+// required uint32 MotionSt = 6;
+bool ToClient::has_motionst() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+void ToClient::set_has_motionst() {
+  _has_bits_[0] |= 0x00000020u;
+}
+void ToClient::clear_has_motionst() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+void ToClient::clear_motionst() {
+  motionst_ = 0u;
+  clear_has_motionst();
+}
+ ::google::protobuf::uint32 ToClient::motionst() const {
+  // @@protoc_insertion_point(field_get:test.ToClient.MotionSt)
+  return motionst_;
+}
+ void ToClient::set_motionst(::google::protobuf::uint32 value) {
+  set_has_motionst();
+  motionst_ = value;
+  // @@protoc_insertion_point(field_set:test.ToClient.MotionSt)
+}
+
+// required uint32 MotionEs = 7;
+bool ToClient::has_motiones() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+void ToClient::set_has_motiones() {
+  _has_bits_[0] |= 0x00000040u;
+}
+void ToClient::clear_has_motiones() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+void ToClient::clear_motiones() {
+  motiones_ = 0u;
+  clear_has_motiones();
+}
+ ::google::protobuf::uint32 ToClient::motiones() const {
+  // @@protoc_insertion_point(field_get:test.ToClient.MotionEs)
+  return motiones_;
+}
+ void ToClient::set_motiones(::google::protobuf::uint32 value) {
+  set_has_motiones();
+  motiones_ = value;
+  // @@protoc_insertion_point(field_set:test.ToClient.MotionEs)
+}
+
+// required float pose_x = 8;
+bool ToClient::has_pose_x() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+void ToClient::set_has_pose_x() {
+  _has_bits_[0] |= 0x00000080u;
+}
+void ToClient::clear_has_pose_x() {
+  _has_bits_[0] &= ~0x00000080u;
 }
 void ToClient::clear_pose_x() {
   pose_x_ = 0;
@@ -689,15 +1034,15 @@ void ToClient::clear_pose_x() {
   // @@protoc_insertion_point(field_set:test.ToClient.pose_x)
 }
 
-// required float pose_y = 5;
+// required float pose_y = 9;
 bool ToClient::has_pose_y() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 void ToClient::set_has_pose_y() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000100u;
 }
 void ToClient::clear_has_pose_y() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 void ToClient::clear_pose_y() {
   pose_y_ = 0;
@@ -713,15 +1058,15 @@ void ToClient::clear_pose_y() {
   // @@protoc_insertion_point(field_set:test.ToClient.pose_y)
 }
 
-// required float pose_theta = 6;
+// required float pose_theta = 10;
 bool ToClient::has_pose_theta() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 void ToClient::set_has_pose_theta() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000200u;
 }
 void ToClient::clear_has_pose_theta() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 void ToClient::clear_pose_theta() {
   pose_theta_ = 0;
@@ -737,15 +1082,15 @@ void ToClient::clear_pose_theta() {
   // @@protoc_insertion_point(field_set:test.ToClient.pose_theta)
 }
 
-// optional uint32 Image_Length = 7;
+// optional uint32 Image_Length = 11;
 bool ToClient::has_image_length() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 void ToClient::set_has_image_length() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000400u;
 }
 void ToClient::clear_has_image_length() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 void ToClient::clear_image_length() {
   image_length_ = 0u;

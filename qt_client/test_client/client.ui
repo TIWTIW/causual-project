@@ -151,86 +151,86 @@
     <item row="8" column="5" colspan="2">
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_4">
+       <widget class="QLineEdit" name="lineEdit_Left">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QLabel" name="label_6">
+       <widget class="QLabel" name="label_SEN1">
         <property name="text">
-         <string>TextLabel</string>
+         <string>SEN1</string>
         </property>
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEdit_6">
+       <widget class="QLineEdit" name="lineEdit_SEN1">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
       <item row="0" column="4">
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="label_MotionSt">
         <property name="text">
-         <string>TextLabel</string>
+         <string>MotionSt</string>
         </property>
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QLineEdit" name="lineEdit_8">
+       <widget class="QLineEdit" name="lineEdit_MotionSt">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="label_5">
+       <widget class="QLabel" name="label_Right">
         <property name="text">
-         <string>TextLabel</string>
+         <string>Right</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_5">
+       <widget class="QLineEdit" name="lineEdit_Right">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QLabel" name="label_7">
+       <widget class="QLabel" name="label_Hall_left">
         <property name="text">
-         <string>TextLabel</string>
+         <string>Hall_L</string>
         </property>
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QLineEdit" name="lineEdit_7">
+       <widget class="QLineEdit" name="lineEdit_Hall_L">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
       <item row="1" column="4">
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="label_MotionEs">
         <property name="text">
-         <string>TextLabel</string>
+         <string>MotionEs</string>
         </property>
        </widget>
       </item>
       <item row="1" column="5">
-       <widget class="QLineEdit" name="lineEdit_9">
+       <widget class="QLineEdit" name="lineEdit_MotionEs">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="label_Left">
         <property name="text">
-         <string>TextLabel</string>
+         <string>Left</string>
         </property>
        </widget>
       </item>

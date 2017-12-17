@@ -31,7 +31,7 @@ void Client::Initial()
     ui->lineEditY->setReadOnly(true);
 
     ClientSocket = new QTcpSocket(this);
-    ClientSocket->setReadBufferSize(MAXLINE * 3);
+    ClientSocket->setReadBufferSize(MAXLINE);
 
     MapImage = new QImage;
 
@@ -65,7 +65,7 @@ void Client::ClientDisconnected()
     ui->textBrowser->append(tr("Disconnected with host!"));
 }
 
-void Client::ClientSocketError(QAbstractSocket::SocketError e)
+void Client::ClientSocketError(QAbstractSocket::SocketError)
 {
     ui->textBrowser->append(ClientSocket->errorString());
 }
@@ -75,17 +75,20 @@ void Client::ClientRecvData()
     int numRead = 0;
     char buffer[MAXLINE];
 
+    qDebug() << "Recv data! " << ClientSocket->bytesAvailable();
+
     numRead = ClientSocket->read(buffer, sizeof(buffer));
 
-    int i = 0;
-    for( i = 0; i < numRead - 1; ++i)
+    /**********find frame head********/
+    int currPos = 0;
+    for( currPos = 0; currPos < numRead - 1; ++currPos)
     {
-        if(buffer[i] == 'c' && buffer[i + 1] == 'c')
+        if(buffer[currPos] == char(0xA5) && buffer[currPos + 1] == char(0xA5))
             break;
     }
 
     //Head isn't found
-    if( i == numRead - 1 )
+    if( currPos == numRead - 1 )
     {
         qDebug() << "Head isn't found";
         return;
@@ -97,7 +100,18 @@ void Client::ClientRecvData()
 
     qDebug() << "The read number is" << numRead;
     //Head found
-    if( RecvMessage.ParseFromArray(buffer + i + 2, sizeof(buffer)) )
+    /*****started to find length*******/
+    unsigned int msgLength = 0;
+    int shift = 1;
+    for(currPos = currPos + 2; currPos < numRead && shift < 4; ++currPos, ++shift)
+    {
+        msgLength = (msgLength | buffer[currPos]) << (shift * 8);
+    }
+    msgLength = msgLength | buffer[currPos++];
+
+    qDebug() << "MsgLength is " << msgLength;
+
+    if( RecvMessage.ParseFromArray(buffer + currPos, msgLength + 1) )
     {
         qDebug() << "Parse failed!";
         return ;
@@ -121,8 +135,12 @@ void Client::ClientRecvData()
         int ImageLength = RecvMessage.image_length();
         char ImageBuffer[ImageLength];
         int ImageHasRead = 0;
-
         int ImageRead = 0;
+
+        //image data may have been read above, so give the read data to Image buffer
+        for(int i = 0; currPos < numRead && i < ImageLength; ++currPos, ++i)
+            ImageBuffer[i] = buffer[currPos];
+
         while( true )
         {
             //Notion: waitForReadyRead
@@ -147,13 +165,25 @@ void Client::showInformation()
 {
     qDebug() << "Start show information";
 
-    int pose_x = RecvMessage.pose_x();
-    int pose_y = RecvMessage.pose_y();
-    int pose_theta = RecvMessage.pose_theta();
+    float pose_x = RecvMessage.pose_x();
+    float pose_y = RecvMessage.pose_y();
+    float pose_theta = RecvMessage.pose_theta();
+    unsigned short GP2Y0A_Left = RecvMessage.gp2y0a_left();
+    unsigned short GP2Y0A_Right = RecvMessage.gp2y0a_right();
+    uint8_t SEN1 = RecvMessage.sen1();
+    uint32_t Hall_Left_Total = RecvMessage.hall_left_total();
+    uint8_t MotionState = RecvMessage.motionst();
+    uint8_t MotionRes = RecvMessage.motiones();
 
     ui->lineEditX->setText(QString::number(pose_x));
     ui->lineEditY->setText(QString::number(pose_y));
     ui->lineEditTheta->setText(QString::number(pose_theta));
+    ui->lineEdit_Left->setText(QString::number(GP2Y0A_Left));
+    ui->lineEdit_Right->setText(QString::number(GP2Y0A_Right));
+    ui->lineEdit_SEN1->setText(QString::number(SEN1));
+    ui->lineEdit_Hall_L->setText(QString::number(Hall_Left_Total));
+    ui->lineEdit_MotionSt->setText(QString::number(MotionState));
+    ui->lineEdit_MotionEs->setText(QString::number(MotionRes));
 }
 
 void Client::showImage(char *ImageBuf, int size)

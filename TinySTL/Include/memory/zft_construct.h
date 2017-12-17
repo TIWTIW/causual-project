@@ -1,7 +1,9 @@
 #ifndef _ZFTCONSTRUCT_
 #define _ZFTCONSTRUCT_
 
-#include <new.h>
+#include <new>
+#include "../iterators/zft_type_traits.h"
+#include "../iterators/zft_iterator.h"
 
 namespace zft
 {
@@ -22,6 +24,12 @@ inline void destroy(T *pointer)
     pointer->~T();
 }
 
+template <class ForwordIterator, class T>
+inline void __destroy(ForwordIterator first, ForwordIterator last, T*)
+{
+    typedef typename __type_traits<T>::has_trival_destructor trival_destructor;
+    __destroy_aux(first, last, trival_destructor());
+}
 //destroy the iterator range first & last
 //becaue not all objects have destructor
 //so it's divided into two categories
@@ -33,12 +41,12 @@ inline void destroy(ForwordIterator first, ForwordIterator last)
     __destroy(first, last, value_type(first));
 }
 
-template <class ForwordIterator, class T>
+/*template <class ForwordIterator, class T>
 inline void __destroy(ForwordIterator first, ForwordIterator last, T*)
 {
     typedef typename __type_traits<T>::has_trival_destructor trival_destructor;
     __destroy_aux(first, last, trival_destructor());
-}
+}*/
 
 template <class ForwordIterator>
 inline void

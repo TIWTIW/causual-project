@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.4.1, 2017-11-22T22:09:40. -->
+<!-- Written by QtCreator 4.4.1, 2017-12-14T19:21:43. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -304,7 +304,7 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
-     <value type="QString">LD_LIBRARY_PATH=/home/zhoufeitong/Qt/5.9.2/gcc_64/lib:/opt/FriendlyARM/toolschain/4.5.1/lib</value>
+     <value type="QString">LD_LIBRARY_PATH</value>
     </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">test_client</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>

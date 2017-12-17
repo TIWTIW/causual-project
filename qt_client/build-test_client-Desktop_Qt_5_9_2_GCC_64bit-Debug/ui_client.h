@@ -55,18 +55,18 @@ public:
     QLineEdit *lineEditTheta;
     QFrame *line_3;
     QGridLayout *gridLayout_4;
-    QLineEdit *lineEdit_4;
-    QLabel *label_6;
-    QLineEdit *lineEdit_6;
-    QLabel *label_8;
-    QLineEdit *lineEdit_8;
-    QLabel *label_5;
-    QLineEdit *lineEdit_5;
-    QLabel *label_7;
-    QLineEdit *lineEdit_7;
-    QLabel *label_9;
-    QLineEdit *lineEdit_9;
-    QLabel *label_4;
+    QLineEdit *lineEdit_Left;
+    QLabel *label_SEN1;
+    QLineEdit *lineEdit_SEN1;
+    QLabel *label_MotionSt;
+    QLineEdit *lineEdit_MotionSt;
+    QLabel *label_Right;
+    QLineEdit *lineEdit_Right;
+    QLabel *label_Hall_left;
+    QLineEdit *lineEdit_Hall_L;
+    QLabel *label_MotionEs;
+    QLineEdit *lineEdit_MotionEs;
+    QLabel *label_Left;
     QFrame *line_6;
     QFrame *line_8;
     QFrame *line;
@@ -218,71 +218,71 @@ public:
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setSpacing(6);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        lineEdit_4 = new QLineEdit(centralWidget);
-        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
-        lineEdit_4->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        lineEdit_Left = new QLineEdit(centralWidget);
+        lineEdit_Left->setObjectName(QStringLiteral("lineEdit_Left"));
+        lineEdit_Left->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
 
-        gridLayout_4->addWidget(lineEdit_4, 0, 1, 1, 1);
+        gridLayout_4->addWidget(lineEdit_Left, 0, 1, 1, 1);
 
-        label_6 = new QLabel(centralWidget);
-        label_6->setObjectName(QStringLiteral("label_6"));
+        label_SEN1 = new QLabel(centralWidget);
+        label_SEN1->setObjectName(QStringLiteral("label_SEN1"));
 
-        gridLayout_4->addWidget(label_6, 0, 2, 1, 1);
+        gridLayout_4->addWidget(label_SEN1, 0, 2, 1, 1);
 
-        lineEdit_6 = new QLineEdit(centralWidget);
-        lineEdit_6->setObjectName(QStringLiteral("lineEdit_6"));
-        lineEdit_6->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        lineEdit_SEN1 = new QLineEdit(centralWidget);
+        lineEdit_SEN1->setObjectName(QStringLiteral("lineEdit_SEN1"));
+        lineEdit_SEN1->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
 
-        gridLayout_4->addWidget(lineEdit_6, 0, 3, 1, 1);
+        gridLayout_4->addWidget(lineEdit_SEN1, 0, 3, 1, 1);
 
-        label_8 = new QLabel(centralWidget);
-        label_8->setObjectName(QStringLiteral("label_8"));
+        label_MotionSt = new QLabel(centralWidget);
+        label_MotionSt->setObjectName(QStringLiteral("label_MotionSt"));
 
-        gridLayout_4->addWidget(label_8, 0, 4, 1, 1);
+        gridLayout_4->addWidget(label_MotionSt, 0, 4, 1, 1);
 
-        lineEdit_8 = new QLineEdit(centralWidget);
-        lineEdit_8->setObjectName(QStringLiteral("lineEdit_8"));
-        lineEdit_8->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        lineEdit_MotionSt = new QLineEdit(centralWidget);
+        lineEdit_MotionSt->setObjectName(QStringLiteral("lineEdit_MotionSt"));
+        lineEdit_MotionSt->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
 
-        gridLayout_4->addWidget(lineEdit_8, 0, 5, 1, 1);
+        gridLayout_4->addWidget(lineEdit_MotionSt, 0, 5, 1, 1);
 
-        label_5 = new QLabel(centralWidget);
-        label_5->setObjectName(QStringLiteral("label_5"));
+        label_Right = new QLabel(centralWidget);
+        label_Right->setObjectName(QStringLiteral("label_Right"));
 
-        gridLayout_4->addWidget(label_5, 1, 0, 1, 1);
+        gridLayout_4->addWidget(label_Right, 1, 0, 1, 1);
 
-        lineEdit_5 = new QLineEdit(centralWidget);
-        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
-        lineEdit_5->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        lineEdit_Right = new QLineEdit(centralWidget);
+        lineEdit_Right->setObjectName(QStringLiteral("lineEdit_Right"));
+        lineEdit_Right->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
 
-        gridLayout_4->addWidget(lineEdit_5, 1, 1, 1, 1);
+        gridLayout_4->addWidget(lineEdit_Right, 1, 1, 1, 1);
 
-        label_7 = new QLabel(centralWidget);
-        label_7->setObjectName(QStringLiteral("label_7"));
+        label_Hall_left = new QLabel(centralWidget);
+        label_Hall_left->setObjectName(QStringLiteral("label_Hall_left"));
 
-        gridLayout_4->addWidget(label_7, 1, 2, 1, 1);
+        gridLayout_4->addWidget(label_Hall_left, 1, 2, 1, 1);
 
-        lineEdit_7 = new QLineEdit(centralWidget);
-        lineEdit_7->setObjectName(QStringLiteral("lineEdit_7"));
-        lineEdit_7->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        lineEdit_Hall_L = new QLineEdit(centralWidget);
+        lineEdit_Hall_L->setObjectName(QStringLiteral("lineEdit_Hall_L"));
+        lineEdit_Hall_L->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
 
-        gridLayout_4->addWidget(lineEdit_7, 1, 3, 1, 1);
+        gridLayout_4->addWidget(lineEdit_Hall_L, 1, 3, 1, 1);
 
-        label_9 = new QLabel(centralWidget);
-        label_9->setObjectName(QStringLiteral("label_9"));
+        label_MotionEs = new QLabel(centralWidget);
+        label_MotionEs->setObjectName(QStringLiteral("label_MotionEs"));
 
-        gridLayout_4->addWidget(label_9, 1, 4, 1, 1);
+        gridLayout_4->addWidget(label_MotionEs, 1, 4, 1, 1);
 
-        lineEdit_9 = new QLineEdit(centralWidget);
-        lineEdit_9->setObjectName(QStringLiteral("lineEdit_9"));
-        lineEdit_9->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        lineEdit_MotionEs = new QLineEdit(centralWidget);
+        lineEdit_MotionEs->setObjectName(QStringLiteral("lineEdit_MotionEs"));
+        lineEdit_MotionEs->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
 
-        gridLayout_4->addWidget(lineEdit_9, 1, 5, 1, 1);
+        gridLayout_4->addWidget(lineEdit_MotionEs, 1, 5, 1, 1);
 
-        label_4 = new QLabel(centralWidget);
-        label_4->setObjectName(QStringLiteral("label_4"));
+        label_Left = new QLabel(centralWidget);
+        label_Left->setObjectName(QStringLiteral("label_Left"));
 
-        gridLayout_4->addWidget(label_4, 0, 0, 1, 1);
+        gridLayout_4->addWidget(label_Left, 0, 0, 1, 1);
 
 
         gridLayout_5->addLayout(gridLayout_4, 8, 5, 1, 2);
@@ -441,12 +441,12 @@ public:
         labelTheta->setText(QApplication::translate("Client", "Theta", Q_NULLPTR));
         labelY->setText(QApplication::translate("Client", "Y", Q_NULLPTR));
         labelX->setText(QApplication::translate("Client", "X", Q_NULLPTR));
-        label_6->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
-        label_8->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
-        label_5->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
-        label_7->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
-        label_9->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
-        label_4->setText(QApplication::translate("Client", "TextLabel", Q_NULLPTR));
+        label_SEN1->setText(QApplication::translate("Client", "SEN1", Q_NULLPTR));
+        label_MotionSt->setText(QApplication::translate("Client", "MotionSt", Q_NULLPTR));
+        label_Right->setText(QApplication::translate("Client", "Right", Q_NULLPTR));
+        label_Hall_left->setText(QApplication::translate("Client", "Hall_L", Q_NULLPTR));
+        label_MotionEs->setText(QApplication::translate("Client", "MotionEs", Q_NULLPTR));
+        label_Left->setText(QApplication::translate("Client", "Left", Q_NULLPTR));
         labelImage->setText(QString());
         pushButtonNeedImage->setText(QApplication::translate("Client", "Need Image", Q_NULLPTR));
         pushButtonNoImage->setText(QApplication::translate("Client", "No Image", Q_NULLPTR));

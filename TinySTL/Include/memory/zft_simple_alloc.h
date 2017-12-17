@@ -1,14 +1,17 @@
 #ifndef _ZFT_SIMPLE_ALLOC_H
 #define _ZFT_SIMPLE_ALLOC_H
 
+#include <cstddef>
+
 namespace zft
 {
+
 //Actually it's just a wrap of allocator which made container can allocate easier
 template <class T, class Alloc>
 class simple_alloc
 {
 public:
-    static T* allocate(size_t n)
+    static T *allocate(size_t n)
     {
         return 0 == n ? 0 : (T *)Alloc::allocate(n * sizeof(T));
     }

@@ -1,6 +1,9 @@
 #ifndef _ZFT_ALGO_H
 #define _ZFT_ALGO_H
 
+#include "../iterators/zft_iterator.h"
+#include "../associative_containers/zft_pair.h"
+
 namespace zft
 {
 template <class ForwardIterator>
@@ -82,7 +85,7 @@ inline ForwardIterator1
 find_end(ForwardIterator1 first1, ForwardIterator1 last1,
          ForwardIterator2 first2, ForwardIterator2 last2)
 {
-    typedef typename iterator_traits<ForwardIterator１>::iterator_category
+    typedef typename iterator_traits<ForwardIterator1>::iterator_category
                      category1;
 
     typedef typename iterator_traits<ForwardIterator2>::iterator_category
@@ -147,7 +150,7 @@ InputIterator find_first_of(InputIterator first1, InputIterator last1,
 {
     for(; first1 != last1; ++first1)
         for(ForwardIterator iter = first2; iter != last2; ++iter)
-            if(*first == *iter)
+            if(*first1 == *iter)
                 return first1;
     return last1;
 }
@@ -159,12 +162,12 @@ InputIterator find_first_of(InputIterator first1, InputIterator last1,
 {
     for(; first1 != last1; ++first1)
         for(ForwardIterator iter = first2; iter != last2; ++iter)
-            if(comp(*first, *iter))
+            if(comp(*first1, *iter))
                 return first1;
     return last1;
 }
 
-template <class InputIterator. class Function>
+template <class InputIterator, class Function>
 Function for_each(InputIterator first, InputIterator last, Function f)
 {
     for(; first != last; ++first)
@@ -392,7 +395,7 @@ OutputIterator remove_copy_if(InputIterator first, InputIterator last,
     return result;
 }
 
-template <class ForwardIterator first, class T>
+template <class ForwardIterator, class T>
 void replace(ForwardIterator first, ForwardIterator last,
              const T &old_value, const T &new_value)
 {
@@ -470,7 +473,7 @@ OutputIterator reverse_copy(BidirectionalIterator first,
 }
 
 template <class ForwardIterator>
-inline void rotate(ForwardIterator first, ForwardIterator middile,
+inline void rotate(ForwardIterator first, ForwardIterator middle,
                    ForwardIterator last)
 {
     if(first == middle || middle == last)
@@ -558,7 +561,7 @@ OutputIterator rotate_copy(ForwardIterator first, ForwardIterator middle,
 }
 
 template <class ForwardIterator1, class ForwardIterator2>
-inline ForwardIterator search(ForwardIterator1 first1,
+inline ForwardIterator1 search(ForwardIterator1 first1,
                               ForwardIterator1 last1,
                               ForwardIterator2 first2,
                               ForwardIterator2 last2)
@@ -575,7 +578,7 @@ ForwardIterator1 __search(ForwardIterator1 first1, ForwardIterator1 last1,
 {
     Distance1 d1 = 0;
     distance(first1, last1, d1);
-    Distance d2 = 0;
+    Distance2 d2 = 0;
     distance(first2, last2, d2);
 
     if(d1 < d2)
@@ -610,7 +613,7 @@ ForwardIterator1 __search(ForwardIterator1 first1, ForwardIterator1 last1,
 template <class ForwardIterator, class Integer, class T>
 ForwardIterator search_n(ForwardIterator first,
                          ForwardIterator last,
-                         Integer count, const T &value_type)
+                         Integer count, const T &value)
 {
     if(count <= 0)
         return first;
@@ -639,7 +642,7 @@ template <class ForwardIterator, class Integer, class T,
           class BinaryPredicate>
 ForwardIterator search_n(ForwardIterator first,
                          ForwardIterator last,
-                         Integer count, const T &value_type,
+                         Integer count, const T &value,
                          BinaryPredicate binary_pred)
 {
     if(count <= 0)
@@ -723,7 +726,7 @@ inline OutputIterator unique_copy(InputIterator first,
 {
     if(first == last)
         return result;
-    reutrn __unique_copy(first, last, result, iterator_category(result));
+    return __unique_copy(first, last, result, iterator_category(result));
 }
 
 template <class InputIterator, class ForwardIterator>
@@ -775,7 +778,7 @@ inline ForwardIterator lower_bound(ForwardIterator first,
 template <class ForwardIterator, class T, class Compare>
 inline ForwardIterator lower_bound(ForwardIterator first,
                                    ForwardIterator last,
-                                   const T &value. Compare comp)
+                                   const T &value, Compare comp)
 {
     return __lower_bound(first, last, value, comp, distance_type(first),
                          iterator_category(first));
@@ -849,7 +852,7 @@ inline ForwardIterator upper_bound(ForwardIterator first,
 template <class ForwardIterator, class T, class Compare>
 inline ForwardIterator upper_bound(ForwardIterator first,
                                    ForwardIterator last,
-                                   const T &value. Compare comp)
+                                   const T &value, Compare comp)
 {
     return __upper_bound(first, last, value, comp, distance_type(first),
                          iterator_category(first));
@@ -1241,7 +1244,7 @@ pair<ForwardIterator, ForwardIterator>
 __equal_range(ForwardIterator first, ForwardIterator last,
               const T &value, Distance *, forward_iterator_tag)
 {
-    Distance len = 0'
+    Distance len = 0;
     distance(first, last, len);
     Distance half;
     ForwardIterator middle, left, right;
@@ -1284,7 +1287,7 @@ inline void inplace_merge(BidirectionalIterator first,
                         distance_type(first));
 }
 
-template <class BidirectionalIterator, class T, class Distance>
+/*template <class BidirectionalIterator, class T, class Distance>
 inline void __inplace_merge_aux(BidirectionalIterator first,
                                 BidirectionalIterator middle,
                                 BidirectionalIterator last,
@@ -1301,7 +1304,7 @@ inline void __inplace_merge_aux(BidirectionalIterator first,
     else
         __merge_adaptive(first, middle, last, len1, len2, buf.begin(),
                          Distance(buf.size()));
-}
+}*/
 
 template <class BidirectionalIterator, class Distance, class Pointer>
 void __merge_adaptive(BidirectionalIterator first,
@@ -1354,9 +1357,9 @@ void __merge_adaptive(BidirectionalIterator first,
 
 template <class BidirectionalIterator1, class BidirectionalIterator2,
           class Distance>
-BidirectionalIterator __rotate_adaptive(BidirectionalIterator first,
-                                        BidirectionalIterator middle,
-                                        BidirectionalIterator last,
+BidirectionalIterator1 __rotate_adaptive(BidirectionalIterator1 first,
+                                        BidirectionalIterator1 middle,
+                                        BidirectionalIterator1 last,
                                         Distance len1, Distance len2,
                                         BidirectionalIterator2 buffer,
                                         Distance buffer_size)
@@ -1418,7 +1421,7 @@ void __nth_element(RandomAccessIterator first,
 template <class BidirectionalIterator>
 void mergesort(BidirectionalIterator first, BidirectionalIterator last)
 {
-    typedef iterator_traits<BidirectionalIterator>::difference_type n =
+     typename iterator_traits<BidirectionalIterator>::difference_type n =
         distance_type(first, last);
 
     if(n == 0 || n == 1)

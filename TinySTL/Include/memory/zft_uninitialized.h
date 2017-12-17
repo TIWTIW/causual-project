@@ -42,10 +42,10 @@ inline ForwordIterator __uninitialized_fill_n_aux(ForwordIterator first,
 
 template <class InputIterator, class ForwordIterator>
 inline ForwordIterator
-uninitialized_copy_(InputIterator first, InputIterator last,
+uninitialized_copy(InputIterator first, InputIterator last,
                     ForwordIterator result)
 {
-    return __uninitialized_copy(fist, last, result, value_type(result));
+    return __uninitialized_copy(first, last, result, value_type(result));
 }
 
 template <class InputIterator, class ForwordIterator, class T>

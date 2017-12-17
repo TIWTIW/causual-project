@@ -6,23 +6,63 @@
 
 #IncludeRegexTransform: 
 
-.././Include/memory/zft_default_alloc.h
-zft_malloc_alloc.h
-.././Include/memory/zft_malloc_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/algorithms/zft_algo.h
+../iterators/zft_iterator.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/iterators/zft_iterator.h
+../associative_containers/zft_pair.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/associative_containers/zft_pair.h
 
-.././Include/memory/zft_malloc_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/associative_containers/zft_pair.h
+
+/media/zhoufeitong/projects/causual/TinySTL/Include/iterators/zft_iterator.h
+cstddef
+-
+
+/media/zhoufeitong/projects/causual/TinySTL/Include/iterators/zft_type_traits.h
+
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_construct.h
+new
+-
+../iterators/zft_type_traits.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/iterators/zft_type_traits.h
+../iterators/zft_iterator.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/iterators/zft_iterator.h
+
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_default_alloc.h
+zft_malloc_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_malloc_alloc.h
+
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_malloc_alloc.h
 new
 -
 iostream
 -
 
-.././Include/memory/zft_simple_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_simple_alloc.h
+cstddef
+-
+
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_uninitialized.h
+zft_construct.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_construct.h
+../algorithms/zft_algo.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/algorithms/zft_algo.h
+
+/media/zhoufeitong/projects/causual/TinySTL/Include/sequence_container/zft_vector.h
+../memory/zft_construct.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_construct.h
+../memory/zft_simple_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_simple_alloc.h
+../memory/zft_default_alloc.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_default_alloc.h
+../memory/zft_uninitialized.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/memory/zft_uninitialized.h
+../algorithms/zft_algo.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/algorithms/zft_algo.h
 
 /media/zhoufeitong/projects/causual/TinySTL/Source/main.cpp
-memory/zft_default_alloc.h
-/media/zhoufeitong/projects/causual/TinySTL/Source/memory/zft_default_alloc.h
-memory/zft_simple_alloc.h
-/media/zhoufeitong/projects/causual/TinySTL/Source/memory/zft_simple_alloc.h
+../Include/sequence_container/zft_vector.h
+/media/zhoufeitong/projects/causual/TinySTL/Include/sequence_container/zft_vector.h
 iostream
 -
 

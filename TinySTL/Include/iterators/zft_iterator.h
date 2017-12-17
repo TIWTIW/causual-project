@@ -1,6 +1,8 @@
 #ifndef _ZFT_ITERATOR_H
 #define _ZFT_ITERATOR_H
 
+#include <cstddef>
+
 namespace zft
 {
 struct input_iterator_tag {};
@@ -73,10 +75,10 @@ value_type(const Iterator &)
 }
 
 template <class InputIterator>
-inline iterator_traits<InputIterator>::difference_type
+inline typename iterator_traits<InputIterator>::difference_type
 __distance(InputIterator first, InputIterator last, input_iterator_tag)
 {
-    iterator_traits<InputIterator>::difference_type n = 0;
+    typename iterator_traits<InputIterator>::difference_type n = 0;
     while(first != last)
     {
         ++first;
@@ -86,7 +88,7 @@ __distance(InputIterator first, InputIterator last, input_iterator_tag)
 }
 
 template <class RandomAccessIterator>
-inline iterator_traits<RandomAccessIterator>::difference_type
+inline typename iterator_traits<RandomAccessIterator>::difference_type
 __distance(RandomAccessIterator first, RandomAccessIterator last,
            random_access_iterator_tag)
 {
@@ -94,7 +96,7 @@ __distance(RandomAccessIterator first, RandomAccessIterator last,
 }
 
 template <class InputIterator>
-inline iterator_traits<InputIterator>::difference_type
+inline typename iterator_traits<InputIterator>::difference_type
 distance(InputIterator first, InputIterator last)
 {
     typedef typename
@@ -103,7 +105,7 @@ distance(InputIterator first, InputIterator last)
 }
 
 template <class InputIterator, class Distance>
-inline __void advance(InputIterator &i, Distance n, input_iterator_tag)
+inline void advance(InputIterator &i, Distance n, input_iterator_tag)
 {
     while(n--)
         ++i;
@@ -300,13 +302,13 @@ public:
         return self(current - n);
     }
 
-    seif &operator+=(difference_type n)
+    self &operator+=(difference_type n)
     {
         current -= n;
         return *this;
     }
 
-    seif operator-(difference_type n) const
+    self operator-(difference_type n) const
     {
         return self(current + n);
     }
@@ -323,7 +325,7 @@ public:
     }
 };
 
-template <class T, class Distance = ptrdiff_t>
+/*template <class T, class Distance = ptrdiff_t>
 class istream_iterator
 {
     friend bool operator==(const istream_iterator<T, Distance> &x,
@@ -397,7 +399,7 @@ public:
     ostream_iterator<T> &operator++() {return *this;}
     ostream_iterator<T> &operator++(int) {return *this;}
 
-};
+};*/
 
 }
 

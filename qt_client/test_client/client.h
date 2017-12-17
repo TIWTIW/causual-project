@@ -7,8 +7,8 @@
 #include "test_ToServer.pb.h"
 
 //IP and Port Number
-#define IP "127.0.0.1"
-#define PORT "15000"
+#define IP "192.168.1.20"
+#define PORT "9600"
 #define MAXLINE 4096
 
 namespace Ui {

@@ -18,14 +18,19 @@ message ToClient
     //required uint32 DataLength = 2;
 
     //sensor data
-    required uint32 Sen_data = 3;
+    required uint32 GP2Y0A_Left = 3;
+    required uint32 GP2Y0A_Right = 4;
+    required uint32 SEN1 = 5;
+    required int32 Hall_Left_Total = 6;
+    required uint32 MotionSt = 7;
+    required uint32 MotionEs = 8;
 
     //pose data
-    required float pose_x = 4;
-    required float pose_y = 5;
-    required float pose_theta = 6;
+    required float pose_x = 9;
+    required float pose_y = 10;
+    required float pose_theta = 11;
 
-    optional uint32 Image_Length = 7;
+    optional uint32 Image_Length = 12;
 
    // required uint32 tail = 8;
 

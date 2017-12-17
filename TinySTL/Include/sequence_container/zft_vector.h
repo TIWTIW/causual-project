@@ -5,6 +5,7 @@
 #include "../memory/zft_simple_alloc.h"
 #include "../memory/zft_default_alloc.h"
 #include "../memory/zft_uninitialized.h"
+#include "../algorithms/zft_algo.h"
 
 namespace zft
 {
@@ -111,6 +112,7 @@ public:
         resize(new_size, T());
     }
     void clear() {erase(begin(), end());}
+    void insert(iterator postion, size_type n, const T &x);
 
 protected:
     iterator allocate_and_fill(size_type n, const T &x)
@@ -151,13 +153,13 @@ void vector<T, Alloc>::insert_aux(iterator position, const T &x)
         deallocate();
 
         start = new_start;
-        finsih = new_finish;
+        finish = new_finish;
         end_of_storage = new_start + len;
     }
 }
 
 template <class T, class Alloc>
-void vector<T, Alloc>::insert(iterator postion, size_type n, const T &x)
+void vector<T, Alloc>::insert(iterator position, size_type n, const T &x)
 {
     if(n != 0)
     {
@@ -185,7 +187,7 @@ void vector<T, Alloc>::insert(iterator postion, size_type n, const T &x)
         else
         {
             const size_type old_size = size();
-            const size_type len = old_size + max(old_size, n);
+            const size_type len = old_size + (old_size > n ? old_size : n);
 
             iterator new_start = data_allocator::allocate(len);
             iterator new_finish = new_start;
