@@ -2,6 +2,7 @@
 #define _ZFT_SET_H
 
 #include "zft_RB_tree.h"
+#include "functor/zft_function.h"
 
 namespace zft
 {
@@ -23,7 +24,7 @@ private:
      }
      */
 
-    typedef rb_tree<key_type, value_type
+    typedef rb_tree<key_type, value_type,
                     identity<value_type>, key_compare, Alloc> rep_type;
     rep_type t;
 
@@ -121,8 +122,8 @@ public:
         return t.equal_range(x);
     }
 
-    friend bool operator== <> (const set &. const set &);
-    friend bool operator< <> (const set &, const set &);
+    friend bool operator== (const set &, const set &);
+    friend bool operator< (const set &, const set &);
 };
 
 template <class Key, class Compare, class Alloc>

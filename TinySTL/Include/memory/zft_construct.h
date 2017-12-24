@@ -2,8 +2,8 @@
 #define _ZFTCONSTRUCT_
 
 #include <new>
-#include "../iterators/zft_type_traits.h"
-#include "../iterators/zft_iterator.h"
+#include "iterators/zft_type_traits.h"
+#include "iterators/zft_iterator.h"
 
 namespace zft
 {
@@ -24,30 +24,6 @@ inline void destroy(T *pointer)
     pointer->~T();
 }
 
-template <class ForwordIterator, class T>
-inline void __destroy(ForwordIterator first, ForwordIterator last, T*)
-{
-    typedef typename __type_traits<T>::has_trival_destructor trival_destructor;
-    __destroy_aux(first, last, trival_destructor());
-}
-//destroy the iterator range first & last
-//becaue not all objects have destructor
-//so it's divided into two categories
-//if there's no trival_destructor, call destroy above
-//if there's trival_destructor, do nothing
-template <class ForwordIterator>
-inline void destroy(ForwordIterator first, ForwordIterator last)
-{
-    __destroy(first, last, value_type(first));
-}
-
-/*template <class ForwordIterator, class T>
-inline void __destroy(ForwordIterator first, ForwordIterator last, T*)
-{
-    typedef typename __type_traits<T>::has_trival_destructor trival_destructor;
-    __destroy_aux(first, last, trival_destructor());
-}*/
-
 template <class ForwordIterator>
 inline void
 __destroy_aux(ForwordIterator first, ForwordIterator last, __false_type)
@@ -62,6 +38,24 @@ __destroy_aux(ForwordIterator, ForwordIterator, __true_type)
 {
 
 }
+template <class ForwordIterator, class T>
+inline void __destroy(ForwordIterator first, ForwordIterator last, T*)
+{
+    typedef typename __type_traits<T>::has_trivial_destructor trivial_destructor;
+    __destroy_aux(first, last, trivial_destructor());
+}
+
+//destroy the iterator range first & last
+//becaue not all objects have destructor
+//so it's divided into two categories
+//if there's no trivial_destructor, call destroy above
+//if there's trivial_destructor, do nothing
+template <class ForwordIterator>
+inline void destroy(ForwordIterator first, ForwordIterator last)
+{
+    __destroy(first, last, value_type(first));
+}
+
 }
 
 #endif

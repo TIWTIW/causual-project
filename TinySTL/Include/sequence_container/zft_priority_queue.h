@@ -3,6 +3,7 @@
 
 #include "zft_vector.h"
 #include "zft_heap.h"
+#include "functor/zft_function.h"
 
 namespace zft
 {

@@ -31,7 +31,7 @@ struct minus : public binary_function<T, T, T>
 };
 
 template <class T>
-struct muliplies : public binary_function<T, T, T>
+struct multiplies : public binary_function<T, T, T>
 {
     T operator()(const T &x, const T &y) const {return x * y;}
 };
@@ -61,13 +61,13 @@ T identity_element(plus<T>)
 
 template <class T>
 inline
-T identity_element(muliplies<T>)
+T identity_element(multiplies<T>)
 {return T(1);}
 
 template <class T>
 struct equal_to : public binary_function<T, T, bool>
 {
-    bool operator()(const T &x. const T &y) const
+    bool operator()(const T &x, const T &y) const
     {
         return x == y;
     }
@@ -76,7 +76,7 @@ struct equal_to : public binary_function<T, T, bool>
 template <class T>
 struct not_equal_to : public binary_function<T, T, bool>
 {
-    bool operator()(const T &x. const T &y) const
+    bool operator()(const T &x, const T &y) const
     {
         return x != y;
     }
@@ -85,7 +85,7 @@ struct not_equal_to : public binary_function<T, T, bool>
 template <class T>
 struct greater : public binary_function<T, T, bool>
 {
-    bool operator()(const T &x. const T &y) const
+    bool operator()(const T &x, const T &y) const
     {
         return x > y;
     }
@@ -94,7 +94,7 @@ struct greater : public binary_function<T, T, bool>
 template <class T>
 struct less : public binary_function<T, T, bool>
 {
-    bool operator()(const T &x. const T &y) const
+    bool operator()(const T &x, const T &y) const
     {
         return x < y;
     }
@@ -103,7 +103,7 @@ struct less : public binary_function<T, T, bool>
 template <class T>
 struct greater_equal : public binary_function<T, T, bool>
 {
-    bool operator()(const T &x. const T &y) const
+    bool operator()(const T &x, const T &y) const
     {
         return x >= y;
     }
@@ -112,7 +112,7 @@ struct greater_equal : public binary_function<T, T, bool>
 template <class T>
 struct less_equal : public binary_function<T, T, bool>
 {
-    bool operator()(const T &x. const T &y) const
+    bool operator()(const T &x, const T &y) const
     {
         return x <= y;
     }
@@ -164,7 +164,7 @@ struct select1st : public unary_function<Pair, typename Pair::first_type>
 };
 
 template <class Pair>
-struct select2nd : public unary_function<Pair, typename Par::second_type>
+struct select2nd : public unary_function<Pair, typename Pair::second_type>
 {
     const typename Pair::second_type &operator()(const Pair &x) const
     {
@@ -218,7 +218,7 @@ protected:
     Predicate pred;
 public:
     explicit binary_negate(const Predicate &x) : pred(x) {}
-    bool operator(const typename Predicate::first_argument_type &x,
+    bool operator()(const typename Predicate::first_argument_type &x,
                   const typename Predicate::second_argument_type &y) const
     {
         return !pred(x, y);
@@ -364,7 +364,7 @@ template <class Arg1, class Arg2, class Result>
 inline pointer_to_binary_function<Arg1, Arg2, Result>
 ptr_fun(Result (*x)(Arg1, Arg2))
 {
-    return pointer_to_unary_function<Arg1, Arg2, Result>(x);
+    return pointer_to_binary_function<Arg1, Arg2, Result>(x);
 }
 
 template <class S, class T>
@@ -381,7 +381,7 @@ template <class S, class T>
 class const_mem_fun_t : public unary_function<const T*, S>
 {
 public:
-    explicit const_mem_fun_t(S(T::*pf)()) const : f(pf) {}
+    explicit const_mem_fun_t(S(T::*pf)() const) : f(pf) {}
     S operator()(const T *p) const {return (p->*f)();}
 private:
     S(T::*f)() const;
@@ -421,7 +421,7 @@ template <class S, class T, class A>
 class const_mem_fun1_t : public binary_function<const T *, A, S>
 {
 public:
-    explicit const_mem_fun1_t*(S(T::*pf)(A) const) : f(pf) {}
+    explicit const_mem_fun1_t(S(T::*pf)(A) const) : f(pf) {}
     S operator()(const T *p, A x) const {return (p->*f)(x);}
 private:
     S(T::*f)(A) const;
@@ -448,7 +448,7 @@ private:
 };
 
 template <class S, class T>
-inline mem_fun_t<S, t> mem_fun(S(T::*f)())
+inline mem_fun_t<S, T> mem_fun(S(T::*f)())
 {
     return mem_fun_t<S, T>(f);
 }

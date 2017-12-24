@@ -1,10 +1,10 @@
 #ifndef _ZFT_RB_TREE_H
 #define _ZFT_RB_TREE_H
 
-#include "../memory/zft_construct.h"
-#include "../memory/zft_default_alloc.h"
-#include "../memory/zft_simple_alloc.h"
-#include "../memory/zft_uninitialized.h"
+#include "memory/zft_construct.h"
+#include "memory/zft_default_alloc.h"
+#include "memory/zft_simple_alloc.h"
+#include "memory/zft_uninitialized.h"
 
 namespace zft
 {
@@ -41,7 +41,7 @@ template <class Value>
 struct __rb_tree_node : public __rb_tree_node_base
 {
     typedef __rb_tree_node<Value> *link_type;
-    value value_field;
+    Value value_field;
 };
 
 struct __rb_tree_base_iterator
@@ -218,7 +218,7 @@ protected:
     {return (link_type &)(x->parent);}
 
     static reference value(base_ptr x)
-    {return x->value_field;}
+    {return ((link_type)x)->value_field;}
 
     static const Key &key(base_ptr x)
     {return KeyOfValue()(value(x));}
@@ -233,7 +233,7 @@ protected:
     {return (link_type) __rb_tree_node_base::maximum(x);}
 
 public:
-    typedef __rb_tree_iterator<value_field, reference, pointer> iterator;
+    typedef __rb_tree_iterator<value_type, reference, pointer> iterator;
 
 private:
     iterator __insert(base_ptr x, base_ptr y, const value_type &v);
@@ -269,11 +269,21 @@ public:
     bool empty() const {return node_count == 0;}
     size_type size() const {return node_count;}
     size_type max_size() const {return size_type(-1);}
+    void clear();
 
 public:
     pair<iterator, bool> insert_unique(const value_type &x);
     iterator insert_equal(const value_type &x);
+    iterator find(const Key &k);
 };
+
+template <class Key, class Value, class KeyOfValue, class Compare, class Alloc>
+void rb_tree<Key, Value, KeyOfValue, Compare, Alloc>::clear()
+{
+    iterator cur = begin();
+    while(cur != end())
+        destroy_node(cur->node);
+}
 
 template <class Key, class Value, class KeyOfValue, class Compare, class Alloc>
 typename rb_tree<Key, Value, KeyOfValue, Compare, Alloc>::iterator
@@ -320,7 +330,7 @@ rb_tree<Key, Value, KeyOfValue, Compare, Alloc>::insert_unique(const Value &v)
 template <class Key, class Value, class KeyOfValue, class Compare, class Alloc>
 typename rb_tree<Key, Value, KeyOfValue, Compare, Alloc>::iterator
 rb_tree<Key, Value, KeyOfValue, Compare, Alloc>::
-    __insert(base_ptr x_, base_ptr y_, const Value &x)
+    __insert(base_ptr x_, base_ptr y_, const Value &v)
 {
     link_type x = (link_type)x_;
     link_type y = (link_type)y_;
@@ -356,6 +366,45 @@ rb_tree<Key, Value, KeyOfValue, Compare, Alloc>::
     ++node_count;
     return iterator(z);
 }
+
+inline void
+__rb_tree_rotate_left(__rb_tree_node_base *x, __rb_tree_node_base *&root)
+{
+    __rb_tree_node_base *y = x->right;
+    x->right = y->left;
+    if(y->left != 0)
+        y->left->parent = x;
+    y->parent = x->parent;
+
+    if(x == root)
+        root = y;
+    else if(x == x->parent->left)
+        x->parent->left = y;
+    else
+        x->parent->right = y;
+    y->left = x;
+    x->parent = y;
+}
+
+inline void
+__rb_tree_rotate_right(__rb_tree_node_base *x, __rb_tree_node_base *&root)
+{
+    __rb_tree_node_base *y = x->left;
+    x->left = y->right;
+    if(y->right != 0)
+        y->right->parent = x;
+    y->parent = x->parent;
+
+    if(x == root)
+        root = y;
+    else if(x == x->parent->right)
+        x->parent->right = y;
+    else
+        x->parent->left = y;
+    y->right = x;
+    x->parent = y;
+}
+
 
 inline void
 __rb_tree_rebalance(__rb_tree_node_base *x, __rb_tree_node_base *&root)
@@ -410,44 +459,6 @@ __rb_tree_rebalance(__rb_tree_node_base *x, __rb_tree_node_base *&root)
     }
 
     root->color = __rb_tree_black;
-}
-
-inline void
-__rb_tree_rotate_left(__rb_tree_node_base *x, __rb_tree_node_base *&root)
-{
-    __rb_tree_node_base *y = x->right;
-    x->right = y->left;
-    if(y->left != 0)
-        y->left->parent = x;
-    y->parent = x->parent;
-
-    if(x == root)
-        root = y;
-    else if(x == x->parent->left)
-        x->parent->left = y;
-    else
-        x->parent->right = y;
-    y->left = x;
-    x->parent = y;
-}
-
-inline void
-__rb_tree_rotate_right(__rb_tree_node_base *x, __rb_tree_node_base *&root)
-{
-    __rb_tree_node_base *y = x->left;
-    x->left = y->right;
-    if(y->right != 0)
-        y->right->parent = x;
-    y->parent = x->parent;
-
-    if(x == root)
-        root = y;
-    else if(x == x->parent->right)
-        x->parent->right = y;
-    else
-        x->parent->left = y;
-    y->right = x;
-    x->parent = y;
 }
 
 template <class Key, class Value, class KeyOfValue, class Compare, class Alloc>

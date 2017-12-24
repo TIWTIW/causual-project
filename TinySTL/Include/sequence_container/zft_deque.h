@@ -1,13 +1,19 @@
 #ifndef _ZFT_DEQUE_H
 #define _ZFT_DEQUE_H
 
-#include "../memory/zft_construct.h"
-#include "../memory/zft_default_alloc.h"
-#include "../memory/zft_simple_alloc.h"
-#include "../memory/zft_uninitialized.h"
+#include "memory/zft_construct.h"
+#include "memory/zft_default_alloc.h"
+#include "memory/zft_simple_alloc.h"
+#include "memory/zft_uninitialized.h"
 
 namespace zft
 {
+
+inline size_t __deque_buf_size(size_t n, size_t sz)
+{
+    return n != 0 ? n : (sz < 512 ? size_t(512 / sz) : size_t(1));
+}
+
 //iterator
 template <class T, class Ref, class Ptr, size_t BufSiz>
 struct __deque_iterator
@@ -31,10 +37,6 @@ struct __deque_iterator
     T *last;
     map_pointer node;
 
-    inline size_t __deque_buf_size(size_t n, size_t sz)
-    {
-        return n != 0 ? n : (sz < 512 ? size_t(512 / sz) : size_t(1));
-    }
 
     void set_node(map_pointer new_node)
     {
@@ -126,7 +128,7 @@ struct __deque_iterator
 
     reference operator[](difference_type n) const {return *(*this + n);}
 
-    bool operator==(const self &x) const {return cur == x.cur};
+    bool operator==(const self &x) const {return cur == x.cur;}
     bool operator!=(const self &x) const {return !(*this == x);}
     bool operator<(const self &x) const
     {
@@ -139,8 +141,10 @@ class deque
 {
 public:
     typedef T value_type;
+    typedef value_type& reference;
     typedef value_type* pointer;
     typedef size_t size_type;
+    typedef ptrdiff_t difference_type;
 
 public:
     typedef __deque_iterator<T, T&, T*, BufSiz> iterator;
@@ -182,7 +186,7 @@ protected:
     typedef simple_alloc<pointer, Alloc> map_allocator;
 
 public:
-    deque(int n. const value_type &value) :
+    deque(int n, const value_type &value) :
         start(), finish(), map(0), map_size(0)
     {
         fill_initialize(n, value);
@@ -196,13 +200,19 @@ protected:
 
         //here should has exception handler
         for(cur = start.node; cur < finish.node; ++cur)
-            uninitialized_fill(*cur, *cur + buffer_size(), value);
+            uninitialized_fill(*cur, *cur + __deque_iterator<T, reference, pointer, BufSiz>::buffer_size(), value);
         uninitialized_fill(finish.first, finish.cur, value);
+    }
+
+    //temp add
+    size_t initial_map_size()
+    {
+        return 6;
     }
 
     void create_map_and_nodes(size_type num_elements)
     {
-        size_type num_nodes = num_elements / buffer_size() + 1;
+        size_type num_nodes = num_elements / __deque_iterator<T,reference, pointer, BufSiz>::buffer_size() + 1;
 
         map_size = max(initial_map_size(), num_nodes + 2);
         map = map_allocator::allocate(map_size);
@@ -219,7 +229,7 @@ protected:
         start.set_node(nstart);
         finish.set_node(nfinish);
         start.cur = start.finish;
-        finish.cur = finish.first + num_elements % buffer_size();
+        finish.cur = finish.first + num_elements % __deque_iterator<T, reference, pointer, BufSiz>::buffer_size();
     }
 
     void push_back(const value_type &t)
@@ -368,7 +378,7 @@ public:
     {
         for(map_pointer node = start.node + 1; node < finish.node; ++node)
         {
-            destroy(*node, *node + buffer_size());
+            destroy(*node, *node + __deque_iterator<value_type, reference, pointer, BufSiz>::buffer_size());
             data_allocator::deallocate(*node, buffer_size());
         }
 
@@ -376,7 +386,7 @@ public:
         {
             destroy(start.cur, start.last);
             destroy(finish.first, finish.cur);
-            data_allocator::deallocate(finish.first, buffer_size());
+            data_allocator::deallocate(finish.first, __deque_iterator<value_type, reference, pointer, BufSiz>::buffer_size());
         }
         else
         {

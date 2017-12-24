@@ -2,7 +2,7 @@
 #define _ZFT_UNINITIALIZED_H
 
 #include "zft_construct.h"
-#include "../algorithms/zft_algo.h"
+#include "algorithms/zft_algobase.h"
 
 namespace zft
 {
@@ -42,23 +42,6 @@ inline ForwordIterator __uninitialized_fill_n_aux(ForwordIterator first,
 
 template <class InputIterator, class ForwordIterator>
 inline ForwordIterator
-uninitialized_copy(InputIterator first, InputIterator last,
-                    ForwordIterator result)
-{
-    return __uninitialized_copy(first, last, result, value_type(result));
-}
-
-template <class InputIterator, class ForwordIterator, class T>
-inline ForwordIterator
-__uninitialized_copy(InputIterator first, InputIterator last,
-                     ForwordIterator result, T*)
-{
-    typedef typename __type_traits<T>::is_POD_type is_POD;
-    return __uninitialized_copy_aux(first, last, result, is_POD());
-}
-
-template <class InputIterator, class ForwordIterator>
-inline ForwordIterator
 __uninitialized_copy_aux(InputIterator first, InputIterator last,
                          ForwordIterator result, __true_type)
 {
@@ -76,6 +59,24 @@ __uninitialized_copy_aux(InputIterator first, InputIterator last,
 
     return cur;
 }
+
+template <class InputIterator, class ForwordIterator, class T>
+inline ForwordIterator
+__uninitialized_copy(InputIterator first, InputIterator last,
+                     ForwordIterator result, T*)
+{
+    typedef typename __type_traits<T>::is_POD_type is_POD;
+    return __uninitialized_copy_aux(first, last, result, is_POD());
+}
+
+template <class InputIterator, class ForwordIterator>
+inline ForwordIterator
+uninitialized_copy(InputIterator first, InputIterator last,
+                    ForwordIterator result)
+{
+    return __uninitialized_copy(first, last, result, value_type(result));
+}
+
 
 template <class ForwordIterator, class T>
 inline void uninitialized_fill(ForwordIterator first,

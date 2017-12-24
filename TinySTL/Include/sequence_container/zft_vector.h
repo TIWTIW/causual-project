@@ -5,7 +5,7 @@
 #include "../memory/zft_simple_alloc.h"
 #include "../memory/zft_default_alloc.h"
 #include "../memory/zft_uninitialized.h"
-#include "../algorithms/zft_algo.h"
+#include "../algorithms/zft_algobase.h"
 
 namespace zft
 {
@@ -44,6 +44,8 @@ protected:
 public:
     iterator begin() {return start;}
     iterator end() {return finish;}
+    iterator begin() const {return start;}
+    iterator end() const {return finish;}
     size_type size() const {return (size_type)(end() - begin());}
     size_type capacity() const {return size_type(end_of_storage - begin());}
     bool empty() const {return begin() == end();}

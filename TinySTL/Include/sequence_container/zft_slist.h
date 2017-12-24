@@ -1,10 +1,10 @@
 #ifndef _ZFT_SLIST_H
 #define _ZFT_SLIST_H
 
-#include "../memory/zft_default_alloc.h"
-#include "../memory/zft_construct.h"
-#include "../memory/zft_simple_alloc.h"
-#include "../memory/zft_uninitialized.h"
+#include "memory/zft_default_alloc.h"
+#include "memory/zft_construct.h"
+#include "memory/zft_simple_alloc.h"
+#include "memory/zft_uninitialized.h"
 
 namespace zft
 {
@@ -22,9 +22,9 @@ struct __slist_node : public __slist_node_base
 inline __slist_node_base * __slist_make_link( __slist_node_base *prev_node,
                                               __slist_node_base *now_node)
 {
-    new_node->next = prev_node->next;
-    prev_node->next = new_node;
-    return new_node;
+    now_node->next = prev_node->next;
+    prev_node->next = now_node;
+    return now_node;
 }
 
 inline size_t __slist_size(__slist_node_base *node)
@@ -144,7 +144,13 @@ public:
     {
         list_node_base *tmp = head.next;
         head.next = L.head.next;
-        L.head.next = temp;
+        L.head.next = tmp;
+    }
+
+    void clear()
+    {
+        while(size() != 0)
+            pop_front();
     }
 
 public:

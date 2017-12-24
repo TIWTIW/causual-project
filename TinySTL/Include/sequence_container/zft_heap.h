@@ -1,8 +1,6 @@
 #ifndef _ZFT_HEAP_H
 #define _ZFT_HEAP_H
 
-#include ""
-
 namespace zft
 {
 template <class RandomAccessIterator>
@@ -16,7 +14,7 @@ template <class RandomAccessIterator, class Distance, class T>
 inline void __push_heap_aux(RandomAccessIterator first,
                             RandomAccessIterator last, Distance *, T*)
 {
-    __push_heap(first, Distance(last - first) - 1), Distance(0),
+    __push_heap(first, Distance((last - first) - 1), Distance(0),
                 T(*(last - 1)));
 }
 
@@ -42,7 +40,7 @@ inline void pop_heap(RandomAccessIterator first,
 }
 
 template <class RandomAccessIterator, class T>
-inline void __pop_heap_aux(RandomAccessIterator first
+inline void __pop_heap_aux(RandomAccessIterator first,
                            RandomAccessIterator last, T*)
 {
     __pop_heap(first, last - 1, last - 1, T(*(last - 1)),

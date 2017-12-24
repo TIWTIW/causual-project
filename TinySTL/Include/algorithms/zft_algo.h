@@ -1,8 +1,9 @@
 #ifndef _ZFT_ALGO_H
 #define _ZFT_ALGO_H
 
-#include "../iterators/zft_iterator.h"
-#include "../associative_containers/zft_pair.h"
+#include "iterators/zft_iterator.h"
+#include "associative_containers/zft_pair.h"
+#include <cstdlib>
 
 namespace zft
 {

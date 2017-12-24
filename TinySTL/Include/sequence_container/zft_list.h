@@ -146,7 +146,7 @@ public:
     {
         link_type tmp = create_node(x);
         tmp->next = position.node;
-        tmp->prev = postion.node->prev;
+        tmp->prev = position.node->prev;
         (link_type(position.node->prev))->next = tmp;
         position.node->prev = tmp;
         return tmp;

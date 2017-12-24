@@ -1,10 +1,8 @@
 #ifndef _ZFT_HASH_TABLE_H
 #define _ZFT_HASH_TABLE_H
 
-#include "../memory/zft_construct.h"
-#include "../memory/zft_default_alloc.h"
-#include "../memory/zft_simple_alloc.h"
-#include "../memory/zft_uninitialized.h"
+#include "algorithms/zft_algo.h"
+#include "sequence_container/zft_vector.h"
 #include "zft_pair.h"
 #include "zft_hash_fun.h"
 
@@ -26,8 +24,8 @@ static const unsigned long __zft_prime_list[__zft_num_primes] =
 inline unsigned long __zft_next_primes(unsigned long n)
 {
     const unsigned long *first = __zft_prime_list;
-    const unsigned long *last = __zft_prime_list _ + __zft_num_primes;
-    const unsigned long *pos = lower(first, last, n);
+    const unsigned long *last = __zft_prime_list + __zft_num_primes;
+    const unsigned long *pos = lower_bound(first, last, n);
     return pos == last ? *(last - 1) : *pos;
 }
 
@@ -47,11 +45,11 @@ template <class Value, class Key, class HashFcn,
           class ExtractKey, class EqualKey, class Alloc>
 struct __hashtable_iterator
 {
-    typedef hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc> hashtable;
-    typedef __hashtable_iterator<Value, Key, HashFcn, ExtractKey, EqualKey, ALloc>
+    typedef hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc> __hashtable;
+    typedef __hashtable_iterator<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>
             iterator;
-    typedef __hashtable_const_iterator<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>
-            const_iterator;
+    //typedef __hashtable_const_iterator<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc>
+      //      const_iterator;
     typedef __hashtable_node<Value> node;
 
     typedef forward_iterator_tag iterator_category;
@@ -62,14 +60,14 @@ struct __hashtable_iterator
     typedef Value *pointer;
 
     node *cur;
-    hashtable *ht;
+    __hashtable *ht;
 
-    __hashtable_iterator(node *n, hashtable *tab) : cur(n), ht(tab) {}
+    __hashtable_iterator(node *n, __hashtable *tab) : cur(n), ht(tab) {}
     __hashtable_iterator() {}
     reference operator*() const {return cur->val;}
     pointer operator->() const {return &(operator*());}
     iterator &operator++();
-    iteratpr operator++(int);
+    iterator operator++(int);
     bool operator==(const iterator &it) const {return cur == it.cur;}
     bool operator!=(const iterator &it) const {return cur != it.cur;}
 };
@@ -106,6 +104,9 @@ public:
     typedef HashFcn hasher;
     typedef EqualKey key_equal;
     typedef size_t size_type;
+    typedef Value value_type;
+    typedef __hashtable_iterator<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc> iterator;
+    typedef Key key_type;
 
 private:
     hasher hash;
@@ -139,19 +140,24 @@ protected:
         node_allocator::deallocate(n);
     }
 
-public:
-    hashtable(size_type n, const HashFcn &hf, const EqualKey &eql) :
-        hash(hf), equals(eql), get_key(ExtractKey()), num_elements(0)
-    {
-        initialize_buckets(n);
-    }
-
-    void initialize_bucket(size_type n)
+    void initialize_buckets(size_type n)
     {
         const size_type n_buckets = next_size(n);
         buckets.reserver(n_buckets);
         buckets.insert(buckets.end(), n_buckets, (node *)0);
         num_elements = 0;
+    }
+
+    size_type next_size(size_type n) const
+    {
+        return __zft_next_primes(n);
+    }
+
+public:
+    hashtable(size_type n, const HashFcn &hf, const EqualKey &eql) :
+        hash(hf), equals(eql), get_key(ExtractKey()), num_elements(0)
+    {
+        initialize_buckets(n);
     }
 
     pair<iterator, bool> insert_unique(const value_type &obj)
@@ -168,7 +174,7 @@ public:
             const size_type n = next_size(num_elements_hint);
             if(n > old_n)
             {
-                vector<node*, A> tmp(n, (node *)0);
+                vector<node*, Alloc> tmp(n, (node *)0);
 
                 for(size_type bucket = 0; bucket < old_n; ++bucket)
                 {

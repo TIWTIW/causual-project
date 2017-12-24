@@ -1,6 +1,8 @@
 #ifndef _ZFT_NUMERIC_H
 #define _ZFT_NUMERIC_H
 
+#include "functor/zft_function.h"
+
 namespace zft
 {
 template <class InputIterator, class T>
@@ -12,7 +14,7 @@ T accumulate(InputIterator first, InputIterator last, T init)
     return init;
 }
 
-template <class InputIterator, class I, class BinaryOperation>
+template <class InputIterator, class T, class BinaryOperation>
 T accumulate(InputIterator first, InputIterator last, T init,
              BinaryOperation binary_op)
 {
@@ -22,7 +24,7 @@ T accumulate(InputIterator first, InputIterator last, T init,
 }
 
 //difference between elems
-template <class InputIterator. class OutputIterator>
+template <class InputIterator, class OutputIterator>
 OutputIterator adjacent_difference(InputIterator first, InputIterator last,
                                   OutputIterator result)
 {

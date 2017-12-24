@@ -1,6 +1,8 @@
 #ifndef _ZFT_HASH_FUN_H
 #define _ZFT_HASH_FUN_H
 
+#include <cstddef>
+
 namespace zft
 {
 template <class Key> struct hash {};

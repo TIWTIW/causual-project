@@ -3,6 +3,7 @@
 
 #include "zft_RB_tree.h"
 #include "zft_pair.h"
+#include "functor/zft_function.h"
 
 namespace zft
 {
@@ -30,7 +31,7 @@ public:
     };
 
 private:
-    typedef rb_tree<key_type, value_type
+    typedef rb_tree<key_type, value_type,
                     select1st<value_type>, key_compare, Alloc> rep_type;
     rep_type t;
 
@@ -50,7 +51,7 @@ public:
     explicit map(const Compare &comp) : t(comp) {}
 
     template <class InputIterator>
-    map(InputIterator first, InputIterator last) : t(Compare)
+    map(InputIterator first, InputIterator last) : t(Compare())
     {
         t.insert_unique(first, last);
     }
@@ -84,7 +85,7 @@ public:
 
     T &operator[](const key_type &x)
     {
-        return (*((insert(value_type(k, T()))).first)).second;
+        return (*((insert(value_type(x, T()))).first)).second;
     }
     void swap(map<Key, T, Compare, Alloc> &x) {t.swap(x.t);}
 
@@ -126,8 +127,9 @@ public:
         return t.equal_range(x);
     }
 
-    friend bool operator== <> (const map &, const map &);
-    friend bool operator< <> (const map &, const map &);
+    //??
+    friend bool operator== (const map &, const map &);
+    friend bool operator< (const map &, const map &);
 };
 
 template <class Key, class T, class Compare, class Alloc>

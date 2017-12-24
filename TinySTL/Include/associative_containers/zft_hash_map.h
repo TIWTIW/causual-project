@@ -2,13 +2,14 @@
 #define _ZFT_HASH_MAP_H
 
 #include "zft_hash_table.h"
+#include "functor/zft_function.h"
 
 namespace zft
 {
 template <class Key,
           class T,
-          class HashFcn = hash<Value>,
-          class EqualKey = equal_to<Value>,
+          class HashFcn = hash<Key>,
+          class EqualKey = equal_to<Key>,
           class Alloc = alloc>
 class hash_map
 {
@@ -19,14 +20,14 @@ private:
 
 public:
     typedef typename ht::key_type key_type;
-    typedef typename T data_type;
-    typedef typename T mapped_type;
+    typedef T data_type;
+    typedef T mapped_type;
     typedef typename ht::value_type value_type;
     typedef typename ht::hasher hasher;
     typedef typename ht::key_equal key_equal;
 
     typedef typename ht::size_type size_type;
-    typedef typename ht::difference_type;
+    typedef typename ht::difference_type difference_type;
     typedef typename ht::pointer pointer;
     typedef typename ht::const_pointer const_pointer;
     typedef typename ht::reference reference;
