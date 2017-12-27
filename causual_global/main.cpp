@@ -57,11 +57,23 @@ void extendPoint(Point &pt_, queue<Point> &npq, vector<vector<Point>> &map, bool
         npq.push(map[x][y - 1]);
     if(map[x][y + 1].color_ == 255 && !(map[x][y + 1].hasVisited_))
         npq.push(map[x][y + 1]);
+    if(map[x - 1][y - 1].color_ == 255 && !(map[x - 1][y - 1].hasVisited_))
+        npq.push(map[x - 1][y - 1]);
+    if(map[x - 1][y + 1].color_ == 255 && !(map[x - 1][y + 1].hasVisited_))
+        npq.push(map[x - 1][y + 1]);
+    if(map[x + 1][y - 1].color_ == 255 && !(map[x + 1][y - 1].hasVisited_))
+        npq.push(map[x + 1][y - 1]);
+    if(map[x + 1][y + 1].color_ == 255 && !(map[x + 1][y + 1].hasVisited_))
+        npq.push(map[x + 1][y + 1]);
 
     map[x - 1][y].hasVisited_ = true;
     map[x + 1][y].hasVisited_ = true;
     map[x][y - 1].hasVisited_ = true;
     map[x][y + 1].hasVisited_ = true;
+    map[x - 1][y - 1].hasVisited_ = true;
+    map[x - 1][y + 1].hasVisited_ = true;
+    map[x + 1][y - 1].hasVisited_ = true;
+    map[x + 1][y + 1].hasVisited_ = true;
 
     if(map[x - 1][y].color_ == 127)
         isEdge = true;
@@ -70,6 +82,14 @@ void extendPoint(Point &pt_, queue<Point> &npq, vector<vector<Point>> &map, bool
     if(map[x][y - 1].color_ == 127)
         isEdge = true;
     if(map[x][y + 1].color_ == 127)
+        isEdge = true;
+    if(map[x - 1][y - 1].color_ == 127)
+        isEdge = true;
+    if(map[x - 1][y + 1].color_ == 127)
+        isEdge = true;
+    if(map[x + 1][y - 1].color_ == 127)
+        isEdge = true;
+    if(map[x + 1][y + 1].color_ == 127)
         isEdge = true;
 }
 
@@ -87,25 +107,34 @@ void drawMap(cv::Mat& map_)
     line(map_, cv::Point(540, 70), cv::Point(540, 230), cv::Scalar(0), 1, 8);
 
     line(map_, cv::Point(230, 430), cv::Point(400, 430), cv::Scalar(0), 1, 8);
+
 }
 
 //construct point map, in fact it can be seen as grid
 void ConstructPointMap(vector<vector<Point>> &pointMap, cv::Mat &map_)
 {
-    drawMap(map_);
+    //drawMap(map_);
     for(int i = 0; i < map_.rows; ++i)
     {
         //pointMap.resize(map_.cols);
         for(int j = 0; j < map_.cols; ++j)
         {
             Point tempPoint(i, j);
-            tempPoint.color_ = map_.ptr<uchar>(i)[j];
+            tempPoint.color_ = map_.at<uchar>(i,j);
             pointMap[i].push_back(tempPoint);
+            //cout << (int)tempPoint.color_ << " ";
+            /*if(tempPoint.color_ == (int)255)
+            {
+                cout << "255" << endl;
+                exit(0);
+            }*/
         }
+        //cout << endl;
     }
 
-    cv::imshow("map", map_);
-    cv::waitKey(0);
+    /*cv::imshow("map", map_);
+    cv::imwrite("origin_map.png", map_);
+    cv::waitKey(0);*/
 }
 
 void clearQueue(queue<Point> &qp_)
@@ -131,6 +160,14 @@ bool f_isEdge(Point &pt_, vector<vector<Point>> &map)
         return true;
     if(map[x][y + 1].color_ == 127)
         return true;
+    if(map[x - 1][y - 1].color_ == 127)
+        return true;
+    if(map[x - 1][y + 1].color_ == 127)
+        return true;
+    if(map[x + 1][y - 1].color_ == 127)
+        return true;
+    if(map[x + 1][y + 1].color_ == 127)
+        return true;
 
     return false;
 }
@@ -154,13 +191,29 @@ void extendEdge(Point &pt_, vector<vector<Point>> &pointMap, int edgeNo, Edge &n
         newEdge.push(pointMap[x][y]);
         pointMap[x][y].belongEdge_ = edgeNo;
 
+        if(f_isEdge(pointMap[x - 1][y - 1], pointMap) && pointMap[x - 1][y - 1].belongEdge_ == 0)
+        {
+            pointQueue.push(pointMap[x - 1][y - 1]);
+        }
         if(f_isEdge(pointMap[x - 1][y], pointMap) && pointMap[x - 1][y].belongEdge_ == 0)
         {
             pointQueue.push(pointMap[x - 1][y]);
         }
+        if(f_isEdge(pointMap[x - 1][y + 1], pointMap) && pointMap[x - 1][y + 1].belongEdge_ == 0)
+        {
+            pointQueue.push(pointMap[x - 1][y + 1]);
+        }
         if(f_isEdge(pointMap[x + 1][y], pointMap) && pointMap[x + 1][y].belongEdge_ == 0)
         {
             pointQueue.push(pointMap[x + 1][y]);
+        }
+        if(f_isEdge(pointMap[x + 1][y - 1], pointMap) && pointMap[x + 1][y - 1].belongEdge_ == 0)
+        {
+            pointQueue.push(pointMap[x + 1][y - 1]);
+        }
+        if(f_isEdge(pointMap[x + 1][y + 1], pointMap) && pointMap[x + 1][y + 1].belongEdge_ == 0)
+        {
+            pointQueue.push(pointMap[x + 1][y + 1]);
         }
         if(f_isEdge(pointMap[x][y - 1], pointMap) && pointMap[x][y - 1].belongEdge_ == 0)
         {
@@ -239,7 +292,7 @@ vector<Edge> processMap(cv::Mat &map_, Point &sp_)
 
 
     //Draw distance map, just for debug
-    cv::Mat distanceMap(480, 640, 0);
+    cv::Mat distanceMap(map_.rows, map_.cols, 0);
     for(int i = 0; i < pointMap.size(); ++i)
     {
         for(int j = 0; j < pointMap[i].size(); ++j)
@@ -248,22 +301,86 @@ vector<Edge> processMap(cv::Mat &map_, Point &sp_)
         }
     }
 
-    cv::imshow("disMap", distanceMap);
-    cv::waitKey(0);
+    /*cv::imshow("disMap", distanceMap);
+    cv::imwrite("disMap.png", distanceMap);
+    cv::waitKey(0);*/
     return res;
+}
+
+bool map_pre_process( cv::Mat srcMat, cv::Mat &mapImg )
+{
+
+    if( srcMat.empty() )
+    {
+        std::cout << "Error::map_pre_process: empty input map!" << std::endl;
+        return false;
+    }
+    if( srcMat.type() != CV_8UC1 )
+    {
+        // split the map image
+        std::vector<cv::Mat> imageChannels;
+        cv::split( srcMat, imageChannels );
+        //std::cout << "channels = " << imageChannels.size() << std::endl;
+        srcMat = imageChannels[0];
+    }
+
+    mapImg = cv::Mat( srcMat.rows, srcMat.cols, CV_8UC1, cv::Scalar::all(255) );
+    for( int i = 0; i < srcMat.rows; i++ )
+    {
+        for( int j = 0; j < srcMat.cols; j++ )
+        {
+            if( i == 0 || j == 0 || i == srcMat.rows || j == srcMat.cols )
+            { // add virtual edge
+                mapImg.at<uchar>(i,j) = 0;
+                continue;
+            }
+
+            int pixValue = srcMat.at<uchar>(i,j);
+            if( pixValue < 77 )
+            {
+                mapImg.at<uchar>(i,j) = 0;
+            }
+            else if( pixValue >= 77 && pixValue < 177 )
+            {
+                mapImg.at<uchar>(i,j) = 127;
+            }
+            else
+            {
+                mapImg.at<uchar>(i,j) = 255;
+            }
+
+        }
+    }
+    return true;
 }
 
 int main()
 {
     //define a map
-    cv::Mat map(480, 640, 0, 127);
+    //cv::Mat map(480, 640, 0, 127);
+    cv::Mat map_origin = cv::imread("env3.png", -1);
+
+    cv::Mat map;
+    double start = static_cast<double>(cv::getTickCount());
+    if(map_pre_process(map_origin, map))
+        ;
+    else
+    {
+        cout << "pre process failed" << endl;
+        exit(0);
+    }
+
     vector<Edge> result;
 
-    Point startPoint(map.rows / 2, map.cols / 2);
+    Point startPoint(100, 400);
+    //cv::circle(map, cv::Point(400, 100), 5, cv::Scalar(0, 0, 255));
+
     result = processMap(map, startPoint);
 
+    double time = ((double)cv::getTickCount() - start) / cv::getTickFrequency();
+    cout << "所用时间为：" << time << "秒" << endl;
     //Edge Map to show the edges which were found
-    cv::Mat EdgeMap(480, 640, 0, cv::Scalar(0));
+    cv::Mat EdgeMap(map.rows, map.cols, 0, cv::Scalar(0));
     int i = 0;
     for(auto &e : result)
     {
@@ -276,7 +393,8 @@ int main()
         }
     }
 
-    cv::imshow("EdgeMap", EdgeMap);
-    cv::waitKey(0);
+    /*cv::imshow("EdgeMap", EdgeMap);
+    cv::imwrite("EdgeMap.png", EdgeMap);
+    cv::waitKey(0);*/
 
 }
